@@ -1,0 +1,1266 @@
+<!DOCTYPE html><html><head>
+      <title>Interfejsy w C#</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview .code-chunk .output-div {
+  border-left-style: dotted;
+  border-color: gray;
+  border-width: 1px;
+  font-size: 0.8em;
+}
+.markdown-preview.markdown-preview .code-chunk .output-div .language-text {
+  /* background: #f4fcfd */
+  background: black;
+  color: yellow;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <table>
+<thead>
+<tr>
+<th>Krzysztof Molenda</th>
+<th>2019-10-20</th>
+<th>C#</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h2 class="mume-header" id="interfejsy-w-_c_">Interfejsy w <em>C#</em></h2>
+
+<blockquote>
+<p>UWAGA: W C# 8 w istotny spos&#xF3;b zmodyfikowano za&#x142;o&#x17C;enia dotycz&#x105;ce interfejs&#xF3;w (ich syntaksy, semantyki i pragmatyki). Podane poni&#x17C;ej stwierdzenia dotycz&#x105; natywnej koncepcji interfejsu - obowi&#x105;zuj&#x105;cej do C# 7 w&#x142;&#x105;cznie.</p>
+</blockquote>
+<hr>
+<h3 class="mume-header" id="interfejs-co-to-jest">Interfejs - co to jest</h3>
+
+<dl>
+<dt>Interfejs</dt>
+<dd>w programowaniu obiektowym jest definicj&#x105; typu (abstrakcyjnego), posiadaj&#x105;cego jedynie metody, a nie dane. Zatem <strong>nie mo&#x17C;na</strong> utworzy&#x107; instancji interfejsu, mo&#x17C;na jednak deklarowa&#x107; zmienne typu interfejsu.<br>
+O <em>klasie konkretnej</em>, kt&#xF3;ra implementuje wszystkie metody interfejsu m&#xF3;wimy, &#x17C;e <strong>implementuje dany interfejs</strong>.<br>
+Klasa mo&#x17C;e dziedziczy&#x107; tylko z jednej klasy, ale implementowa&#x107; wiele interfejs&#xF3;w. Koncepcj&#x119; interfejsu jako wydzielonej jednostki programistycznej wprowadzono ju&#x17C; w Java 1.0 (1996 r.) w celu wyeliminowania/ograniczenia problem&#xF3;w zwi&#x105;zanych z wielodziedziczeniem (wyst&#x119;puj&#x105;cych w C++).</dd>
+</dl>
+<p><strong>Za&#x142;o&#x17C;enia dotycz&#x105;ce interfejs&#xF3;w:</strong></p>
+<ul>
+<li>
+<p>Interfejs okre&#x15B;la odpowiedzialno&#x15B;&#x107; klasy lub struktury (co ma robi&#x107;), ale nie okre&#x15B;la w jaki spos&#xF3;b ta odpowiedzialno&#x15B;&#x107; ma zosta&#x107; zrealizowana (jak ma to robi&#x107;).</p>
+<blockquote>
+<p>Realizowane jest to poprzez sygnatury metod</p>
+</blockquote>
+</li>
+<li>
+<p>W interfejsie nie deklarujemy sk&#x142;adnik&#xF3;w prywatnych.</p>
+<blockquote>
+<p>U&#x17C;ycie sk&#x142;adnik&#xF3;w prywatnych jest wnikaniem w szczeg&#xF3;&#x142;y implementacyjne</p>
+</blockquote>
+</li>
+<li>
+<p>Domy&#x15B;lnie wszystkie sk&#x142;adniki interfejsu s&#x105; publiczne i abstrakcyjne.</p>
+<blockquote>
+<p>Interfejs opisuje budow&#x119; klasy widzian&#x105; z zewn&#x105;trz i nie dostarcza &#x17C;adnej implementacji</p>
+</blockquote>
+</li>
+<li>
+<p>Interfejs jest typem j&#x119;zyka C#. Definiowany jest s&#x142;owem kluczowym <code>interface</code>.</p>
+</li>
+<li>
+<p>Interfejs nie mo&#x17C;e zawiera&#x107; p&#xF3;l, ale mo&#x17C;e zawiera&#x107; deklaracje <em>properties</em>.</p>
+<blockquote>
+<p>Deklaracja p&#xF3;l jest wnikaniem w szczeg&#xF3;&#x142;y implementacyjne.<br>
+<em>Property</em> (<code>get</code>, <code>set</code>) jest - z formalnego punktu widzenia - metod&#x105;, widzian&#x105; tak, jak pole. Definiuje dzia&#x142;anie operatora przypisania w okre&#x15B;lonym kontek&#x15B;cie.</p>
+</blockquote>
+</li>
+<li>
+<p>Interfejs nie mo&#x17C;e zawiera&#x107; deklaracji konstruktora.</p>
+<blockquote>
+<p>By&#x142;by to szczeg&#xF3;&#x142; implementacyjny</p>
+</blockquote>
+</li>
+<li>
+<p>Interfejs mo&#x17C;e by&#x107; traktowany jako kontrakt (pierwowz&#xF3;r klasy, na bazie kt&#xF3;rej p&#xF3;&#x17A;niej tworzone b&#x119;d&#x105; obiekty). W interfejsie zatem nie mo&#x17C;na deklarowa&#x107; sk&#x142;adnik&#xF3;w statycznych.</p>
+<blockquote>
+<p>M&#xF3;wimy, &#x17C;e interfejs &quot;pracuje na rzecz instancji&quot;.</p>
+</blockquote>
+</li>
+<li>
+<p>Dzi&#x119;ki interfejsom w C# mo&#x17C;na zrealizowa&#x107; koncepcj&#x119; wielodziedziczenia.</p>
+<blockquote>
+<p>Klasy/struktury mog&#x105; implementowa&#x107; wiele interfejs&#xF3;w. Klasa mo&#x17C;e dziedziczy&#x107; wy&#x142;&#x105;cznie z jednej klasy bazowej.</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>Sk&#x142;adnia deklaracji interfejsu:</strong></p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token comment">// deklaracja</span>
+<span class="token keyword">interface</span> <span class="token class-name">IPrzyklad</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// deklaracja `event`-&#xF3;w</span>
+    <span class="token comment">// deklaracja indekser&#xF3;w</span>
+    <span class="token comment">// deklaracja metod</span>
+    <span class="token comment">// deklaracja properties</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// u&#x17C;ycie - implementacja interfejsu</span>
+<span class="token keyword">class</span> <span class="token class-name">MojPrzyklad</span> <span class="token punctuation">:</span> <span class="token class-name">IPrzyklad</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ... implementacje</span>
+<span class="token punctuation">}</span>
+</pre><p><strong>Przyk&#x142;ad konkretny:</strong><br>
+Deklaracja interfejsu <code>IStos&lt;T&gt;</code> (jako typ abstrakcyjny), w formie kontraktu do zrealizowania :</p>
+<div class="code-chunk" data-id="istos" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=0, cmd=dotnet-script id=&quot;istos&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IStos</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">Push</span><span class="token punctuation">(</span><span class="token class-name">T</span> <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//wstawia element t typu T na stos</span>
+    <span class="token class-name">T</span> <span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">//zdejmuje szczytowy element ze stosu</span>
+    <span class="token class-name">T</span> Peek <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>         <span class="token comment">//zwraca szczytowy element stosu</span>
+    <span class="token keyword">int</span> Count <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>      <span class="token comment">//zwraca liczb&#x119; element&#xF3;w na stosie</span>
+    <span class="token keyword">bool</span> IsEmpty <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>   <span class="token comment">//zwraca true, je&#x15B;li stos jest pusty, a false w przeciwnym przypadku</span>
+    <span class="token keyword">void</span> <span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">//opr&#xF3;&#x17C;nia stos</span>
+    <span class="token class-name">T</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token keyword">int</span> index<span class="token punctuation">]</span> <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token comment">//indekser, read-only</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Jako typ abstrakcyjny, podany stos spe&#x142;nia poni&#x17C;sze za&#x142;o&#x17C;enia (aksjomaty), kt&#xF3;re formalnie definiuj&#x105; jego dzia&#x142;anie:</p>
+<ol>
+<li>Bezpo&#x15B;rednio po utworzeniu, stos jest pusty. Po opr&#xF3;&#x17C;nieniu (<code>Clear()</code>), stos jest pusty.</li>
+<li>Po wykonaniu <code>Push(x)</code> stos nie jest pusty (zawiera co najmniej jeden element).</li>
+<li>Sekwencja metod <code>Push(x)</code> a nast&#x119;pnie <code>Pop()</code> nie zmienia zawarto&#x15B;ci stosu.</li>
+<li>Po wykonaniu <code>Push(x)</code>, metoda/property <code>Peek</code> zwr&#xF3;ci wstawiony element <code>x</code>.</li>
+<li>Wykonanie metod <code>Pop()</code> lub <code>Peek</code> na stosie pustym zg&#x142;asza wyj&#x105;tek <code>StosEmptyException</code>.</li>
+</ol>
+<p>Przyk&#x142;adowa implementacja stosu (niekompletna), wykorzystuj&#x105;cego tablic&#x119; jako no&#x15B;nik danych:</p>
+<div class="code-chunk" data-id="stoswtablicy" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=1, cmd=dotnet-script continue=&quot;istos&quot; id=&quot;stoswtablicy&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StosWTablicy</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token punctuation">:</span> IStos<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> T<span class="token punctuation">[</span><span class="token punctuation">]</span> tab<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> szczyt <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">StosWTablicy</span><span class="token punctuation">(</span><span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        tab <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">T</span><span class="token punctuation">[</span>size<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        szczyt <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">T</span> Peek <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">T</span> <span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Push</span><span class="token punctuation">(</span><span class="token class-name">T</span> <span class="token keyword">value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> Count <span class="token operator">=&gt;</span> szczyt <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> IsEmpty <span class="token operator">=&gt;</span> szczyt <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> szczyt <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">T</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token keyword">int</span> index<span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> Capacity <span class="token operator">=&gt;</span> tab<span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">TrimExcess</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Przyk&#x142;adowa implementacja stosu (niekompletna), wykorzystuj&#x105;cego struktury wi&#x105;zane jako no&#x15B;nik danych:</p>
+<div class="code-chunk" data-id="code-chunk-id-2" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=2, cmd=dotnet-script continue=&quot;istos&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StosLinkedNodes</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token punctuation">:</span> IStos<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">Node</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">T</span> data<span class="token punctuation">;</span>
+        <span class="token class-name">Node</span> next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">private</span> <span class="token class-name">Node</span> head <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">Node</span> top <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">StosLinkedNodes</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> Count <span class="token operator">=&gt;</span> counter<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> head <span class="token operator">=</span> top <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> IsEmpty <span class="token operator">=&gt;</span> counter <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">T</span> Peek <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">T</span> <span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Push</span><span class="token punctuation">(</span><span class="token class-name">T</span> <span class="token keyword">value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token class-name">T</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token keyword">int</span> index<span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">C:\Przedmioty\CSharp-2020-github\Types-Interfaces\uecj0rayp_code_chunk(16,11): warning CS0169: Pole &quot;StosLinkedNodes<t>.Node.data&quot; nie jest nigdy u&#xFFFD;ywane
+C:\Przedmioty\CSharp-2020-github\Types-Interfaces\uecj0rayp_code_chunk(17,14): warning CS0169: Pole &quot;StosLinkedNodes<t>.Node.next&quot; nie jest nigdy u&#xFFFD;ywane
+C:\Przedmioty\CSharp-2020-github\Types-Interfaces\uecj0rayp_code_chunk(20,18): warning CS0414: Pole &quot;StosLinkedNodes<t>.top&quot; jest przypisane, lecz jego warto&#xFFFD;&#xFFFD; nie jest nigdy u&#xFFFD;ywana
+</t></t></t></pre></div></div><p>Obie implementacje realizuj&#x105; <em>kontrakt</em> zapisany w interfejsie, aczkolwiek robi&#x105; to zupe&#x142;nie inaczej - inne s&#x105; podstawy zapami&#x119;tywania element&#xF3;w stosu. Ponadto <code>StosWTablicy</code> dostarcza dwie dodatkowe metody bezpo&#x15B;rednio zwi&#x105;zane z reprezentacj&#x105; wewn&#x119;trzn&#x105; (<em>property</em> typu <code>get</code> <code>Capacity</code> zwracaj&#x105;ce aktualn&#x105; pojemno&#x15B;&#x107; stosu (nie liczb&#x119; zapami&#x119;tanych element&#xF3;w) oraz metod&#x119; <code>TrimExcess()</code> optymalizuj&#x105;c&#x105; rozmiar tablicy przechowuj&#x105;cej elementy stosu). Metody te nie mia&#x142;by sensu w przypadku realizacji wi&#x105;zanej.</p>
+<h3 class="mume-header" id="klasy-abstrakcyjne-_versus_-interfejsy">Klasy abstrakcyjne <em>versus</em> interfejsy</h3>
+
+<p>Interfejs mo&#x17C;e by&#x107; postrzegany jako forma kontraktu dla implementator&#xF3;w. Ale klasa abstrakcyjna r&#xF3;wnie&#x17C; mo&#x17C;e t&#x119; rol&#x119; spe&#x142;nia&#x107;. Zobaczmy to na przyk&#x142;adzie stosu:</p>
+<div class="code-chunk" data-id="abstractstos" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=3, cmd=dotnet-script id=&quot;abstractstos&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractStos</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> counter<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">AbstractStos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">Push</span><span class="token punctuation">(</span><span class="token class-name">T</span> <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">//wstawia element t typu T na stos</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token class-name">T</span> <span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">//zdejmuje szczytowy element ze stosu</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token class-name">T</span> Peek <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>         <span class="token comment">//zwraca szczytowy element stosu</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> Count <span class="token operator">=&gt;</span> counter<span class="token punctuation">;</span>            <span class="token comment">//zwraca liczb&#x119; element&#xF3;w na stosie</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> IsEmpty <span class="token operator">=&gt;</span> Count <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>      <span class="token comment">//zwraca true, je&#x15B;li stos jest pusty, a false w przeciwnym przypadku</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">//opr&#xF3;&#x17C;nia stos</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token class-name">T</span> <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token keyword">int</span> index<span class="token punctuation">]</span> <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token comment">//indekser, read-only</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Klasa abstrakcyjna mo&#x17C;e zawiera&#x107; cz&#x119;&#x15B;ciow&#x105; implementacj&#x119;. W takim razie by&#x107; mo&#x17C;e konieczne s&#x105; jakie&#x15B; pola i sk&#x142;adniki prywatne. R&#xF3;wnie&#x17C; nale&#x17C;y przewidzie&#x107; konstruktor, cho&#x107; nie mo&#x17C;e on by&#x107; bezpo&#x15B;rednio wywo&#x142;any operatorem <code>new</code>. Cz&#x119;&#x15B;&#x107; metod opatrzona jest s&#x142;owem <code>abstract</code> - one <strong>musz&#x105;</strong> by&#x107; zaimplementowane w klasie konkretnej, dziedzicz&#x105;cej z klasy abstrakcyjnej. Inne metody - dla kt&#xF3;rych w tym momencie znany jest spos&#xF3;b realizacji - mog&#x105; by&#x107; w klasie abstrakcyjnej zaimplementowane (np. <code>IsEmpty</code> na bazie <code>Count</code>).</p>
+<p>Widzimy zatem podstawowe r&#xF3;&#x17C;nice mi&#x119;dzy interfejsem a klas&#x105; abstrakcyjn&#x105;:</p>
+<table>
+<thead>
+<tr>
+<th>klasa abstrakcyjna</th>
+<th>interfejs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sk&#x142;ada si&#x119; z deklaracji metod (abstrakcyjnych) i/lub metod zaimplementowanych</td>
+<td>Sk&#x142;ada si&#x119; wy&#x142;&#x105;cznie z deklaracji metod (w&#x142;a&#x15B;ciwo&#x15B;ci, indekser&#xF3;w, event-&#xF3;w)</td>
+</tr>
+<tr>
+<td>Mo&#x17C;e dziedziczy&#x107; tylko z jednej klasy (bazowej)</td>
+<td>Zapewnia realizacj&#x119; wielodziedziczenia</td>
+</tr>
+<tr>
+<td>Mo&#x17C;e zawiera&#x107; konstruktor (je&#x15B;li nie zawiera, to tworzony jest automatycznie domy&#x15B;lny)</td>
+<td>Nie mo&#x17C;e zawiera&#x107; konstruktor&#xF3;w</td>
+</tr>
+<tr>
+<td>Mo&#x17C;e zawiera&#x107; statyczne sk&#x142;adniki</td>
+<td>Nie mo&#x17C;e zawiera&#x107; statycznych sk&#x142;adnik&#xF3;w</td>
+</tr>
+<tr>
+<td>Sk&#x142;adniki mog&#x105; by&#x107; publiczne, prywatne, protected, ...</td>
+<td>Mo&#x17C;e zawiera&#x107; wy&#x142;&#x105;cznie sk&#x142;adniki publiczne, poniewa&#x17C; - z za&#x142;o&#x17C;enia - interfejs jest publiczny. Przy deklaracji sk&#x142;adnik&#xF3;w nie u&#x17C;ywamy s&#x142;owa <code>public</code></td>
+</tr>
+<tr>
+<td>Wydajno&#x15B;&#x107; klas abstrakcyjnych jest wi&#x119;ksza ni&#x17C; interfejs&#xF3;w</td>
+<td>Wydajno&#x15B;&#x107; interfejs&#xF3;w jest mniejsza ni&#x17C; klas abstrakcyjnych, poniewa&#x17C; czasoch&#x142;onne jest wyszukiwanie metod implementuj&#x105;cych metody interfejsu w klasach konkretnych</td>
+</tr>
+<tr>
+<td>Jest wykorzystywana w charakterze klasy w&#x119;z&#x142;owej w hierarchii klas, definiuj&#x105;cej podstawowe funkcjonalno&#x15B;ci potomk&#xF3;w</td>
+<td>Jest wykorzystywany do definiowania dodatkowej funkcjonalno&#x15B;ci klas implementuj&#x105;cych</td>
+</tr>
+<tr>
+<td>Klasa konkretna mo&#x17C;e u&#x17C;y&#x107; tylko jednej klasy abstrakcyjnej (dziedziczenie)</td>
+<td>Klasa konkretna mo&#x17C;e u&#x17C;y&#x107; wielu interfejs&#xF3;w (implementacja)</td>
+</tr>
+<tr>
+<td>Je&#x15B;li wiele klas implementuje <strong>w ten sam spos&#xF3;b te same</strong> funkcjonalno&#x15B;ci, to celowym jest umie&#x15B;ci&#x107; je w klasie bazowej, kt&#xF3;ra stanie si&#x119; w&#x119;z&#x142;em w hierarchii klas i z kt&#xF3;rej pozosta&#x142;e <em>podobne</em> klasy b&#x119;d&#x105; owe funkcjonalno&#x15B;ci dziedziczy&#x107;. Klasa ta b&#x119;dzie najprawdopodobniej klas&#x105; <em>abstrakcyjn&#x105;</em></td>
+<td>Je&#x15B;li wiele implementacji jedynie wsp&#xF3;&#x142;dzieli metody o tej samej sygnaturze, wtedy wskazane jest zapisanie tej sygnatury w interfejsie, za&#x15B; klasy implementowa&#x107; b&#x119;d&#x105; ten interfejs</td>
+</tr>
+<tr>
+<td>Klasy abstrakcyjne zawiera&#x107; mog&#x105; sta&#x142;e, pola, metody, ...</td>
+<td>Interfejsy zawiera&#x107; mog&#x105; jedynie metody (a zatem r&#xF3;wnie&#x17C; <em>properties,</em> indeksery, eventy - kt&#xF3;re formalnie s&#x105; metodami <em>pod przykryciem</em>)</td>
+</tr>
+<tr>
+<td>Klasy abstrakcyjne mog&#x105; by&#x107; ca&#x142;kowicie, cz&#x119;&#x15B;ciowo lub wcale nie implementowane (wtedy klas&#x105; dziedzicz&#x105;c&#x105; jest klasa abstrakcyjna)</td>
+<td>Interfejsy musz&#x105; by&#x107; w ca&#x142;o&#x15B;ci implementowane (lub cz&#x119;&#x15B;ciowo przez klas&#x119; abstrakcyjn&#x105;)</td>
+</tr>
+</tbody>
+</table>
+<h3 class="mume-header" id="interfejs-jest-typem-referencyjnym">Interfejs jest typem (referencyjnym)</h3>
+
+<p>Interfejsy definiuj&#x105; typy (referencyjne). Mo&#x17C;na zatem deklarowa&#x107; zmienne (typu &quot;interfejsowego&quot;).</p>
+<div class="code-chunk" data-id="001" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=4, cmd=dotnet-script continue=&quot;istos&quot; id=&quot;001&quot;}" class="language-csharp">IStos<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> s1<span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Ale nie mo&#x17C;na utworzy&#x107; obiektu typu interfejsowego (przecie&#x17C; interfejs opisuje totaln&#x105; abstrakcj&#x119; i nie mo&#x17C;e definiowa&#x107; chocia&#x17C;by konstruktora).</p>
+<div class="code-chunk" data-id="002" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=5, cmd=dotnet-script continue=&quot;001&quot; id=&quot;002&quot;}" class="language-csharp">s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">IStos</span><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//compilation error</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Mo&#x17C;na za to przypisa&#x107; zmiennej typu interfejsowego obiekt ka&#x17C;dego typu implementuj&#x105;cego ten interfejs.</p>
+<div class="code-chunk" data-id="003" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=6, cmd=dotnet-script continue=&quot;istos&quot; continue=&quot;stoswtablicy&quot; id=&quot;003&quot;}" class="language-csharp">IStos<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">StosWTablicy</span><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> s <span class="token keyword">is</span> IStos<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> s <span class="token keyword">is</span> StosWTablicy<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>W powy&#x17C;szym przyk&#x142;adzie wida&#x107;, &#x17C;e zmienna <code>s</code> jest r&#xF3;wnocze&#x15B;nie dw&#xF3;ch typ&#xF3;w: interfejsowego <code>IStos&lt;int&gt;</code> oraz konkretnego <code>StosoWTablicy&lt;int&gt;</code> (formalnie jest jeszcze typu <code>Object</code>).</p>
+<p>Mo&#x17C;emy zatem bezpo&#x15B;rednio skorzysta&#x107; z ka&#x17C;dej funkcjonalno&#x15B;ci zdefiniowanej w interfejsie (na rzecz zmiennej <code>s</code>) lub <em>po&#x15B;rednio</em>, wiedz&#x105;c, &#x17C;e <code>s</code> jest konkretnego typu, przez rzutowanie:</p>
+<div class="code-chunk" data-id="004" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=7, cmd=dotnet-script id=&quot;004&quot; continue=&quot;istos&quot; continue=&quot;stoswtablicy&quot;}" class="language-csharp">IStos<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">StosWTablicy</span><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> s<span class="token punctuation">.</span>IsEmpty <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//Console.WriteLine( s.Capacity ); // compilation error - w interfejsie nie ma takiej metody</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>StosWTablicy<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>s<span class="token punctuation">)</span><span class="token punctuation">.</span>Capacity <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p><strong>Przyk&#x142;ad - Figury:</strong></p>
+<p>Rozwa&#x17C;my troch&#x119; bardziej zaawansowany przyk&#x142;ad - hierarchi&#x119; figur geometrycznych (np. w aspekcie tworzonej aplikacji graficznej) rysowanej na siatce z ca&#x142;kowitymi wsp&#xF3;&#x142;rz&#x119;dnymi (np. pixele).</p>
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentscripttype="application/ecmascript" contentstyletype="text/css" height="489px" preserveAspectRatio="none" style="width:1053px;height:489px;" version="1.1" viewBox="0 0 1053 489" width="1053px" zoomAndPan="magnify"><defs><filter height="300%" id="f16p1ocv8sk0va" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[04c42d9e0ba311ec095b6aa916fec760]
+class IMierzalna--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="70.0234" id="IMierzalna" style="stroke: #A80036; stroke-width: 1.5;" width="128" x="850" y="40"/><ellipse cx="882.1" cy="60.0938" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M883.0531,56.7344 L883.0531,63.3906 L884.7719,63.3906 Q885.3813,63.3906 885.6469,63.625 Q885.9125,63.8594 885.9125,64.25 Q885.9125,64.625 885.6469,64.8594 Q885.3813,65.0938 884.7719,65.0938 L879.6313,65.0938 Q879.0219,65.0938 878.7563,64.8594 Q878.4906,64.625 878.4906,64.2344 Q878.4906,63.8594 878.7563,63.625 Q879.0219,63.3906 879.6313,63.3906 L881.35,63.3906 L881.35,56.7344 L879.6313,56.7344 Q879.0219,56.7344 878.7563,56.5 Q878.4906,56.2656 878.4906,55.875 Q878.4906,55.5 878.7563,55.2656 Q879.0219,55.0313 879.6313,55.0313 L884.7719,55.0313 Q885.3813,55.0313 885.6469,55.2656 Q885.9125,55.5 885.9125,55.875 Q885.9125,56.2656 885.6469,56.5 Q885.3813,56.7344 884.7719,56.7344 L883.0531,56.7344 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="61" x="898.4" y="57.457">&#xAB;interface&#xBB;</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="58" x="899.9" y="72.5508">IMierzalna</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="851" x2="977" y1="80.1875" y2="80.1875"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="851" x2="977" y1="88.1875" y2="88.1875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="856" y="103.6064">void Skaluj(double wsp)</text><!--MD5=[77bc9f809add8846b6f4d0e50ecdc660]
+class IMierzalna1D--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="70.0234" id="IMierzalna1D" style="stroke: #A80036; stroke-width: 1.5;" width="112" x="786" y="214.5"/><ellipse cx="803.7" cy="234.5938" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M804.6531,231.2344 L804.6531,237.8906 L806.3719,237.8906 Q806.9813,237.8906 807.2469,238.125 Q807.5125,238.3594 807.5125,238.75 Q807.5125,239.125 807.2469,239.3594 Q806.9813,239.5938 806.3719,239.5938 L801.2313,239.5938 Q800.6219,239.5938 800.3563,239.3594 Q800.0906,239.125 800.0906,238.7344 Q800.0906,238.3594 800.3563,238.125 Q800.6219,237.8906 801.2313,237.8906 L802.95,237.8906 L802.95,231.2344 L801.2313,231.2344 Q800.6219,231.2344 800.3563,231 Q800.0906,230.7656 800.0906,230.375 Q800.0906,230 800.3563,229.7656 Q800.6219,229.5313 801.2313,229.5313 L806.3719,229.5313 Q806.9813,229.5313 807.2469,229.7656 Q807.5125,230 807.5125,230.375 Q807.5125,230.7656 807.2469,231 Q806.9813,231.2344 806.3719,231.2344 L804.6531,231.2344 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="61" x="824.8" y="231.957">&#xAB;interface&#xBB;</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="74" x="818.3" y="247.0508">IMierzalna1D</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="787" x2="897" y1="254.6875" y2="254.6875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="792" y="270.1064">double Dlugosc {get}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="787" x2="897" y1="276.5234" y2="276.5234"/><!--MD5=[82bd71f7636fa228b191d9ec5b15d3ed]
+class IMierzalna2D--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="83.8594" id="IMierzalna2D" style="stroke: #A80036; stroke-width: 1.5;" width="109" x="933.5" y="207.5"/><ellipse cx="949.85" cy="227.5938" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M950.8031,224.2344 L950.8031,230.8906 L952.5219,230.8906 Q953.1313,230.8906 953.3969,231.125 Q953.6625,231.3594 953.6625,231.75 Q953.6625,232.125 953.3969,232.3594 Q953.1313,232.5938 952.5219,232.5938 L947.3813,232.5938 Q946.7719,232.5938 946.5063,232.3594 Q946.2406,232.125 946.2406,231.7344 Q946.2406,231.3594 946.5063,231.125 Q946.7719,230.8906 947.3813,230.8906 L949.1,230.8906 L949.1,224.2344 L947.3813,224.2344 Q946.7719,224.2344 946.5063,224 Q946.2406,223.7656 946.2406,223.375 Q946.2406,223 946.5063,222.7656 Q946.7719,222.5313 947.3813,222.5313 L952.5219,222.5313 Q953.1313,222.5313 953.3969,222.7656 Q953.6625,223 953.6625,223.375 Q953.6625,223.7656 953.3969,224 Q953.1313,224.2344 952.5219,224.2344 L950.8031,224.2344 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="61" x="970.65" y="224.957">&#xAB;interface&#xBB;</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="74" x="964.15" y="240.0508">IMierzalna2D</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="934.5" x2="1041.5" y1="247.6875" y2="247.6875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="97" x="939.5" y="263.1064">double Obwod {get}</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="939.5" y="276.9424">double Pole {get}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="934.5" x2="1041.5" y1="283.3594" y2="283.3594"/><!--MD5=[cb9090773ace4c876ac53bdca5362a0f]
+entity ##853--><!--MD5=[32b7d1704ef6ae3e2564c2b67cdbad9a]
+class Figura2D--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="97.6953" id="Figura2D" style="stroke: #A80036; stroke-width: 1.5;" width="194" x="303" y="26"/><ellipse cx="353.25" cy="46.0938" fill="#A9DCDF" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M355.4375,47.8594 L351.2969,47.8594 L350.875,48.8906 L351.2969,48.8906 Q351.9063,48.8906 352.1719,49.125 Q352.4375,49.3594 352.4375,49.75 Q352.4375,50.125 352.1719,50.3594 Q351.9063,50.5938 351.2969,50.5938 L349,50.5938 Q348.3906,50.5938 348.1406,50.3594 Q347.875,50.125 347.875,49.7344 Q347.875,49.3594 348.1563,49.125 Q348.4219,48.875 349.0469,48.8906 L351.7188,42.2344 L350.6094,42.2344 Q350,42.2344 349.7344,42 Q349.4688,41.7656 349.4688,41.375 Q349.4688,41 349.7344,40.7656 Q350,40.5313 350.6094,40.5313 L354.2813,40.5313 L357.6719,48.8906 Q358.2656,48.8906 358.4531,49.0313 Q358.8438,49.2969 358.8438,49.75 Q358.8438,50.125 358.5781,50.3594 Q358.3281,50.5938 357.7188,50.5938 L355.4219,50.5938 Q354.8125,50.5938 354.5469,50.3594 Q354.2813,50.125 354.2813,49.7344 Q354.2813,49.3594 354.5469,49.125 Q354.8125,48.8906 355.4219,48.8906 L355.8438,48.8906 L355.4375,47.8594 Z M354.7188,46.1563 L353.3594,42.7813 L351.9844,46.1563 L354.7188,46.1563 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="89" x="371.75" y="43.457">&#xAB;abstract class&#xBB;</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="51" x="390.75" y="58.5508">Figura2D</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="304" x2="496" y1="66.1875" y2="66.1875"/><ellipse cx="314" cy="77.1875" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="323" y="81.6064">Color Kolor {get; set}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="304" x2="496" y1="88.0234" y2="88.0234"/><ellipse cx="314" cy="99.0234" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="168" x="323" y="103.4424">Figura2D(Color kolor = Color.Black)</text><ellipse cx="314" cy="112.8594" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="113" x="323" y="117.2783">void Rysuj() &#xAB;abstract&#xBB;</text><!--MD5=[3def58987d297269ba039c9582a17307]
+class Punkt--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="89.5078" id="Punkt" style="stroke: #A80036; stroke-width: 1.5;" width="144" x="124" y="30"/><ellipse cx="176.25" cy="46" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M179.0156,41.875 Q179.1719,41.6563 179.3594,41.5469 Q179.5469,41.4375 179.7656,41.4375 Q180.1406,41.4375 180.375,41.7031 Q180.6094,41.9531 180.6094,42.5625 L180.6094,44.0156 Q180.6094,44.625 180.375,44.8906 Q180.1406,45.1563 179.7656,45.1563 Q179.4219,45.1563 179.2188,44.9531 Q179.0156,44.7656 178.9063,44.25 Q178.8594,43.8906 178.6719,43.7031 Q178.3438,43.3281 177.7344,43.1094 Q177.125,42.8906 176.5,42.8906 Q175.7344,42.8906 175.0938,43.2188 Q174.4688,43.5469 173.9688,44.2969 Q173.4844,45.0469 173.4844,46.0781 L173.4844,47.1719 Q173.4844,48.4063 174.375,49.2344 Q175.2656,50.0469 176.8594,50.0469 Q177.7969,50.0469 178.4531,49.7969 Q178.8438,49.6406 179.2656,49.2031 Q179.5313,48.9375 179.6719,48.8594 Q179.8281,48.7813 180.0313,48.7813 Q180.3594,48.7813 180.6094,49.0469 Q180.875,49.2969 180.875,49.6406 Q180.875,49.9844 180.5313,50.3906 Q180.0313,50.9688 179.2344,51.2969 Q178.1563,51.75 176.8594,51.75 Q175.3438,51.75 174.1406,51.125 Q173.1563,50.625 172.4688,49.5625 Q171.7813,48.4844 171.7813,47.2031 L171.7813,46.0469 Q171.7813,44.7188 172.3906,43.5781 Q173.0156,42.4219 174.1094,41.8125 Q175.2031,41.1875 176.4375,41.1875 Q177.1719,41.1875 177.8125,41.3594 Q178.4688,41.5156 179.0156,41.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="31" x="196.75" y="50.9102">Punkt</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="125" x2="267" y1="62" y2="62"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="61" x="130" y="77.4189">int X, Y {get}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="125" x2="267" y1="83.8359" y2="83.8359"/><ellipse cx="135" cy="94.8359" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="118" x="144" y="99.2549">Punkt(x, y : int) &#xAB;create&#xBB;</text><ellipse cx="135" cy="108.6719" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="113" x="144" y="113.0908">void Rysuj() &#xAB;override&#xBB;</text><!--MD5=[0d1aada3b994b5a3eda8652851b69a68]
+class Odcinek--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="117.1797" id="Odcinek" style="stroke: #A80036; stroke-width: 1.5;" width="175" x="51.5" y="191"/><ellipse cx="112.25" cy="207" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M115.0156,202.875 Q115.1719,202.6563 115.3594,202.5469 Q115.5469,202.4375 115.7656,202.4375 Q116.1406,202.4375 116.375,202.7031 Q116.6094,202.9531 116.6094,203.5625 L116.6094,205.0156 Q116.6094,205.625 116.375,205.8906 Q116.1406,206.1563 115.7656,206.1563 Q115.4219,206.1563 115.2188,205.9531 Q115.0156,205.7656 114.9063,205.25 Q114.8594,204.8906 114.6719,204.7031 Q114.3438,204.3281 113.7344,204.1094 Q113.125,203.8906 112.5,203.8906 Q111.7344,203.8906 111.0938,204.2188 Q110.4688,204.5469 109.9688,205.2969 Q109.4844,206.0469 109.4844,207.0781 L109.4844,208.1719 Q109.4844,209.4063 110.375,210.2344 Q111.2656,211.0469 112.8594,211.0469 Q113.7969,211.0469 114.4531,210.7969 Q114.8438,210.6406 115.2656,210.2031 Q115.5313,209.9375 115.6719,209.8594 Q115.8281,209.7813 116.0313,209.7813 Q116.3594,209.7813 116.6094,210.0469 Q116.875,210.2969 116.875,210.6406 Q116.875,210.9844 116.5313,211.3906 Q116.0313,211.9688 115.2344,212.2969 Q114.1563,212.75 112.8594,212.75 Q111.3438,212.75 110.1406,212.125 Q109.1563,211.625 108.4688,210.5625 Q107.7813,209.4844 107.7813,208.2031 L107.7813,207.0469 Q107.7813,205.7188 108.3906,204.5781 Q109.0156,203.4219 110.1094,202.8125 Q111.2031,202.1875 112.4375,202.1875 Q113.1719,202.1875 113.8125,202.3594 Q114.4688,202.5156 115.0156,202.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="45" x="132.75" y="211.9102">Odcinek</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="52.5" x2="225.5" y1="223" y2="223"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="76" x="71.5" y="238.4189">Punkt A, B {get}</text><ellipse cx="62.5" cy="247.8359" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="71.5" y="252.2549">double Dlugosc {get}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="52.5" x2="225.5" y1="258.6719" y2="258.6719"/><ellipse cx="62.5" cy="269.6719" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="149" x="71.5" y="274.0908">Odcinek( a, b : Punkt) &#xAB;create&#xBB;</text><ellipse cx="62.5" cy="283.5078" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="71.5" y="287.9268">void Skaluj(double wsp)</text><ellipse cx="62.5" cy="297.3438" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="113" x="71.5" y="301.7627">void Rysuj() &#xAB;override&#xBB;</text><!--MD5=[b1cae093f16a6c4f785e8a7175c1793d]
+class Trojkat--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="131.0156" id="Trojkat" style="stroke: #A80036; stroke-width: 1.5;" width="177" x="573.5" y="184"/><ellipse cx="639.25" cy="200" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M642.0156,195.875 Q642.1719,195.6563 642.3594,195.5469 Q642.5469,195.4375 642.7656,195.4375 Q643.1406,195.4375 643.375,195.7031 Q643.6094,195.9531 643.6094,196.5625 L643.6094,198.0156 Q643.6094,198.625 643.375,198.8906 Q643.1406,199.1563 642.7656,199.1563 Q642.4219,199.1563 642.2188,198.9531 Q642.0156,198.7656 641.9063,198.25 Q641.8594,197.8906 641.6719,197.7031 Q641.3438,197.3281 640.7344,197.1094 Q640.125,196.8906 639.5,196.8906 Q638.7344,196.8906 638.0938,197.2188 Q637.4688,197.5469 636.9688,198.2969 Q636.4844,199.0469 636.4844,200.0781 L636.4844,201.1719 Q636.4844,202.4063 637.375,203.2344 Q638.2656,204.0469 639.8594,204.0469 Q640.7969,204.0469 641.4531,203.7969 Q641.8438,203.6406 642.2656,203.2031 Q642.5313,202.9375 642.6719,202.8594 Q642.8281,202.7813 643.0313,202.7813 Q643.3594,202.7813 643.6094,203.0469 Q643.875,203.2969 643.875,203.6406 Q643.875,203.9844 643.5313,204.3906 Q643.0313,204.9688 642.2344,205.2969 Q641.1563,205.75 639.8594,205.75 Q638.3438,205.75 637.1406,205.125 Q636.1563,204.625 635.4688,203.5625 Q634.7813,202.4844 634.7813,201.2031 L634.7813,200.0469 Q634.7813,198.7188 635.3906,197.5781 Q636.0156,196.4219 637.1094,195.8125 Q638.2031,195.1875 639.4375,195.1875 Q640.1719,195.1875 640.8125,195.3594 Q641.4688,195.5156 642.0156,195.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="37" x="659.75" y="204.9102">Trojkat</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="574.5" x2="749.5" y1="216" y2="216"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="95" x="593.5" y="231.4189">A, B, C : Punkt {get}</text><ellipse cx="584.5" cy="240.8359" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="97" x="593.5" y="245.2549">double Obwod {get}</text><ellipse cx="584.5" cy="254.6719" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="593.5" y="259.0908">double Pole {get}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="574.5" x2="749.5" y1="265.5078" y2="265.5078"/><ellipse cx="584.5" cy="276.5078" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="151" x="593.5" y="280.9268">Trojkat(a, b, c : Punkt) &#xAB;create&#xBB;</text><ellipse cx="584.5" cy="290.3438" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="593.5" y="294.7627">void Skaluj(double wsp)</text><ellipse cx="584.5" cy="304.1797" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="113" x="593.5" y="308.5986">void Rysuj() &#xAB;override&#xBB;</text><!--MD5=[4ac5f72ab9a97ae2cc97389cab89eb4f]
+class Okrag--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="131.0156" id="Okrag" style="stroke: #A80036; stroke-width: 1.5;" width="186" x="307" y="184"/><ellipse cx="379.25" cy="200" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M382.0156,195.875 Q382.1719,195.6563 382.3594,195.5469 Q382.5469,195.4375 382.7656,195.4375 Q383.1406,195.4375 383.375,195.7031 Q383.6094,195.9531 383.6094,196.5625 L383.6094,198.0156 Q383.6094,198.625 383.375,198.8906 Q383.1406,199.1563 382.7656,199.1563 Q382.4219,199.1563 382.2188,198.9531 Q382.0156,198.7656 381.9063,198.25 Q381.8594,197.8906 381.6719,197.7031 Q381.3438,197.3281 380.7344,197.1094 Q380.125,196.8906 379.5,196.8906 Q378.7344,196.8906 378.0938,197.2188 Q377.4688,197.5469 376.9688,198.2969 Q376.4844,199.0469 376.4844,200.0781 L376.4844,201.1719 Q376.4844,202.4063 377.375,203.2344 Q378.2656,204.0469 379.8594,204.0469 Q380.7969,204.0469 381.4531,203.7969 Q381.8438,203.6406 382.2656,203.2031 Q382.5313,202.9375 382.6719,202.8594 Q382.8281,202.7813 383.0313,202.7813 Q383.3594,202.7813 383.6094,203.0469 Q383.875,203.2969 383.875,203.6406 Q383.875,203.9844 383.5313,204.3906 Q383.0313,204.9688 382.2344,205.2969 Q381.1563,205.75 379.8594,205.75 Q378.3438,205.75 377.1406,205.125 Q376.1563,204.625 375.4688,203.5625 Q374.7813,202.4844 374.7813,201.2031 L374.7813,200.0469 Q374.7813,198.7188 375.3906,197.5781 Q376.0156,196.4219 377.1094,195.8125 Q378.2031,195.1875 379.4375,195.1875 Q380.1719,195.1875 380.8125,195.3594 Q381.4688,195.5156 382.0156,195.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="33" x="399.75" y="204.9102">Okrag</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="308" x2="492" y1="216" y2="216"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="89" x="327" y="231.4189">Punkt Srodek {get}</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="327" y="245.2549">int Promien {get}</text><ellipse cx="318" cy="254.6719" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="327" y="259.0908">double Dlugosc {get}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="308" x2="492" y1="265.5078" y2="265.5078"/><ellipse cx="318" cy="276.5078" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="327" y="280.9268">Okrag( s : Punkt, r : int ) &#xAB;create&#xBB;</text><ellipse cx="318" cy="290.3438" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="327" y="294.7627">void Skaluj(double wsp)</text><ellipse cx="318" cy="304.1797" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="113" x="327" y="308.5986">void Rysuj() &#xAB;override&#xBB;</text><!--MD5=[87a5a83b4f0d41f37868bb1235ce8537]
+class Kolo--><rect fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" height="103.3438" id="Kolo" style="stroke: #A80036; stroke-width: 1.5;" width="212" x="294" y="375"/><ellipse cx="383.25" cy="391" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M386.0156,386.875 Q386.1719,386.6563 386.3594,386.5469 Q386.5469,386.4375 386.7656,386.4375 Q387.1406,386.4375 387.375,386.7031 Q387.6094,386.9531 387.6094,387.5625 L387.6094,389.0156 Q387.6094,389.625 387.375,389.8906 Q387.1406,390.1563 386.7656,390.1563 Q386.4219,390.1563 386.2188,389.9531 Q386.0156,389.7656 385.9063,389.25 Q385.8594,388.8906 385.6719,388.7031 Q385.3438,388.3281 384.7344,388.1094 Q384.125,387.8906 383.5,387.8906 Q382.7344,387.8906 382.0938,388.2188 Q381.4688,388.5469 380.9688,389.2969 Q380.4844,390.0469 380.4844,391.0781 L380.4844,392.1719 Q380.4844,393.4063 381.375,394.2344 Q382.2656,395.0469 383.8594,395.0469 Q384.7969,395.0469 385.4531,394.7969 Q385.8438,394.6406 386.2656,394.2031 Q386.5313,393.9375 386.6719,393.8594 Q386.8281,393.7813 387.0313,393.7813 Q387.3594,393.7813 387.6094,394.0469 Q387.875,394.2969 387.875,394.6406 Q387.875,394.9844 387.5313,395.3906 Q387.0313,395.9688 386.2344,396.2969 Q385.1563,396.75 383.8594,396.75 Q382.3438,396.75 381.1406,396.125 Q380.1563,395.625 379.4688,394.5625 Q378.7813,393.4844 378.7813,392.2031 L378.7813,391.0469 Q378.7813,389.7188 379.3906,388.5781 Q380.0156,387.4219 381.1094,386.8125 Q382.2031,386.1875 383.4375,386.1875 Q384.1719,386.1875 384.8125,386.3594 Q385.4688,386.5156 386.0156,386.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="25" x="403.75" y="395.9102">Kolo</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="295" x2="505" y1="407" y2="407"/><ellipse cx="305" cy="418" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="97" x="314" y="422.4189">double Obwod {get}</text><ellipse cx="305" cy="431.8359" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="314" y="436.2549">double Pole {get}</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="295" x2="505" y1="442.6719" y2="442.6719"/><ellipse cx="305" cy="453.6719" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="186" x="314" y="458.0908">Kolo( s : Punkt, promien : int ) &#xAB;create&#xBB;</text><ellipse cx="305" cy="467.5078" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="95" x="314" y="471.9268">void Rysuj() &#xAB;new&#xBB;</text><ellipse cx="11" cy="249.5" fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" rx="5" ry="5" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="-24.5" y="266.957">IMierzalna1D</text><ellipse cx="267" cy="249.5" fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" rx="5" ry="5" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="231.5" y="266.957">IMierzalna1D</text><ellipse cx="533" cy="249.5" fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" rx="5" ry="5" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="497.5" y="266.957">IMierzalna2D</text><ellipse cx="254" cy="426.5" fill="#FEFECE" filter="url(#f16p1ocv8sk0va)" rx="5" ry="5" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="218.5" y="443.957">IMierzalna2D</text><!--MD5=[5427326abd3ffd32add5cdb71c7408df]
+link Punkt to Figura2D--><path d="M268.117,75 C273.007,75 277.897,75 282.787,75 " fill="none" id="Punkt-&gt;Figura2D" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="282.891,68,302.891,75,282.891,82,282.891,68" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[591f484432354352700b6a1a08f7cb5d]
+reverse link Figura2D to Odcinek--><path d="M310.287,135.293 C283.057,153.29 253.194,173.027 226.136,190.91 " fill="none" id="Figura2D&lt;-Odcinek" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="306.752,129.239,327.297,124.051,314.471,140.918,306.752,129.239" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[6534dc07796b5a8f8a8b9ac633086e47]
+reverse link Figura2D to Trojkat--><path d="M489.804,135.127 C516.728,152.853 546.237,172.282 573.102,189.97 " fill="none" id="Figura2D&lt;-Trojkat" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="485.837,140.896,472.982,124.051,493.535,129.203,485.837,140.896" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[8deb6d86bc759220d815439a0edf48c0]
+reverse link Figura2D to Okrag--><path d="M400,144.502 C400,157.504 400,171.067 400,183.942 " fill="none" id="Figura2D&lt;-Okrag" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="393,144.051,400,124.051,407,144.051,393,144.051" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[b56993ff7edc3f76d5255310e6a2ec2a]
+reverse link Okrag to Kolo--><path d="M400,335.382 C400,348.854 400,362.409 400,374.767 " fill="none" id="Okrag&lt;-Kolo" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="393,335.166,400,315.166,407,335.166,393,335.166" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[66878525027fcd6fc1f83d3b2f0cddb9]
+link Odcineklol861 to Odcinek--><path d="M16.5,249.5 C28.1439,249.5 39.7878,249.5 51.4316,249.5 " fill="none" id="Odcineklol861-Odcinek" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[3d3111a3495e434ac5d8ffdab11241f9]
+link Okraglol864 to Okrag--><path d="M272.195,249.5 C283.678,249.5 295.16,249.5 306.643,249.5 " fill="none" id="Okraglol864-Okrag" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[3ac99602df17e540a0e0ac1e17e7ab84]
+link Trojkatlol867 to Trojkat--><path d="M538.039,249.5 C549.822,249.5 561.605,249.5 573.387,249.5 " fill="none" id="Trojkatlol867-Trojkat" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[d1512839685cb3d97ceb698b8e267ca4]
+link Kololol870 to Kolo--><path d="M259.133,426.5 C270.688,426.5 282.244,426.5 293.799,426.5 " fill="none" id="Kololol870-Kolo" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[4f47d525d3e292de344ffab72da767f6]
+reverse link IMierzalna to IMierzalna1D--><path d="M891.979,128.76 C880.34,156.643 866.395,190.054 856.195,214.49 " fill="none" id="IMierzalna&lt;-IMierzalna1D" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="885.611,125.841,899.775,110.08,898.531,131.234,885.611,125.841" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[82e827238e08b10966dd29029a7c9ab3]
+reverse link IMierzalna to IMierzalna2D--><path d="M936.611,128.707 C947.424,153.915 960.18,183.65 970.278,207.189 " fill="none" id="IMierzalna&lt;-IMierzalna2D" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="930.072,131.22,928.62,110.08,942.938,125.701,930.072,131.22" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[b03107d6a5231f659163a9276ed4b4e9]
+@startuml
+abstract class Figura2D <<abstract class>>
+{
+    + Color Kolor {get; set}
+    + Figura2D(Color kolor = Color.Black)
+    + void Rysuj() <<abstract>>
+}
+
+class Punkt
+{
+    int X, Y {get}
+    + Punkt(x, y : int) <<create>>
+    + void Rysuj() <<override>>
+}
+
+class Odcinek
+{
+    Punkt A, B {get}
+    + Odcinek( a, b : Punkt) <<create>>
+    + double Dlugosc {get}
+    + void Skaluj(double wsp)
+    + void Rysuj() <<override>>
+}
+
+class Trojkat
+{
+    A, B, C : Punkt {get}
+    + double Obwod {get}
+    + double Pole {get}
+    + Trojkat(a, b, c : Punkt) <<create>>
+    + void Skaluj(double wsp)
+    + void Rysuj() <<override>>
+}
+
+class Okrag
+{
+    Punkt Srodek {get}
+    int Promien {get}
+    + Okrag( s : Punkt, r : int ) <<create>>
+    + double Dlugosc {get}
+    + void Skaluj(double wsp)
+    + void Rysuj() <<override>>
+}
+
+class Kolo
+{
+    + Kolo( s : Punkt, promien : int ) <<create>>
+    + double Obwod {get}
+    + double Pole {get}
+    + void Rysuj() <<new>>
+}
+
+together {
+    interface IMierzalna <<interface>>
+    {
+        void Skaluj(double wsp)
+    }
+
+    interface IMierzalna1D <<interface>>
+    {
+        double Dlugosc {get}
+    }
+
+    interface IMierzalna2D <<interface>>
+    {
+        double Obwod {get}
+        double Pole {get}
+    }
+}
+
+together {
+    class Okrag
+    class Kolo
+}
+
+Figura2D <|-left- Punkt
+Figura2D <|- - Odcinek
+Figura2D <|- - Trojkat
+Figura2D <|- - Okrag
+Okrag <|- - Kolo
+IMierzalna1D ()- Odcinek
+IMierzalna1D ()- Okrag
+IMierzalna2D ()- Trojkat
+IMierzalna2D ()- Kolo
+IMierzalna <|- - IMierzalna1D
+IMierzalna <|- - IMierzalna2D
+
+@enduml
+
+PlantUML version 1.2019.11(Sun Sep 22 12:02:15 CEST 2019)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.2+9
+Operating System: Windows 10
+Default Encoding: Cp1250
+Language: pl
+Country: PL
+--></g></svg></p><p>Zauwa&#x17C;amy kilka wa&#x17C;nych w&#x142;asno&#x15B;ci:</p>
+<ul>
+<li>
+<p>Interfejsy mog&#x105; budowa&#x107; w&#x142;asn&#x105; hierarchi&#x119; dziedziczenia. Opisuj&#x105; w&#x142;asno&#x15B;ci, kt&#xF3;re spe&#x142;nia&#x107; b&#x119;d&#x105; obiekty. W tym przypadku nadrz&#x119;dn&#x105; w&#x142;asno&#x15B;ci&#x105; jest <em>mierzalno&#x15B;&#x107;</em>, a ka&#x17C;da figura mierzalna jest skalowalna (wg swoich zasad - inaczej odcinek, inaczej okr&#x105;g).</p>
+<ul>
+<li>Obiekty mierzalne w jednym wymiarze maj&#x105; d&#x142;ugo&#x15B;&#x107; (np. odcinek, okr&#x105;g).</li>
+<li>Obiekty mierzalne w 2 wymiarach maj&#x105; obw&#xF3;d i pole powierzchni.</li>
+</ul>
+</li>
+<li>
+<p>Kluczow&#x105; klas&#x105; jest <code>Figura2D</code> - klasa abstrakcyjna, definiuj&#x105;ca podstawow&#x105; funkcjonalno&#x15B;&#x107; ka&#x17C;dej figury (tu: fakt przypisania koloru oraz mo&#x17C;liwo&#x15B;&#x107; narysowania). Oczywi&#x15B;cie obiektu typu <code>Figura2D</code> nie mo&#x17C;na narysowa&#x107;, dop&#xF3;ki nie b&#x119;dziemy wiedzieli, jakiego jest szczeg&#xF3;&#x142;owego typu (czy jest odcinkiem, czy tr&#xF3;jk&#x105;tem, ...). Klasa abstrakcyjna jest w&#x119;z&#x142;owa dla ca&#x142;ej hierarchii.</p>
+</li>
+<li>
+<p>Typ <code>Punkt</code> jest klas&#x105; konkretn&#x105;, dziedziczy z klasy <code>Figura2D</code> funkcjonalno&#x15B;ci (mo&#x17C;na go narysowa&#x107; w okre&#x15B;lonym kolorze). Nie b&#x119;dzie on mia&#x142; podtyp&#xF3;w (od struktur nie mo&#x17C;na dziedziczy&#x107;). Nie ma on w&#x142;asno&#x15B;ci mierzalno&#x15B;ci.</p>
+</li>
+<li>
+<p>Typ <code>Odcinek</code> realizowany jest jako klasa konkretna, ma w&#x142;asno&#x15B;&#x107; mierzalno&#x15B;ci w 1 wymiarze.</p>
+</li>
+<li>
+<p>Typ <code>Kolo</code> realizowany jest jako klasa konkretna, ma w&#x142;asno&#x15B;&#x107; mierzalno&#x15B;ci w 2 wymiarach (obw&#xF3;d i pole). Poniewa&#x17C; dziedziczy z klasy <code>Okrag</code> (ko&#x142;o jest okr&#x119;giem wraz z wype&#x142;nieniem), mo&#x17C;na m&#xF3;wi&#x107; r&#xF3;wnie&#x17C; o <em>d&#x142;ugo&#x15B;ci</em> ko&#x142;a.</p>
+</li>
+<li>
+<p>Ka&#x17C;de ko&#x142;o jest jednocze&#x15B;nie okr&#x119;giem (wynika z dziedziczenia). Poprawnym b&#x119;dzie zatem zapis:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token class-name">Okrag</span> o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Kolo</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>a nast&#x119;pnie:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp">Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> o<span class="token punctuation">.</span>Dlugosc <span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// poprawnie</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> o<span class="token punctuation">.</span>Pole <span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// compilation error</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Kolo<span class="token punctuation">)</span>o<span class="token punctuation">)</span><span class="token punctuation">.</span>Pole <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// poprawnie</span>
+</pre></li>
+<li>
+<p>W klasie <code>Kolo</code> metoda <code>Rysuj()</code> nie przes&#x142;ania (<em>override</em>) tej z klasy <code>Okrag</code>, ale definiuje now&#x105; (<code>new</code>). Przeanalizujmy skutki. Gdyby implementacja wygl&#x105;da&#x142;a tak, jak na poni&#x17C;szym listingu:</p>
+<pre data-role="codeBlock" data-info="csharp {highlight=11}" class="language-csharp" data-line="11"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Okrag</span> <span class="token punctuation">:</span> <span class="token class-name">Figura2D</span><span class="token punctuation">,</span> IMierzalna1D
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">string</span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> $<span class="token string">&quot;(S({Srodek.X},{Srodek.Y}), {Promien})&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Okrag({ToString()}, {this.Kolor}, dlugosc = {Dlugosc})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Kolo</span> <span class="token punctuation">:</span> <span class="token class-name">Okrag</span><span class="token punctuation">,</span> IMierzalna2D
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Kolo({ToString()}, {this.Kolor}, obwod = {Obwod}, pole = {Pole})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div></pre><p>czyli <code>Rysuj()</code> z klasy <code>Kolo</code> przes&#x142;ania&#x142;oby <code>Rysuj()</code> z klasy <code>Okrag</code>, to poni&#x17C;szy kod, dzi&#x119;ki polimorfizmowi, wywo&#x142;a&#x142;by metod&#x119; <code>Rysuj()</code> zdefiniowan&#x105; w <code>Kolo</code>:</p>
+<pre data-role="codeBlock" data-info="csharp {highlight=2}" class="language-csharp" data-line="2"><span class="token class-name">Okrag</span> o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Kolo</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+o<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//output: Kolo((S(0,0), 1), Red, obwod = 6,283185307179586, pole = 3,141592653589793)</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre><p>Je&#x15B;li w klasie <code>Kolo</code> i metodzie <code>Rysuj()</code> s&#x142;owo kluczowe <code>override</code> zastapimy s&#x142;owem <code>new</code>, dzia&#x142;anie b&#x119;dzie odmienne - wykona si&#x119; metoda <code>Rysuj()</code> z klasy <code>Okrag</code>:</p>
+<pre data-role="codeBlock" data-info="csharp {highlight=[5,14]}" class="language-csharp" data-line="5,14"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Okrag</span> <span class="token punctuation">:</span> <span class="token class-name">Figura2D</span><span class="token punctuation">,</span> IMierzalna1D
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">string</span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> $<span class="token string">&quot;(S({Srodek.X},{Srodek.Y}), {Promien})&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Okrag({ToString()}, {this.Kolor}, dlugosc = {Dlugosc})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Kolo</span> <span class="token punctuation">:</span> <span class="token class-name">Okrag</span><span class="token punctuation">,</span> IMierzalna2D
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">new</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Kolo({ToString()}, {this.Kolor}, obwod = {Obwod}, pole = {Pole})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token class-name">Okrag</span> o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Kolo</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+o<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// output: Okrag((S(0,0), 1), Red, dlugosc = 6,283185307179586)</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div></pre></li>
+</ul>
+<p>Pe&#x142;na implementacja hierarchii klas i interfejs&#xF3;w zaprezentowana jest na poni&#x17C;szym listingu:</p>
+<pre data-role="codeBlock" data-info="cs" class="language-csharp">&#xFEFF;<span class="token keyword">using</span> System<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Color <span class="token operator">=</span> System<span class="token punctuation">.</span>ConsoleColor<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">static</span> System<span class="token punctuation">.</span>Math<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">static</span> System<span class="token punctuation">.</span>Console<span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> src_ex_figury
+<span class="token punctuation">{</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> hierarchia interfejs&#xF3;w</span>
+    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IMierzalna</span> <span class="token punctuation">{</span> <span class="token keyword">void</span> <span class="token function">Skaluj</span><span class="token punctuation">(</span><span class="token keyword">double</span> wsp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IMierzalna1D</span> <span class="token punctuation">{</span> <span class="token keyword">double</span> Dlugosc <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IMierzalna2D</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">double</span> Obwod <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">double</span> Pole <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> hierarchia interfejs&#xF3;w</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> hierarchia klas</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Figura2D</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token class-name">Color</span> Kolor <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token function">Figura2D</span><span class="token punctuation">(</span><span class="token class-name">Color</span> kolor <span class="token operator">=</span> Color<span class="token punctuation">.</span>Black<span class="token punctuation">)</span> <span class="token punctuation">{</span> Kolor <span class="token operator">=</span> kolor<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Punkt</span> <span class="token punctuation">:</span> <span class="token class-name">Figura2D</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token keyword">int</span> X <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">int</span> Y <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token function">Punkt</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span> X <span class="token operator">=</span> x<span class="token punctuation">;</span> Y <span class="token operator">=</span> y<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">string</span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> $<span class="token string">&quot;({X},{Y})&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Punkt({this}, {Kolor})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Odcinek</span> <span class="token punctuation">:</span> <span class="token class-name">Figura2D</span><span class="token punctuation">,</span> IMierzalna1D
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token class-name">Punkt</span> A <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token class-name">Punkt</span> B <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token function">Odcinek</span><span class="token punctuation">(</span><span class="token class-name">Punkt</span> a<span class="token punctuation">,</span> <span class="token class-name">Punkt</span> b<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Blue<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            A <span class="token operator">=</span> a<span class="token punctuation">;</span> B <span class="token operator">=</span> b<span class="token punctuation">;</span>
+            A<span class="token punctuation">.</span>Kolor <span class="token operator">=</span> B<span class="token punctuation">.</span>Kolor <span class="token operator">=</span> Color<span class="token punctuation">.</span>Blue<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Skaluj</span><span class="token punctuation">(</span><span class="token keyword">double</span> wsp<span class="token punctuation">)</span> <span class="token comment">// rozci&#x105;ganie, A niezmienny, przesuwamy B</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>wsp <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ArgumentOutOfRangeException</span><span class="token punctuation">(</span><span class="token string">&quot;wsp. skalowania nie mo&#x17C;e by&#x107; ujemny&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            B <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>X <span class="token operator">+</span> <span class="token punctuation">(</span>B<span class="token punctuation">.</span>X <span class="token operator">-</span> A<span class="token punctuation">.</span>X<span class="token punctuation">)</span> <span class="token operator">*</span> wsp<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>Y <span class="token operator">+</span> <span class="token punctuation">(</span>B<span class="token punctuation">.</span>Y <span class="token operator">-</span> A<span class="token punctuation">.</span>Y<span class="token punctuation">)</span> <span class="token operator">*</span> wsp<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">double</span> Dlugosc <span class="token operator">=&gt;</span> <span class="token function">Sqrt</span><span class="token punctuation">(</span><span class="token function">Pow</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>X <span class="token operator">-</span> B<span class="token punctuation">.</span>X<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">Pow</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span>Y <span class="token operator">-</span> B<span class="token punctuation">.</span>Y<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">string</span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> $<span class="token string">&quot;(A({A.X},{A.Y}), B({B.X},{B.Y}))&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Odcinek({ToString()}, {this.Kolor}, dlugosc = {Dlugosc})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Okrag</span> <span class="token punctuation">:</span> <span class="token class-name">Figura2D</span><span class="token punctuation">,</span> IMierzalna1D
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token class-name">Punkt</span> Srodek <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">int</span> Promien <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token function">Okrag</span><span class="token punctuation">(</span><span class="token class-name">Punkt</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Cyan<span class="token punctuation">)</span> <span class="token punctuation">{</span> Srodek <span class="token operator">=</span> s<span class="token punctuation">;</span> Promien <span class="token operator">=</span> r<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Skaluj</span><span class="token punctuation">(</span><span class="token keyword">double</span> wsp<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>wsp <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ArgumentOutOfRangeException</span><span class="token punctuation">(</span><span class="token string">&quot;wsp. skalowania nie mo&#x17C;e by&#x107; ujemny&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Promien <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Promien <span class="token operator">*</span> wsp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">double</span> Dlugosc <span class="token operator">=&gt;</span> <span class="token number">2</span> <span class="token operator">*</span> PI <span class="token operator">*</span> Promien<span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">string</span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> $<span class="token string">&quot;(S({Srodek.X},{Srodek.Y}), {Promien})&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Okrag({ToString()}, {this.Kolor}, dlugosc = {Dlugosc})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Kolo</span> <span class="token punctuation">:</span> <span class="token class-name">Okrag</span><span class="token punctuation">,</span> IMierzalna2D
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token function">Kolo</span><span class="token punctuation">(</span><span class="token class-name">Punkt</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> r<span class="token punctuation">)</span> <span class="token punctuation">{</span> Kolor <span class="token operator">=</span> Color<span class="token punctuation">.</span>Red<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">double</span> Obwod <span class="token operator">=&gt;</span> Dlugosc<span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token keyword">double</span> Pole <span class="token operator">=&gt;</span> PI <span class="token operator">*</span> Promien <span class="token operator">*</span> Promien<span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token keyword">new</span> <span class="token keyword">void</span> <span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;Kolo({ToString()}, {this.Kolor}, obwod = {Obwod}, pole = {Pole})&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> hierarchia klas</span>
+<span class="token punctuation">}</span>
+</pre><p>Przyk&#x142;adowe u&#x17C;ycie klas i interfejs&#xF3;w tam zdefiniowanych przedstawia poni&#x17C;szy listing:</p>
+<pre data-role="codeBlock" data-info="cs" class="language-csharp">&#xFEFF;<span class="token keyword">using</span> System<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Color <span class="token operator">=</span> System<span class="token punctuation">.</span>ConsoleColor<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">static</span> System<span class="token punctuation">.</span>Console<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic<span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> src_ex_figury
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Program</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token class-name">Punkt</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            p<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">Odcinek</span> odc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Odcinek</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            odc<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            odc<span class="token punctuation">.</span><span class="token function">Skaluj</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            odc<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">Okrag</span> okr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Okrag</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            okr<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">Kolo</span> k <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Kolo</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            k<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">Okrag</span> okr2 <span class="token operator">=</span> k<span class="token punctuation">;</span>
+            <span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>Kolo<span class="token punctuation">)</span>okr2<span class="token punctuation">)</span><span class="token punctuation">.</span>Pole<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            okr2<span class="token punctuation">.</span><span class="token function">Rysuj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// == lista figur ==</span>
+            List<span class="token operator">&lt;</span>Figura2D<span class="token operator">&gt;</span> figury <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>Figura2D<span class="token operator">&gt;</span> <span class="token punctuation">{</span> p<span class="token punctuation">,</span> odc<span class="token punctuation">,</span> okr<span class="token punctuation">,</span> k <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">double</span> sumarycznePole <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> figura <span class="token keyword">in</span> figury<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token class-name">IMierzalna2D</span> fig <span class="token operator">=</span> figura <span class="token keyword">as</span> IMierzalna2D<span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>fig <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">// w C#7 r&#xF3;wnowa&#x17C;ne: !(fig is null)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">Write</span><span class="token punctuation">(</span>$<span class="token string">&quot;{fig}, &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sumarycznePole <span class="token operator">+=</span> fig<span class="token punctuation">.</span>Pole<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;suma p&#xF3;l = {sumarycznePole}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">double</span> sumarycznaDlugosc <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> figura <span class="token keyword">in</span> figury<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>figura <span class="token keyword">is</span> IMierzalna1D<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">Write</span><span class="token punctuation">(</span>$<span class="token string">&quot;{figura}, &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sumarycznaDlugosc <span class="token operator">+=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>IMierzalna1D<span class="token punctuation">)</span>figura<span class="token punctuation">)</span><span class="token punctuation">.</span>Dlugosc<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;suma dlogosci = {sumarycznaDlugosc}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">double</span> sumarycznyObwod <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> figura <span class="token keyword">in</span> figury <span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>figura <span class="token keyword">is</span> <span class="token class-name">IMierzalna2D</span> f<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">Write</span><span class="token punctuation">(</span>$<span class="token string">&quot;{f}, &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sumarycznyObwod <span class="token operator">+=</span> f<span class="token punctuation">.</span>Obwod<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>                
+            <span class="token punctuation">}</span>
+            <span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;suma obwod&#xF3;w = {sumarycznyObwod}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+            <span class="token comment">// InvalidCastException: Unable to cast object of type &apos;Punkt&apos; to type &apos;IMierzalna&apos;</span>
+            <span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token class-name">IMierzalna</span> figura <span class="token keyword">in</span> figury <span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">Write</span><span class="token punctuation">(</span>$<span class="token string">&quot;{figura}, &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                figura<span class="token punctuation">.</span><span class="token function">Skaluj</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</pre><h3 class="mume-header" id="operatory-is-oraz-as-dla-interfejs%C3%B3w">Operatory <code>is</code> oraz <code>as</code> dla interfejs&#xF3;w</h3>
+
+<p>W poprzednim temacie widzieli&#x15B;my, &#x17C;e mo&#x17C;na u&#x17C;y&#x107; operatora rzutowania, aby otrzyma&#x107; referencj&#x119; do interfejsu obiektu. Troch&#x119; lepszym rozwi&#x105;zaniem ni&#x17C; rzutowanie jest u&#x17C;ycie dedykowanego operatora <code>as</code>. Dlaczego? Je&#x15B;li spr&#xF3;bujesz wykona&#x107; rzutowanie referencji obiektu na referencj&#x119; interfejsu kt&#xF3;rego klasa nie implementuje, otrzymasz w efekcie zg&#x142;oszenie wyj&#x105;tku o nieprawid&#x142;owym rzutowaniu. Ten wyj&#x105;tek powiniene&#x15B; przechwyci&#x107; i obs&#x142;u&#x17C;y&#x107;.</p>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">Type-testing and cast operators (C# reference)</a></p>
+<p>U&#x17C;ywaj&#x105;c operatora <code>as</code> wykonujemy konwersj&#x119;, je&#x15B;li jest ona mo&#x17C;liwa. W przeciwnym przypadku operator zwraca <code>null</code>.</p>
+<p>Operator <code>is</code> testuje, czy zmienna jest okre&#x15B;lonego typu, za&#x15B; operator <code>as</code> wykonuje rzutowanie na wskazany typ - nie zwracaj&#x105;c wyj&#x105;tku je&#x15B;li si&#x119; nie powiedzie.</p>
+<pre data-role="codeBlock" data-info="csharp {highlight=[11-12,19-20]}" class="language-csharp" data-line="11-12,19-20">List<span class="token operator">&lt;</span>Figura2D<span class="token operator">&gt;</span> figury <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Figura2D</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// dodano do listy kilka r&#xF3;&#x17C;nego typu figur</span>
+figury<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+figury<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Odcinek</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+figury<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Okrag</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+figury<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Kolo</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">Punkt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">double</span> sumarycznePole <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> figura <span class="token keyword">in</span> figury <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">IMierzalna2D</span> fig <span class="token operator">=</span> figura <span class="token keyword">as</span> IMierzalna2D<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> fig <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token punctuation">)</span> <span class="token comment">// w C#7 r&#xF3;wnowa&#x17C;ne: !(fig is null)</span>
+        sumarycznePole <span class="token operator">+=</span> fig<span class="token punctuation">.</span>Pole<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">double</span> sumarycznaDlugosc <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> figura <span class="token keyword">in</span> figury <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> figura <span class="token keyword">is</span> IMierzalna1D <span class="token punctuation">)</span>
+        sumarycznaDlugosc <span class="token operator">+=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>IMierzalna1D<span class="token punctuation">)</span>figura<span class="token punctuation">)</span><span class="token punctuation">.</span>Dlugosc<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11-12" data-start="11" data-end="12">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="19-20" data-start="19" data-end="20">
+
+</div></div></pre><blockquote>
+<p>UWAGA: W C# 7 operator <code>is</code> zosta&#x142; rozszerzony o mo&#x17C;liwo&#x15B;&#x107; dopasowania do wzorca. Zatem - zamiast operatora <code>as</code> - mo&#x17C;na tylko wykorzysta&#x107; operator <code>is</code> w tym rozszerzonym wariancie (<code>zmienna is Typ wzorzec</code>) realizuj&#x105;c bezpieczne rzutowanie (<em>safe casting</em>):</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="csharp {highlight=[4,5]}" class="language-csharp" data-line="4,5"><span class="token keyword">double</span> sumarycznyObwod <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> figura <span class="token keyword">in</span> figury <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>figura <span class="token keyword">is</span> <span class="token class-name">IMierzalna2D</span> f<span class="token punctuation">)</span>
+        sumarycznyObwod <span class="token operator">+=</span> f<span class="token punctuation">.</span>Obwod<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div></pre><h3 class="mume-header" id="g%C5%82%C3%B3wne-zastosowanie-interfejs%C3%B3w">G&#x142;&#xF3;wne zastosowanie interfejs&#xF3;w</h3>
+
+<p>Interfejsy opisuj&#x105; pewne oczekiwane funkcjonalno&#x15B;ci, jakie klasy lub struktury je implementuj&#x105;ce powinny spe&#x142;nia&#x107;.</p>
+<p>W standardowych bibliotekach C# jest zadeklarowanych wiele takich interfejs&#xF3;w, o kluczowym praktycznym znaczeniu:</p>
+<ul>
+<li>
+<dl>
+<dt><code>IEquatable</code> lub jego generyczna wersja <code>IEquatable&lt;T&gt;</code>.</dt>
+<dd>Implementacja tego interfejsu oznacza, &#x17C;e w zbiorze instancji projektowanego typu zdefiniowano poj&#x119;cie &quot;taki sam&quot; - czyli w&#x142;asny (a nie domy&#x15B;lny) spos&#xF3;b stwierdzania, czy dwie instancje s&#x105; sobie r&#xF3;wne.</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt><code>IComparable</code> lub jego generyczna wersja <code>IComparable&lt;T&gt;</code>.</dt>
+<dd>Implementacja tego interfejsu oznacza wdro&#x17C;enie w projektowanym typie &quot;porz&#x105;dku wewn&#x119;trznego&quot;. Ka&#x17C;de dwie instancje typu s&#x105; por&#xF3;wnywalne (mo&#x17C;na stwierdzi&#x107;, kt&#xF3;ra jest <em>wi&#x119;ksza</em> a kt&#xF3;ra <em>mniejsza</em>) - wiedza ta jest potrzebna chocia&#x17C;by do sortowania czy szybkiego wyszukiwania (<em>binary search</em>).</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt><code>IComparer</code> lub jego generyczna wersja <code>IComparer&lt;T&gt;</code>.</dt>
+<dd>Klasa implementuj&#x105;ca ten interfejs dostarcza metod&#x119; do por&#xF3;wnywania dw&#xF3;ch obiekt&#xF3;w.  Wykorzystywane w celu dostarczenia &quot;zewn&#x119;trznego&quot; sposobu por&#xF3;wnywania element&#xF3;w dla algorytm&#xF3;w sortowania i szybkiego wyszukiwania.</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt><code>IDisposable</code></dt>
+<dd>Klasy implementuj&#x105;ce ten interfejs zapewniaj&#x105; w&#x142;asne mechanizmy zwalniania zasob&#xF3;w zewn&#x119;trznych (np. dost&#x119;p do plik&#xF3;w i strumieni danych czy bazy danych) i &quot;wsp&#xF3;&#x142;pracuj&#x105;&quot; z instrukcj&#x105; <code>using</code> (nie deklaracj&#x105; <code>using</code>).</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt><code>ICloneable</code></dt>
+<dd>Klasy implementuj&#x105;ce ten interfejs dostarczaj&#x105; w&#x142;asn&#x105;, niestandardow&#x105; metod&#x119; tworzenia kopii elementu (zamiast predefiniowanej <code>Object.MemberwiseClone</code>).</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt><code>IEnumerable</code> lub jego generyczna wersja <code>IEnumerable&lt;T&gt;</code>.</dt>
+<dd>Klasy (kolekcje) implementuj&#x105;ce ten interfejs definiuj&#x105; <em>iterator</em> i mi&#x119;dzy innymi pozwalaj&#x105; na przegl&#x105;danie swojej zawarto&#x15B;ci za pomoc&#x105; p&#x119;tli <code>foreach</code>. Typ <code>IEnumerable</code> wykorzystywany jest w technologii LINQ.</dd>
+</dl>
+</li>
+<li><code>ICollection</code>, <code>IList</code>, <code>ISet</code>, <code>IDictionary</code>, ... - definiuj&#x105; minimalny zestaw funkcjonalno&#x15B;ci dla odpowiednich kolekcji.</li>
+<li><code>ISerializable</code></li>
+<li>... i wiele innych.</li>
+</ul>
+<p>Zwyczajowo, nazwy interfejs&#xF3;w poprzedzane s&#x105; liter&#x105; <code>I</code> - dla zwi&#x119;kszenia czytelno&#x15B;ci (np. <code>ICloneable</code>) - ale nie jest to obowi&#x105;zek. Zwyczajowo, interfejsy dzielimy na te, kt&#xF3;re:</p>
+<ul>
+<li>definiuj&#x105; po&#x17C;&#x105;dan&#x105; cech&#x119; - i one wyst&#x119;puj&#x105; w wariancie <strong>przymiotnikowym</strong> (np. <code>IComparable</code> czyli &quot;por&#xF3;wnywalny&quot; lub <code>ICloneable</code> - klonowalny). Klasy implementuj&#x105;ce takie interfejsy opisuj&#x105; obiekty spe&#x142;niaj&#x105;ce t&#x119; po&#x17C;&#x105;dan&#x105; cech&#x119;, jako prawdopodobnie jedn&#x105; z wielu.</li>
+<li>definiuj&#x105; okre&#x15B;lon&#x105; funkcjonalno&#x15B;&#x107; poprzez metod&#x119; lub zestaw metod opisuj&#x105;c &quot;kontrakt&quot; dla obiekt&#xF3;w (np. <code>IComparator</code>, <code>ICollection</code>, <code>ISet</code>, <code>IList</code>, ...). Ich nazwy wyst&#x119;puj&#x105; w wariancie <strong>rzeczownikowym</strong>.</li>
+</ul>
+<p>Rozwa&#x17C;my nast&#x119;puj&#x105;cy kod, w kt&#xF3;rym zmiennej <code>kolekcja</code> typu &quot;interfejsowego&quot; <code>ICollection&lt;int&gt;</code> przypisujemy konkretny obiekt, np. typu <code>HashSet&lt;int&gt;</code>:</p>
+<div class="code-chunk" data-id="code-chunk-id-8" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=8, cmd=dotnet-script}" class="language-csharp">ICollection<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> kolekcja <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+kolekcja<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// inne polecenia na kolekcji</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">,</span> kolekcja<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2 1 5 3 4 0</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">2 1 5 3 4 0
+</pre></div></div><p>Oczywi&#x15B;cie na tak zdefiniowanej kolekcji mo&#x17C;emy wykonywa&#x107; dzia&#x142;ania zdefiniowane w interfejsie <code>ICollection</code> (bez rzutowania): <code>Add</code>, <code>Contains</code>, <code>Count</code>.</p>
+<p>Je&#x15B;li jednak nagle zmienimy zdanie i oczekiwaliby&#x15B;my raczej kolekcji, kt&#xF3;ra przechowywa&#x142;aby elementy w spos&#xF3;b posortowany (zgodnie z porz&#x105;dkiem zdefiniowanym w typie element&#xF3;w), wystarczy zmiana kodu w jednej linijce:</p>
+<div class="code-chunk" data-id="code-chunk-id-9" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=9, cmd=dotnet-script highlight=1}" class="language-csharp" data-line="1">ICollection<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> kolekcja <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SortedSet</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+kolekcja<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// inne polecenia na kolekcji</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">,</span> kolekcja<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 0 1 2 3 4 5</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
+</div></div></pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">0 1 2 3 4 5
+</pre></div></div><p>Deklarowanie zmiennej odwo&#x142;uj&#x105;cej si&#x119; do interfejsu, nast&#x119;pnie wykorzystanie tylko tych metod, kt&#xF3;re zdefiniowane s&#x105; w interfejsie (bez rzutowania) oraz przypisanie tej zmiennej referencji do konkretnego obiektu pozwala na zwi&#x119;kszenie elastyczno&#x15B;ci kodu. W dowolnym momencie, przy niewielkim wysi&#x142;ku, mo&#x17C;emy zmieni&#x107; kod uzyskuj&#x105;c np. zwi&#x119;kszenie wydajno&#x15B;ci poprzez zastosowanie np. bardziej wydajnej struktury danych dla okre&#x15B;lonego problemu.</p>
+<blockquote>
+<p>Przyk&#x142;ad konkretny: W dostarczonym Ci kodzie, do przechowywania element&#xF3;w wykorzystana jest lista (<code>List&lt;T&gt;</code>). Cz&#x119;sto dodajesz do niej elementy, cz&#x119;sto wypisujesz j&#x105;. Sporadycznie sprawdzasz, czy element nale&#x17C;y do listy, elementy nie s&#x105; usuwane z listy. W Twojej aplikacji zale&#x17C;y Ci jednak na jak najlepszym gospodarowaniu pami&#x119;ci&#x105; (np. tworzysz rozwi&#x105;zanie dla IoT). Struktura danych <code>List&lt;T&gt;</code> implementowana jest w tablicy i ma w&#x142;asno&#x15B;&#x107; samorozszerzania. Dodanie nowych element&#xF3;w powoduje automatyczne utworzenie nowej tablicy o wi&#x119;kszym rozmiarze, a nast&#x119;pnie przekopiowanie do niej poprzedniej zawarto&#x15B;ci. Proces ten jest czasoch&#x142;onny (<code>O(n)</code>) i wymaga dodatkowej pami&#x119;ci (<code>O(n)</code>). Rozs&#x105;dniejszym jest w tym przypadku zastosowanie <code>LinkedList&lt;T&gt;</code> (jej rozmiar jest dopasowany do aktualnej liczby przechowywanych element&#xF3;w, czas dodania nowego elementu jest sta&#x142;y <code>O(1)</code>).</p>
+</blockquote>
+<h3 class="mume-header" id="wielodziedziczenie-jawna-implementacja-interfejs%C3%B3w">Wielodziedziczenie. Jawna implementacja interfejs&#xF3;w</h3>
+
+<p>Wielokrotnie wcze&#x15B;niej zasygnalizowano, &#x17C;e interfejsy umo&#x17C;liwiaj&#x105; realizacj&#x119; wielodziedziczenia. Zreszt&#x105; wymy&#x15B;lono je w&#x142;a&#x15B;nie po to, aby unikn&#x105;&#x107; niejednoznaczno&#x15B;ci zwi&#x105;zanych z wielodziedziczeniem (tzw. <em>diamond problem</em>).</p>
+<p><strong>Diamond problem:</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Multiple_inheritance">https://en.wikipedia.org/wiki/Multiple_inheritance</a></p>
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentscripttype="application/ecmascript" contentstyletype="text/css" height="311px" preserveAspectRatio="none" style="width:198px;height:311px;" version="1.1" viewBox="0 0 198 311" width="198px" zoomAndPan="magnify"><defs><filter height="300%" id="feol09my812eg" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[fc539fa3f3b7db9b31467e896d367b3b]
+class Device--><rect fill="#FEFECE" filter="url(#feol09my812eg)" height="61.8359" id="Device" style="stroke: #A80036; stroke-width: 1.5;" width="69" x="64.5" y="8"/><ellipse cx="79.5" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M82.2656,19.875 Q82.4219,19.6563 82.6094,19.5469 Q82.7969,19.4375 83.0156,19.4375 Q83.3906,19.4375 83.625,19.7031 Q83.8594,19.9531 83.8594,20.5625 L83.8594,22.0156 Q83.8594,22.625 83.625,22.8906 Q83.3906,23.1563 83.0156,23.1563 Q82.6719,23.1563 82.4688,22.9531 Q82.2656,22.7656 82.1563,22.25 Q82.1094,21.8906 81.9219,21.7031 Q81.5938,21.3281 80.9844,21.1094 Q80.375,20.8906 79.75,20.8906 Q78.9844,20.8906 78.3438,21.2188 Q77.7188,21.5469 77.2188,22.2969 Q76.7344,23.0469 76.7344,24.0781 L76.7344,25.1719 Q76.7344,26.4063 77.625,27.2344 Q78.5156,28.0469 80.1094,28.0469 Q81.0469,28.0469 81.7031,27.7969 Q82.0938,27.6406 82.5156,27.2031 Q82.7813,26.9375 82.9219,26.8594 Q83.0781,26.7813 83.2813,26.7813 Q83.6094,26.7813 83.8594,27.0469 Q84.125,27.2969 84.125,27.6406 Q84.125,27.9844 83.7813,28.3906 Q83.2813,28.9688 82.4844,29.2969 Q81.4063,29.75 80.1094,29.75 Q78.5938,29.75 77.3906,29.125 Q76.4063,28.625 75.7188,27.5625 Q75.0313,26.4844 75.0313,25.2031 L75.0313,24.0469 Q75.0313,22.7188 75.6406,21.5781 Q76.2656,20.4219 77.3594,19.8125 Q78.4531,19.1875 79.6875,19.1875 Q80.4219,19.1875 81.0625,19.3594 Q81.7188,19.5156 82.2656,19.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="37" x="93.5" y="28.9102">Device</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="65.5" x2="132.5" y1="40" y2="40"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="65.5" x2="132.5" y1="48" y2="48"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="70.5" y="63.4189">Run()</text><!--MD5=[d5f1be826c69ca1567a5e96185ac7827]
+class Scanner--><rect fill="#FEFECE" filter="url(#feol09my812eg)" height="61.8359" id="Scanner" style="stroke: #A80036; stroke-width: 1.5;" width="78" x="6" y="130"/><ellipse cx="21" cy="146" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M23.7656,141.875 Q23.9219,141.6563 24.1094,141.5469 Q24.2969,141.4375 24.5156,141.4375 Q24.8906,141.4375 25.125,141.7031 Q25.3594,141.9531 25.3594,142.5625 L25.3594,144.0156 Q25.3594,144.625 25.125,144.8906 Q24.8906,145.1563 24.5156,145.1563 Q24.1719,145.1563 23.9688,144.9531 Q23.7656,144.7656 23.6563,144.25 Q23.6094,143.8906 23.4219,143.7031 Q23.0938,143.3281 22.4844,143.1094 Q21.875,142.8906 21.25,142.8906 Q20.4844,142.8906 19.8438,143.2188 Q19.2188,143.5469 18.7188,144.2969 Q18.2344,145.0469 18.2344,146.0781 L18.2344,147.1719 Q18.2344,148.4063 19.125,149.2344 Q20.0156,150.0469 21.6094,150.0469 Q22.5469,150.0469 23.2031,149.7969 Q23.5938,149.6406 24.0156,149.2031 Q24.2813,148.9375 24.4219,148.8594 Q24.5781,148.7813 24.7813,148.7813 Q25.1094,148.7813 25.3594,149.0469 Q25.625,149.2969 25.625,149.6406 Q25.625,149.9844 25.2813,150.3906 Q24.7813,150.9688 23.9844,151.2969 Q22.9063,151.75 21.6094,151.75 Q20.0938,151.75 18.8906,151.125 Q17.9063,150.625 17.2188,149.5625 Q16.5313,148.4844 16.5313,147.2031 L16.5313,146.0469 Q16.5313,144.7188 17.1406,143.5781 Q17.7656,142.4219 18.8594,141.8125 Q19.9531,141.1875 21.1875,141.1875 Q21.9219,141.1875 22.5625,141.3594 Q23.2188,141.5156 23.7656,141.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="46" x="35" y="150.9102">Scanner</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="83" y1="162" y2="162"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="83" y1="170" y2="170"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="12" y="185.4189">Run()</text><!--MD5=[69f2f3ad3645114d26612368d508f737]
+class Printer--><rect fill="#FEFECE" filter="url(#feol09my812eg)" height="61.8359" id="Printer" style="stroke: #A80036; stroke-width: 1.5;" width="68" x="119" y="130"/><ellipse cx="134" cy="146" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M136.7656,141.875 Q136.9219,141.6563 137.1094,141.5469 Q137.2969,141.4375 137.5156,141.4375 Q137.8906,141.4375 138.125,141.7031 Q138.3594,141.9531 138.3594,142.5625 L138.3594,144.0156 Q138.3594,144.625 138.125,144.8906 Q137.8906,145.1563 137.5156,145.1563 Q137.1719,145.1563 136.9688,144.9531 Q136.7656,144.7656 136.6563,144.25 Q136.6094,143.8906 136.4219,143.7031 Q136.0938,143.3281 135.4844,143.1094 Q134.875,142.8906 134.25,142.8906 Q133.4844,142.8906 132.8438,143.2188 Q132.2188,143.5469 131.7188,144.2969 Q131.2344,145.0469 131.2344,146.0781 L131.2344,147.1719 Q131.2344,148.4063 132.125,149.2344 Q133.0156,150.0469 134.6094,150.0469 Q135.5469,150.0469 136.2031,149.7969 Q136.5938,149.6406 137.0156,149.2031 Q137.2813,148.9375 137.4219,148.8594 Q137.5781,148.7813 137.7813,148.7813 Q138.1094,148.7813 138.3594,149.0469 Q138.625,149.2969 138.625,149.6406 Q138.625,149.9844 138.2813,150.3906 Q137.7813,150.9688 136.9844,151.2969 Q135.9063,151.75 134.6094,151.75 Q133.0938,151.75 131.8906,151.125 Q130.9063,150.625 130.2188,149.5625 Q129.5313,148.4844 129.5313,147.2031 L129.5313,146.0469 Q129.5313,144.7188 130.1406,143.5781 Q130.7656,142.4219 131.8594,141.8125 Q132.9531,141.1875 134.1875,141.1875 Q134.9219,141.1875 135.5625,141.3594 Q136.2188,141.5156 136.7656,141.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="36" x="148" y="150.9102">Printer</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="120" x2="186" y1="162" y2="162"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="120" x2="186" y1="170" y2="170"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="125" y="185.4189">Run()</text><!--MD5=[0965fe93614fb4ebeb789aab1ae31cc5]
+class Copier--><rect fill="#FEFECE" filter="url(#feol09my812eg)" height="48" id="Copier" style="stroke: #A80036; stroke-width: 1.5;" width="69" x="64.5" y="252"/><ellipse cx="79.5" cy="268" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M82.2656,263.875 Q82.4219,263.6563 82.6094,263.5469 Q82.7969,263.4375 83.0156,263.4375 Q83.3906,263.4375 83.625,263.7031 Q83.8594,263.9531 83.8594,264.5625 L83.8594,266.0156 Q83.8594,266.625 83.625,266.8906 Q83.3906,267.1563 83.0156,267.1563 Q82.6719,267.1563 82.4688,266.9531 Q82.2656,266.7656 82.1563,266.25 Q82.1094,265.8906 81.9219,265.7031 Q81.5938,265.3281 80.9844,265.1094 Q80.375,264.8906 79.75,264.8906 Q78.9844,264.8906 78.3438,265.2188 Q77.7188,265.5469 77.2188,266.2969 Q76.7344,267.0469 76.7344,268.0781 L76.7344,269.1719 Q76.7344,270.4063 77.625,271.2344 Q78.5156,272.0469 80.1094,272.0469 Q81.0469,272.0469 81.7031,271.7969 Q82.0938,271.6406 82.5156,271.2031 Q82.7813,270.9375 82.9219,270.8594 Q83.0781,270.7813 83.2813,270.7813 Q83.6094,270.7813 83.8594,271.0469 Q84.125,271.2969 84.125,271.6406 Q84.125,271.9844 83.7813,272.3906 Q83.2813,272.9688 82.4844,273.2969 Q81.4063,273.75 80.1094,273.75 Q78.5938,273.75 77.3906,273.125 Q76.4063,272.625 75.7188,271.5625 Q75.0313,270.4844 75.0313,269.2031 L75.0313,268.0469 Q75.0313,266.7188 75.6406,265.5781 Q76.2656,264.4219 77.3594,263.8125 Q78.4531,263.1875 79.6875,263.1875 Q80.4219,263.1875 81.0625,263.3594 Q81.7188,263.5156 82.2656,263.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="37" x="93.5" y="272.9102">Copier</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="65.5" x2="132.5" y1="284" y2="284"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="65.5" x2="132.5" y1="292" y2="292"/><!--MD5=[967a5842fcd7ff69c75c4639f362b7b1]
+reverse link Device to Scanner--><path d="M76.9762,88.942 C70.7629,102.749 64.1855,117.366 58.6221,129.729 " fill="none" id="Device&lt;-Scanner" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="70.7827,85.647,85.3735,70.281,83.5496,91.392,70.7827,85.647" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[c280150427b8e8cf4dfb0456afbf691e]
+reverse link Device to Printer--><path d="M121.024,88.942 C127.237,102.749 133.814,117.366 139.378,129.729 " fill="none" id="Device&lt;-Printer" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="114.45,91.392,112.626,70.281,127.217,85.647,114.45,91.392" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[f4b75db4fbf828e098597f348b5853f1]
+reverse link Scanner to Copier--><path d="M68.14,210.4226 C74.9996,224.777 82.1986,239.8415 87.9165,251.8067 " fill="none" id="Scanner&lt;-Copier" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="61.7786,213.3456,59.471,192.282,74.4104,207.3091,61.7786,213.3456" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[070e43ef46c85366a52abbb02d1953f8]
+reverse link Printer to Copier--><path d="M129.86,210.4226 C123,224.777 115.801,239.8415 110.084,251.8067 " fill="none" id="Printer&lt;-Copier" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="123.59,207.3091,138.529,192.282,136.221,213.3456,123.59,207.3091" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[7a66053eac1b67cbe4fe2ada66df2f56]
+@startuml
+
+Device <|- - Scanner
+Device <|- - Printer
+Scanner <|- - Copier
+Printer <|- - Copier
+
+Device : Run()
+Scanner : Run()
+Printer : Run()
+
+@enduml
+
+PlantUML version 1.2019.11(Sun Sep 22 12:02:15 CEST 2019)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.2+9
+Operating System: Windows 10
+Default Encoding: Cp1250
+Language: pl
+Country: PL
+--></g></svg></p><p>Kt&#xF3;ra z metod <code>Run()</code> zostanie odziedziczona w klasie <code>Copier</code>?</p>
+<p>W tym kontek&#x15B;cie pojawia si&#x119; wiele problem&#xF3;w, np. czy kopiarka powinna mie&#x107; jedn&#x105; czy dwie kopie <code>Device</code> oraz jak rozwi&#x105;za&#x107; niekt&#xF3;re niejednoznaczno&#x15B;ci odwo&#x142;a&#x144;.</p>
+<p>W zasadzie problemy wielodziedziczenia mo&#x17C;na omin&#x105;&#x107; (najlepiej nie stosowa&#x107;, zast&#x119;puj&#x105;c wzorcem delegacji) lub rozwi&#x105;za&#x107; za pomoc&#x105; jawnego okre&#x15B;lania zakresu, ale wi&#x105;&#x17C;e si&#x119; to z dodatkowymi kosztami utrzymania kodu, jego z&#x142;o&#x17C;ono&#x15B;ci&#x105; i problemami wydajno&#x15B;ciowymi (przeszukiwanie hierarchii klas).</p>
+<p>J&#x119;zyki C#, Java zapewniaj&#x105; dziedziczenie po jednej klasie bazowej, wi&#x119;c teoretycznie problem nie wyst&#x119;puje. Wielodziedziczenie symulowane jest implementacj&#x105; wielu interfejs&#xF3;w. Interfejsy definiuj&#x105; sygnatury metod, ale nie przewiduj&#x105; konkretnej implementacji. Ta wykonywana jest dopiero na poziomie klasy konkretnej.</p>
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentscripttype="application/ecmascript" contentstyletype="text/css" height="238px" preserveAspectRatio="none" style="width:327px;height:238px;" version="1.1" viewBox="0 0 327 238" width="327px" zoomAndPan="magnify"><defs><filter height="300%" id="ff3gktemyba5y" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[76256baee32c93fbbadf0c4cecce390a]
+class IScanner--><rect fill="#FEFECE" filter="url(#ff3gktemyba5y)" height="61.8359" id="IScanner" style="stroke: #A80036; stroke-width: 1.5;" width="82" x="234" y="40"/><ellipse cx="249" cy="56" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M249.9531,52.6406 L249.9531,59.2969 L251.6719,59.2969 Q252.2813,59.2969 252.5469,59.5313 Q252.8125,59.7656 252.8125,60.1563 Q252.8125,60.5313 252.5469,60.7656 Q252.2813,61 251.6719,61 L246.5313,61 Q245.9219,61 245.6563,60.7656 Q245.3906,60.5313 245.3906,60.1406 Q245.3906,59.7656 245.6563,59.5313 Q245.9219,59.2969 246.5313,59.2969 L248.25,59.2969 L248.25,52.6406 L246.5313,52.6406 Q245.9219,52.6406 245.6563,52.4063 Q245.3906,52.1719 245.3906,51.7813 Q245.3906,51.4063 245.6563,51.1719 Q245.9219,50.9375 246.5313,50.9375 L251.6719,50.9375 Q252.2813,50.9375 252.5469,51.1719 Q252.8125,51.4063 252.8125,51.7813 Q252.8125,52.1719 252.5469,52.4063 Q252.2813,52.6406 251.6719,52.6406 L249.9531,52.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="50" x="263" y="60.9102">IScanner</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="235" x2="315" y1="72" y2="72"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="235" x2="315" y1="80" y2="80"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="240" y="95.4189">Run()</text><!--MD5=[3fc38833abbf5d8e1b14ae79b381795e]
+class IPrinter--><rect fill="#FEFECE" filter="url(#ff3gktemyba5y)" height="61.8359" id="IPrinter" style="stroke: #A80036; stroke-width: 1.5;" width="72" x="127" y="40"/><ellipse cx="142" cy="56" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M142.9531,52.6406 L142.9531,59.2969 L144.6719,59.2969 Q145.2813,59.2969 145.5469,59.5313 Q145.8125,59.7656 145.8125,60.1563 Q145.8125,60.5313 145.5469,60.7656 Q145.2813,61 144.6719,61 L139.5313,61 Q138.9219,61 138.6563,60.7656 Q138.3906,60.5313 138.3906,60.1406 Q138.3906,59.7656 138.6563,59.5313 Q138.9219,59.2969 139.5313,59.2969 L141.25,59.2969 L141.25,52.6406 L139.5313,52.6406 Q138.9219,52.6406 138.6563,52.4063 Q138.3906,52.1719 138.3906,51.7813 Q138.3906,51.4063 138.6563,51.1719 Q138.9219,50.9375 139.5313,50.9375 L144.6719,50.9375 Q145.2813,50.9375 145.5469,51.1719 Q145.8125,51.4063 145.8125,51.7813 Q145.8125,52.1719 145.5469,52.4063 Q145.2813,52.6406 144.6719,52.6406 L142.9531,52.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="40" x="156" y="60.9102">IPrinter</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="128" x2="198" y1="72" y2="72"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="128" x2="198" y1="80" y2="80"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="133" y="95.4189">Run()</text><!--MD5=[fc539fa3f3b7db9b31467e896d367b3b]
+class Device--><rect fill="#FEFECE" filter="url(#ff3gktemyba5y)" height="70.0234" id="Device" style="stroke: #A80036; stroke-width: 1.5;" width="86" x="6" y="36"/><ellipse cx="21" cy="56.0938" fill="#A9DCDF" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M23.1875,57.8594 L19.0469,57.8594 L18.625,58.8906 L19.0469,58.8906 Q19.6563,58.8906 19.9219,59.125 Q20.1875,59.3594 20.1875,59.75 Q20.1875,60.125 19.9219,60.3594 Q19.6563,60.5938 19.0469,60.5938 L16.75,60.5938 Q16.1406,60.5938 15.8906,60.3594 Q15.625,60.125 15.625,59.7344 Q15.625,59.3594 15.9063,59.125 Q16.1719,58.875 16.7969,58.8906 L19.4688,52.2344 L18.3594,52.2344 Q17.75,52.2344 17.4844,52 Q17.2188,51.7656 17.2188,51.375 Q17.2188,51 17.4844,50.7656 Q17.75,50.5313 18.3594,50.5313 L22.0313,50.5313 L25.4219,58.8906 Q26.0156,58.8906 26.2031,59.0313 Q26.5938,59.2969 26.5938,59.75 Q26.5938,60.125 26.3281,60.3594 Q26.0781,60.5938 25.4688,60.5938 L23.1719,60.5938 Q22.5625,60.5938 22.2969,60.3594 Q22.0313,60.125 22.0313,59.7344 Q22.0313,59.3594 22.2969,59.125 Q22.5625,58.8906 23.1719,58.8906 L23.5938,58.8906 L23.1875,57.8594 Z M22.4688,56.1563 L21.1094,52.7813 L19.7344,56.1563 L22.4688,56.1563 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="58" x="33" y="53.457">&#xAB;abstract&#xBB;</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="38" x="43" y="68.5508">Device</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="91" y1="76.1875" y2="76.1875"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="91" y1="84.1875" y2="84.1875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="12" y="99.6064">Run() &#xAB;virtual&#xBB;</text><!--MD5=[0965fe93614fb4ebeb789aab1ae31cc5]
+class Copier--><rect fill="#FEFECE" filter="url(#ff3gktemyba5y)" height="61.8359" id="Copier" style="stroke: #A80036; stroke-width: 1.5;" width="94" x="116" y="166"/><ellipse cx="142.25" cy="182" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M145.0156,177.875 Q145.1719,177.6563 145.3594,177.5469 Q145.5469,177.4375 145.7656,177.4375 Q146.1406,177.4375 146.375,177.7031 Q146.6094,177.9531 146.6094,178.5625 L146.6094,180.0156 Q146.6094,180.625 146.375,180.8906 Q146.1406,181.1563 145.7656,181.1563 Q145.4219,181.1563 145.2188,180.9531 Q145.0156,180.7656 144.9063,180.25 Q144.8594,179.8906 144.6719,179.7031 Q144.3438,179.3281 143.7344,179.1094 Q143.125,178.8906 142.5,178.8906 Q141.7344,178.8906 141.0938,179.2188 Q140.4688,179.5469 139.9688,180.2969 Q139.4844,181.0469 139.4844,182.0781 L139.4844,183.1719 Q139.4844,184.4063 140.375,185.2344 Q141.2656,186.0469 142.8594,186.0469 Q143.7969,186.0469 144.4531,185.7969 Q144.8438,185.6406 145.2656,185.2031 Q145.5313,184.9375 145.6719,184.8594 Q145.8281,184.7813 146.0313,184.7813 Q146.3594,184.7813 146.6094,185.0469 Q146.875,185.2969 146.875,185.6406 Q146.875,185.9844 146.5313,186.3906 Q146.0313,186.9688 145.2344,187.2969 Q144.1563,187.75 142.8594,187.75 Q141.3438,187.75 140.1406,187.125 Q139.1563,186.625 138.4688,185.5625 Q137.7813,184.4844 137.7813,183.2031 L137.7813,182.0469 Q137.7813,180.7188 138.3906,179.5781 Q139.0156,178.4219 140.1094,177.8125 Q141.2031,177.1875 142.4375,177.1875 Q143.1719,177.1875 143.8125,177.3594 Q144.4688,177.5156 145.0156,177.875 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="37" x="158.75" y="186.9102">Copier</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="117" x2="209" y1="198" y2="198"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="117" x2="209" y1="206" y2="206"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="122" y="221.4189">Run() &#xAB;override&#xBB;</text><!--MD5=[7730093a127e1d0b19658785abfcea30]
+reverse link IScanner to Copier--><path d="M234.424,116.923 C219.738,133.1824 203.518,151.1413 190.251,165.8297 " fill="none" id="IScanner&lt;-Copier" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="229.287,112.167,247.888,102.017,239.677,121.551,229.287,112.167" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[e11456454bd111708a9228913c8ea669]
+reverse link IPrinter to Copier--><path d="M163,122.257 C163,137.0321 163,152.7312 163,165.8297 " fill="none" id="IPrinter&lt;-Copier" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="156,122.017,163,102.017,170,122.017,156,122.017" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[3a45304121dace9baf35da1e8e9bc44f]
+reverse link Device to Copier--><path d="M94.337,121.314 C108.128,136.3149 122.871,152.3511 135.147,165.7034 " fill="none" id="Device&lt;-Copier" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="88.8356,125.673,80.4528,106.212,99.142,116.198,88.8356,125.673" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[5c5e8d58273a5e20b0d1f487488b7309]
+@startuml
+
+together {
+    interface IScanner
+    interface IPrinter
+}
+
+abstract class Device <<abstract>>
+
+IScanner <|.. Copier
+IPrinter <|.. Copier
+Device <|-down- Copier
+
+Device : Run() <<virtual>>
+
+IScanner : Run()
+IPrinter : Run()
+Copier : Run() <<override>>
+@enduml
+
+PlantUML version 1.2019.11(Sun Sep 22 12:02:15 CEST 2019)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.2+9
+Operating System: Windows 10
+Default Encoding: Cp1250
+Language: pl
+Country: PL
+--></g></svg></p><div class="code-chunk" data-id="code-chunk-id-10" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=10, cmd=&quot;dotnet-script&quot;}" class="language-csharp"><span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Device</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">IPrinter</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">IScanner</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Copier</span> <span class="token punctuation">:</span> <span class="token class-name">Device</span><span class="token punctuation">,</span> IScanner<span class="token punctuation">,</span> IPrinter
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>W C# mo&#x17C;liwa jest jawna implementacja interfejs&#xF3;w (<em><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation">explicit implementation</a></em>). Pozwala ona klasie implementuj&#x105;cej na specyficzne implementowanie metod interfejsu, niezale&#x17C;nie od metod w&#x142;asnych, lub w celu zapewnienia r&#xF3;&#x17C;nych implementacji dla dw&#xF3;ch metod o tej samej nazwie i sygnaturze odziedziczonych z dw&#xF3;ch podstawowych interfejs&#xF3;w.</p>
+<div class="code-chunk" data-id="code-chunk-id-11" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=11, cmd=&quot;dotnet-script&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Device</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IPrinter</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IScanner</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Copier</span> <span class="token punctuation">:</span> <span class="token class-name">Device</span><span class="token punctuation">,</span> IScanner<span class="token punctuation">,</span> IPrinter
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> IScanner<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;... scanning&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> IPrinter<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;... printing&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token punctuation">(</span><span class="token punctuation">(</span>IScanner<span class="token punctuation">)</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">(</span><span class="token punctuation">(</span>IPrinter<span class="token punctuation">)</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Main()</span>
+<span class="token class-name">Copier</span> xerox <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Copier</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+xerox<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">... scanning
+... printing
+</pre></div></div><p>Implementacje <em>explicit</em> metod interfejs&#xF3;w s&#x105; osi&#x105;galne jedynie poprzez referencje do interfejs&#xF3;w (np. <code>((IScanner)this).Run()</code>). Zatem inne metody klasy nie maj&#x105; do nich bezpo&#x15B;redniego dost&#x119;pu, jedynie poprzez rzutowanie na typ interfejsu.</p>
+<p>Ograniczenie to ma istotny wp&#x142;yw na dziedziczenie. Skoro inni cz&#x142;onkowie klasy nie maj&#x105; bezpo&#x15B;redniego dost&#x119;pu do jawnych implementacji element&#xF3;w interfejsu, to cz&#x142;onkowie klas wywodz&#x105;cych si&#x119; z klasy r&#xF3;wnie&#x17C; nie mog&#x105; bezpo&#x15B;rednio uzyska&#x107; do nich dost&#x119;pu. Zawsze nale&#x17C;y uzyska&#x107; do nich dost&#x119;p poprzez odniesienie do interfejsu.</p>
+<p>Wi&#x119;cej informacji i przyk&#x142;ad&#xF3;w na temat jawnych implementacji interfejs&#xF3;w na stronie <em>C# Programming guide</em>:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation">Explicit Interface Implementation</a>,</li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/how-to-explicitly-implement-interface-members">How to: Explicitly Implement Interface Members</a>,</li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/how-to-explicitly-implement-members-of-two-interfaces">Explicitly Implement Members of Two Interfaces</a>.</li>
+</ul>
+<h3 class="mume-header" id="podsumowanie">Podsumowanie</h3>
+
+<p><strong>Zalety stosowania interfejs&#xF3;w:</strong></p>
+<ul>
+<li>Interfejsy, w powi&#x105;zaniu z klasami abstrakcyjnymi, buduj&#x105; fundamenty biblioteki klas.</li>
+<li>Dostarczaj&#x105; abstrakcj&#x119; projektowanego rozwi&#x105;zania (<em>total abstraction</em>).</li>
+<li>Ich zastosowanie pozwala na zachowanie odpowiedniego poziomu elastyczno&#x15B;ci kodu (<em>lose coupling</em>). Do biblioteki mo&#x17C;esz swobodnie do&#x142;&#x105;cza&#x107; kolejne klasy konkretne, spe&#x142;niaj&#x105;ce okre&#x15B;lone w interfejsach za&#x142;o&#x17C;enia.</li>
+<li>S&#x105; narz&#x119;dziem umo&#x17C;liwiaj&#x105;cym realizacj&#x119; programowania opartego na komponentach <em><a href="https://en.wikipedia.org/wiki/Component-based_software_engineering">component-based programming</a></em>.</li>
+<li>Umo&#x17C;liwiaj&#x105; bezpieczn&#x105; i efektywn&#x105; realizacj&#x119; wielodziedziczenia.</li>
+<li>Interfejsy &quot;dodaj&#x105; mechanizm <em>plug and play</em>&quot; do architektury aplikacji.</li>
+</ul>
+<p><strong>Wady:</strong></p>
+<ul>
+<li>Skompilowany kod z interfejsami jest mniej wydajny ni&#x17C; ten, bez ich stosowania.</li>
+<li>Modyfikacja fundament&#xF3;w architektury biblioteki klas (zmiana interfejs&#xF3;w czy klas abstrakcyjnych) najcz&#x119;&#x15B;ciej wymaga modyfikacji kodu klas implementuj&#x105;cych i ponown&#x105; kompilacj&#x119; ca&#x142;o&#x15B;ci.
+<blockquote>
+<p>Przyk&#x142;adowo, dopisanie deklaracji metody <code>int Wymiar {get;}</code> w interfejsie <code>IMierzalna</code> z przyk&#x142;adu opisuj&#x105;cego hierarchi&#x119; figur powoduje konieczno&#x15B;&#x107; uzupe&#x142;nienia kodu w praktycznie ka&#x17C;dej klasie wchodz&#x105;cej w sk&#x142;ad tej hierarchii.</p>
+</blockquote>
+</li>
+</ul>
+<p>Problem ten cz&#x119;&#x15B;ciowo rozwi&#x105;zano w C# 8, wprowadzaj&#x105;c istotne rozszerzenia w definiowaniu i u&#x17C;yciu interfejs&#xF3;w.</p>
+<hr>
+<p>Referencje:</p>
+<ul>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/index">Interfaces (C# Programming Guide)</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface">Interface (C# Reference)</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2008/ff652489%28v%3dorm.10%29">Interfaces</a> In: Learning C# 3.0: Master the fundamentals of C# 3.0 by Jesse Liberty, Brian MacDonald, published by O&apos;Reilly Media</p>
+</li>
+</ul>
+<hr>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#interfejsy-w-_c_">Interfejsy w <em>C#</em></a>
+<ul>
+<li><a href="#interfejs-co-to-jest">Interfejs - co to jest</a></li>
+<li><a href="#klasy-abstrakcyjne-_versus_-interfejsy">Klasy abstrakcyjne <em>versus</em> interfejsy</a></li>
+<li><a href="#interfejs-jest-typem-referencyjnym">Interfejs jest typem (referencyjnym)</a></li>
+<li><a href="#operatory-is-oraz-as-dla-interfejs%C3%B3w">Operatory <code>is</code> oraz <code>as</code> dla interfejs&#xF3;w</a></li>
+<li><a href="#g%C5%82%C3%B3wne-zastosowanie-interfejs%C3%B3w">G&#x142;&#xF3;wne zastosowanie interfejs&#xF3;w</a></li>
+<li><a href="#wielodziedziczenie-jawna-implementacja-interfejs%C3%B3w">Wielodziedziczenie. Jawna implementacja interfejs&#xF3;w</a></li>
+<li><a href="#podsumowanie">Podsumowanie</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
