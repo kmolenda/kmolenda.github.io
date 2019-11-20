@@ -1,0 +1,511 @@
+<!DOCTYPE html><html><head>
+      <title>Metody rozszerzaj&#x105;ce</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview .code-chunk .output-div {
+  border-left-style: dotted;
+  border-color: gray;
+  border-width: 1px;
+  font-size: 0.8em;
+}
+.markdown-preview.markdown-preview .code-chunk .output-div .language-text {
+  /* background: #f4fcfd */
+  background: black;
+  color: yellow;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h2 class="mume-header" id="metody-rozszerzaj%C4%85ce-ang-_extensions-methods_">Metody rozszerzaj&#x105;ce (ang. <em>extensions methods</em>)</h2>
+
+<table>
+<thead>
+<tr>
+<th>Krzysztof Molenda</th>
+<th>2019-11-10</th>
+<th>C#</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p>Klasycznym sposobem rozszerzania funkcjonalno&#x15B;ci klas jest dziedziczenie. Jednak co zrobi&#x107;, je&#x15B;li klasa jest zapiecz&#x119;towana (<code>sealed</code>)?</p>
+<p>J&#x119;zyk C# dostarcza mechanizmu <strong>metod rozszerzaj&#x105;cych</strong> -- czyli mo&#x17C;liwo&#x15B;ci dodania do istniej&#x105;cego typu pewnych metod, bez konieczno&#x15B;ci modyfikowania tego typu.</p>
+<p>Metoda rozszerzaj&#x105;ca to specjalna metoda, zaprogramowana w specjalnym miejscu i w specjalny spos&#xF3;b, jednak jej u&#x17C;ycie jest takie samo, jak metod zaimplementowanych w typie -- wywo&#x142;ywane s&#x105; na rzecz instancji.</p>
+<h3 class="mume-header" id="przyk%C5%82ad">Przyk&#x142;ad</h3>
+
+<p>Potrzebujemy funkcji zwracaj&#x105;cej liczb&#x119; wyraz&#xF3;w w zadanym napisie (przyjmujemy, &#x17C;e wyraz, to ci&#x105;g znak&#xF3;w oddzielony spacj&#x105;).</p>
+<p>Na przyk&#x142;ad w napisie <code>&quot;Ala ma kota, As to Ali pies&quot;</code> jest 7 wyraz&#xF3;w.</p>
+<p>W klasie <code>string</code> nie ma takiej funkcjonalno&#x15B;ci.</p>
+<h4 class="mume-header" id="podej%C5%9Bcie-1">Podej&#x15B;cie 1</h4>
+
+<p>Definiujemy statyczn&#x105;, niegeneryczn&#x105; i niezagnie&#x17C;d&#x17C;on&#x105; klas&#x119; o nazwie <code>Utility</code> w przestrzeni nazw <code>MyExtensionMethods</code></p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token comment">//file: Utility.cs</span>
+<span class="token keyword">namespace</span> MyExtensionMethods
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Utility</span>
+    <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>W klasie tej umieszczamy metod&#x119; <code>WordCount</code>. Do rozbicia napisu na wyrazy wykorzystujemy metod&#x119; <code>Split</code> z klasy <code>string</code>.</p>
+<div class="code-chunk" data-id="001" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=0, cmd=&quot;dotnet-script&quot; id=&quot;001&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Utility</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">WordCount</span><span class="token punctuation">(</span><span class="token keyword">string</span> napis<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> napis<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>W programie g&#x142;&#xF3;wnym sprawdzamy jej dzia&#x142;anie:</p>
+<div class="code-chunk" data-id="002" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=1, cmd=&quot;dotnet-script&quot; continue=&quot;001&quot; id=&quot;002&quot;}" class="language-csharp"><span class="token keyword">string</span> napis <span class="token operator">=</span> <span class="token string">&quot;Ala  ma kota, as to Ali pies&quot;</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> Utility<span class="token punctuation">.</span><span class="token function">WordCount</span><span class="token punctuation">(</span>napis<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">8
+</pre></div></div><p>Drobny k&#x142;opot -- wyraz&#xF3;w jest <code>7</code>, a program zwraca liczb&#x119; <code>8</code>. Powodem jest podw&#xF3;jna spacja mi&#x119;dzy wyrazami <em>Ala</em> oraz <em>ma</em>. Drobna korekta kodu:</p>
+<div class="code-chunk" data-id="0011" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=2, cmd=&quot;dotnet-script&quot; id=&quot;0011&quot; highlight=5}" class="language-csharp" data-line="5"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Utility</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">WordCount</span><span class="token punctuation">(</span><span class="token keyword">string</span> napis<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> napis<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">,</span> StringSplitOptions<span class="token punctuation">.</span>RemoveEmptyEntries<span class="token punctuation">)</span><span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div></pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><h4 class="mume-header" id="podej%C5%9Bcie-2">Podej&#x15B;cie 2</h4>
+
+<p>Do kodu tak opracowanej funkcji dodajemy s&#x142;owo kluczowe <code>this</code> przed typ, kt&#xF3;ry b&#x119;dzie rozszerzany:</p>
+<div class="code-chunk" data-id="003" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=3, cmd=&quot;dotnet-script&quot; id=&quot;003&quot; highlight=3}" class="language-csharp" data-line="3"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Utility</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">WordCount</span><span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token keyword">string</span> napis<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> napis<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">,</span> StringSplitOptions<span class="token punctuation">.</span>RemoveEmptyEntries<span class="token punctuation">)</span><span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div></pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Mo&#x17C;emy teraz u&#x17C;y&#x107; tak opracowanej funkcji po staremu -- jako metody statycznej klasy <code>Utility</code> oraz po nowemu -- jako metody uruchamianej na rzecz instancji. Wcze&#x15B;niej jednak nale&#x17C;y u&#x17C;y&#x107; dyrektywy <code>using</code> importuj&#x105;c przestrze&#x144; nazw z klas&#x105; definiuj&#x105;c&#x105; metody rozszerzaj&#x105;ce:</p>
+<pre data-role="codeBlock" data-info="csharp { highlight=[11,12] }" class="language-csharp" data-line="11,12"><span class="token keyword">using</span> System<span class="token punctuation">;</span>
+<span class="token keyword">using</span> MyExtensionMethods<span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> KM<span class="token punctuation">.</span>ExtensionsMethodsExample
+<span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">Program</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">string</span> napis <span class="token operator">=</span> <span class="token string">&quot;Ala  ma kota, as to Ali pies&quot;</span><span class="token punctuation">;</span>
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>Utility<span class="token punctuation">.</span><span class="token function">WordCount</span><span class="token punctuation">(</span>napis<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// static method</span>
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>napis<span class="token punctuation">.</span><span class="token function">WordCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// extension method</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div></pre><h4 class="mume-header" id="podej%C5%9Bcie-3">Podej&#x15B;cie 3</h4>
+
+<p>Separatorem mo&#x17C;e by nie tylko spacja, ale ka&#x17C;dy inny bia&#x142;y znak czy znaki przestankowe <code>&apos; &apos;, &apos;\t&apos;, &apos;\n&apos;, &apos;.&apos;, &apos;,&apos;, &apos;!&apos;, &apos;?&apos;</code> i.t.p.</p>
+<p>Dodamy przeci&#x105;&#x17C;ony wariant metody <code>WordCount</code> przyjmuj&#x105;cej jako parametr tablic&#x119; znak&#xF3;w mog&#x105;cych by&#x107; separatorem.</p>
+<p>W klasie <code>Utility</code> umieszczamy drugi wariant metody:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">WordCount</span><span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token keyword">string</span> napis<span class="token punctuation">,</span> <span class="token keyword">params</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> delimiters<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> napis
+            <span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span>delimiters<span class="token punctuation">,</span> StringSplitOptions<span class="token punctuation">.</span>RemoveEmptyEntries<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p>i testujemy w programie:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp">Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> Utility<span class="token punctuation">.</span><span class="token function">WordCount</span><span class="token punctuation">(</span>napis<span class="token punctuation">,</span> <span class="token string">&apos; &apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;\t&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;,&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;.&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;!&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;?&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> napis<span class="token punctuation">.</span><span class="token function">WordCount</span><span class="token punctuation">(</span> delimiters<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token string">&apos; &apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;\t&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;,&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;.&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;!&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;?&apos;</span><span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> napis<span class="token punctuation">.</span><span class="token function">WordCount</span><span class="token punctuation">(</span> <span class="token string">&apos; &apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;\t&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;,&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;.&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;!&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;?&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// bo params</span>
+</pre><p><img src="data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSI2NjlweCIgaGVpZ2h0PSIzNzFweCIgdmlld0JveD0iLTAuNSAtMC41IDY2OSAzNzEiIGNvbnRlbnQ9IiZsdDtteGZpbGUgaG9zdD0mcXVvdDt3d3cuZHJhdy5pbyZxdW90OyBtb2RpZmllZD0mcXVvdDsyMDE5LTExLTIwVDIwOjQ1OjQ3LjcwNlomcXVvdDsgYWdlbnQ9JnF1b3Q7TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzc4LjAuMzkwNC45NyBTYWZhcmkvNTM3LjM2JnF1b3Q7IGV0YWc9JnF1b3Q7Snp1NDZGaldnLWhQV3RrOU1rbngmcXVvdDsgdmVyc2lvbj0mcXVvdDsxMi4yLjcmcXVvdDsgdHlwZT0mcXVvdDticm93c2VyJnF1b3Q7IHBhZ2VzPSZxdW90OzImcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gaWQ9JnF1b3Q7eHNYTUZWeVc5NTFoTnM1UmpXRmgmcXVvdDsgbmFtZT0mcXVvdDtQYWdlLTEmcXVvdDsmZ3Q7N1ZsWlUrTTRFUDR0KzVBQ0hrajVUbmlFQkhabUY2b29tQzFtSGhWYmliWElsc2RXU01LdjM5YmhVM1ltWEx1MVV4T29SR3ExcnU1UHJVL1N5SjBsMjk5emxNVTNMTUowNUZqUmR1VE9SNDVqZTlZVWZvUmtweVRUSUZDQ1ZVNGlyVlFMN3NrejFrSkxTOWNrd2tWTGtUTkdPY25hd3BDbEtRNTVTNGJ5bkczYWFrdEcyNzFtYUlVTndYMklxQ2w5SUJHUDlTeWNTUzMvaE1rcUxudTJnek5Wa3FCU1djK2tpRkhFTmcyUmV6bHlaemxqWEtXUzdReFRZYnpTTHFyZTFVQnBOYkFjcC95UUNwL2lwK2ZINzV6OGNmdjU5dTl2eVo5M3dlZkxVOTNLRTZKclBlR1FvcUlRdytVNVNWZDY2SHhYMnFQWWtJU2lGSElYUzVieWUxMWlReDVSc2tvaEhjS0FjQTZDSjV4ekFxWTgxd1djWlNBTlkwS2phN1JqYXpIc2dxUHdzY3hkeEN3bno5QXNvcnBOS002NVJvVVR0RFR1UlUwUVd5RE5jUUU2dDZVdDdJN29CbTFiaXRlbzRGb1FNa3BSVnBCRk5ZMEU1U3VTWGpET1dhS1Z0SkZnT25nN2FIMjc4aWtzQnN3U3pQTWRxT2dLZ1VhQlhnYXV6bTVxVE5sVExZdWJlTEswRUdrY3I2cVdxODd1QVBjb1hjRUVxdDZtN2Q0OHM3ZWdwek1uYVBlRktQZ3hSUnhmc0hVYUZVMTBRYUl4eTFva01mY0MvRGtHL3NianNRRTZNRHVYWU1qWkk1NHh5Z0JkODVRcEZCSktPNklTaUJRditTQU1pd3lGQVBCcnFUUDNhc21kTm9nUU1haTdwSExWeGlTS2NDb2d4RGppU09GRmdDTmpKT1hTWXY0Ri9JTmRaOWJZSC9rdzhCbms3VG9QLzBJOTV6T1d3bHdRa2REQkFNWU5Gb0E4REdmRDY5Z0UzNjd0MkIraHJRdUFKdGhhbm4rcG0xM0R6WWFQS1pHK1V6NHVRNjM5S2djbjRDcUthNDkrRVE2Zm45cUcxMTNUNjI2UGh5bGFZSHJMQ3NJSkUrM25TcmZqK2YvS3ViNXptSE9uSCtSYnovQ3RtTHBqUGJBOG1rSGc0TWNuSXdFczF4YTI3SmJCNUZFaTlwc3dScm15WTFQOXNGQUEycGI4ZE9BQzhxVXYvdjdQUVVGc3M0MEpxUS9JSTFURU9DcjN5WkpjMk1ZYWNqNFFlOEdCMjVpM1p4ZDdFL2o4bnNBU1VMazRXN2dKdnE4Rno5S2IrOGc5aDFJcjI4SzN0STZsNUtjU0JhTE1NOHNVY0VTaDNhd3BBSG1xd1NVS3BWclZINlJXK2xlT2FsRUtVcFJnZ1MyeGFkL3NMcmNjcHdWRWx4dk1ZeWEyV3FVT05sbDBtd0JaVnNzNnl5UG1DZTFGZ1FaSkp2U1M3VXFROVhHeEt4STZoa0U4U2hKODBhamN3TGhZVUNEWnhJVGplemxpZDc2QittVmcvQ293NXZqdlE1TmNwOE5jWEFOZ2JpOVBDaVlmaExEQVFCaHdVZ2dkSW1ScHF2d1hKNVR3M1MrdWJQWEM3ajFnNGJaaGNXYkdIYmVQMFo0NVB6Vjdudnhpeis5Q3NJS1hzdWRlc0RuZUI0V2dxZUhtYkwyZ01nUlZzYWpMcTNoTW1xZDRLMFVaS1U1R00yZDBibzBtWXVPU1VJSDB2RUczWHRtdThKVTBjdytWMjlQYndlUXVrSitma2R6MUhIY0c2TjVIb2RzL01KUjZlMExwbTlCOU5ramhLdXF6TGhUWSttaFJEM2xxMEszY0lHQ21wQlNVMjNsZkw3YzVBODZVTkVvYkRVbUE5M2FBRWdHOGRGRmtpaXlhb3M0WXFuWDN4TUJvQXpNR0dCM3JCYWdPbnVLcWMxV2N2SG9Va3g2dFY4M0dFSFhqaENVOWJOVUUrWndpU2JIaDZ4R1dtWW9rU0doeUJsK3dnZ1hFQ1M0YW5QcjloaWVXSmFONC9KQUR1YjBtS1Q0dWh6cHVIVit0azZyK3Y5ZnZFY2lPbEVHT1J2Nk1WMmxuVmliSFplSzNxdEM5T25yemdDZnpBYURQaDBKMjQralFpZEhZam53ODZZdnFaOEhFUllFT2VWY29JVlNFcE90MVNDSUJCMjJqOXlHUUU3OUY2ZnJ1WDMzUDd6bFhURDdxNUZvK2NPeTdFOE5wZEM3ZU1HcHkxckF6ekR6ZmZkVmJrc3g4RTVteFgyYm4yMmJoZk5kTDBCMVpIbDNKUTU0dWgyTkUyYTJNaVNUOEVvdERzeXJTcWpXeng1SHhoTkp4Q3l4bUNGQjQzeWJsOWJ1djZaK2VUYW1VNVpoQzNIeHFEMk1QNmI5bGl0ZVU2SEJhNkhDOURwVXYyRG9Qc2E3VWZHTHB0Tk81NUsrdVFzcDJsQldNZHNEWWFOZFEwL3hpY0xpZTFUdmNvVkYxMUcyNzlVNEVDZFgvdTU1TWJQTmh5VUIzeWRLdU85ZXJDMzJjYklKOWdORVo3TWs0VjhOWldkd3N6NnJuUVFIeDZ1ck1HdExvWHBXZ1RlRkc0eVdnN0ZLaWZaaUpGcGxxWlVtMm9vdjJ6ZHlQSXAxa21zb0twN1pqOVVYTm1ndS9oU2p1ajVhT2Q5YUdqR09QZlNOZ1R1MGVsdmp5RndUSTFvK2dDbi8xVTdKNytROD0mbHQ7L2RpYWdyYW0mZ3Q7Jmx0O2RpYWdyYW0gbmFtZT0mcXVvdDtQYWdlLTImcXVvdDsgaWQ9JnF1b3Q7ODNOMHkzUzdRblNDcXI4U2JzaS0mcXVvdDsmZ3Q7N1ZodGs1czJFUDQxektRZjZ1SEZMK2VQTWJiYlR1L2FUTjNNZmV6SXNBYlZBbEZKeElaZjN4VUlEQUhQM1NXK0pzM0VkeDVMSzJsWHUvdnNDMWllbjV4L0VpU0xIM2dJekhMdDhHeDVhOHQxbmFrN3h4OU5LV3JLM1hKWkV5SkJRN1BwUXRqUkVnelJOdFNjaGlCN0d4WG5UTkdzVHd4NG1rS2dlalFpQkQvMXR4MDQ2MHZOU0FRRHdpNGdiRWg5cEtHS2pSYnU0a0wvR1dnVU41S2R1ZEV2SWMxbW80bU1TY2hQSFpLM3NUeGZjSzdxVVhMMmdXbmpOWFk1djE5TjNiK2M3UytsUEs3dXQ4V01sYzZQTmJQdFM0NjBLZ2hJMVcxWnV6WHJENFRseGw2V08yY29aTFhIUWFRSEtVbEFaaVNBWmdWRnRJdDQ5cUhZbkJXa2t2TDBBVlRNUTlteUVPMjJoZDQ1UW44ZWhTU1p2c2hlWnQwZHpZWXMzek1hYUFjcG9xcEJ3SWlVVjY3N1hsRkdWWEh0T24xUk43MjIvUW1hakN0UjB3NGMwYUFEaDNGUitXNytUODdyRGQ1OGJ0dEIwQ1hWWjZrKzByS3NPYlNtZWVRaTlIbWVxamVEbXoxSHBvMmZ3MkVvVThWVVhoVTY2cVBQMFZBcVFkUG91cElweWZSMS9EcWdTQ0kvVTE0UUUzRk4yZ3ovMXpwM0FxTUpWU0RrRDgvRDNRaFdya1B4YVpnOWpUd0JLaGZwRlhjWWs5MUs5RTFKazEyRzRmem1ZdUhhdGJzS0JkWGE3NW5DMUNRbmYwRENQOEFteVZTeFNYRVp0RE8rVHAzdUlZMTA4ZmwwbHkvV3oweHc2N0ZrdlRZRlR4Vk5GVlZ3MWt1eFNoZ1NIQk1yVzVKUXB2dUMrenlnSWNFalBscWE2ME1yVTFoQTROR1BLdkVUWmN4cGF5czJKY0FUVUVLbmE4TmxhYXF4YVVjV1pucTYxUGJaek5EaVRsM0g5R1I2Q3ROUFJDM25TODNFZ1NtYkx5aWgzcUNFUHVTU0ltVmZXUDdVdWx2bzIrR1hId1ZZL3N4YXJoaFA0Vzl0Q1ZFQ3Bxc1NVbHBGV1hrYTJCMlgrYkZ0WExUZDJ5N0V4a2xJWkF5aG1SQkdveFRIQVpvWFJOOWJlQ3JUTEpOenBOdThTY0tEWTU1TnRGc24yQ3N4bm12M01wb2UvNnc4dmRaNUcwZW1uM01XWnU2M3FSRVRvdjdvRElqbjExUlRmM3MwMDUzUkFCbUN3VXJEeVRQekxxZkYyOVZ5MjlHQXdVRmZSNE9ISXJ1M2hxeDRWaWQ0Tk1uWVJRNlVzUTU5TzlOL1NFZVZRd285a1lmcTg0b3dkZXcrVGwxdmdOUGxDRXhucjRYUzZRQ2x2MktUcEVNMkdhQlZkeDlGVUtia094eS9HVGk2ZlRndWgybHpNUUxINld2QmNUWk1tcUI0T0k3SHVpMnU4R2pUNy9qOEp2SHBlRDE4T3RPN0x3dlF4UUNnN3lpSWt5eUw1c0VCeFl5aVZSVlpqaitDbDdJRVVaSVVJbDQxcGYzV2F5VHQ2dTdnenVVbjNHNGZXUjZVL0FUZE51N0tBMVduVmY5L2g4UG1OdUVnYW5qOEovRndpdkdoWTFlOUhmSFdKelNPdGdQWkEzdkhKZFhQSFYyTE5oZTYvMmhEUXNPdzZwbGpMbWlKMnBIRzhLOFZidDY4WHc3bXcyaHJHK1p1dUxWbDVBWHhodFBMTzdKcXJmT20wZHY4Q3c9PSZsdDsvZGlhZ3JhbSZndDsmbHQ7L214ZmlsZSZndDsiPjxkZWZzPjxjbGlwUGF0aCBpZD0ibXgtY2xpcC0zMi0zMS0xNzItMjYtMCI+PHJlY3QgeD0iMzIiIHk9IjMxIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjI2Ii8+PC9jbGlwUGF0aD48Y2xpcFBhdGggaWQ9Im14LWNsaXAtMzMtNjYtMTY5LTM3LTAiPjxyZWN0IHg9IjMzIiB5PSI2NiIgd2lkdGg9IjE2OSIgaGVpZ2h0PSIzNyIvPjwvY2xpcFBhdGg+PGNsaXBQYXRoIGlkPSJteC1jbGlwLTMwMi05MS0zNTItMjQtMCI+PHJlY3QgeD0iMzAyIiB5PSI5MSIgd2lkdGg9IjM1MiIgaGVpZ2h0PSIyNCIvPjwvY2xpcFBhdGg+PGNsaXBQYXRoIGlkPSJteC1jbGlwLTMwMy0xMTYtMzUwLTQwLTAiPjxyZWN0IHg9IjMwMyIgeT0iMTE2IiB3aWR0aD0iMzUwIiBoZWlnaHQ9IjQwIi8+PC9jbGlwUGF0aD48L2RlZnM+PGc+PHBhdGggZD0iTSAyOCAyNiBMIDI4IDAgTCAyMDggMCBMIDIwOCAyNiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48cGF0aCBkPSJNIDI4IDI2IEwgMjggMTAwIEwgMjA4IDEwMCBMIDIwOCAyNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PHBhdGggZD0iTSAyOCAyNiBMIDIwOCAyNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGcgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTJweCI+PHRleHQgeD0iMTE3LjUiIHk9IjE4LjUiPmNsYXNzIHN0cmluZzwvdGV4dD48L2c+PGcgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgY2xpcC1wYXRoPSJ1cmwoI214LWNsaXAtMzItMzEtMTcyLTI2LTApIiBmb250LXNpemU9IjEycHgiPjx0ZXh0IHg9IjMzLjUiIHk9IjQzLjUiPi4uLjwvdGV4dD48L2c+PHBhdGggZD0iTSAyOCA1NiBMIDIwOCA1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PHJlY3QgeD0iMjgiIHk9IjYwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iNiA2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyLDMpIiBvcGFjaXR5PSIwLjI1Ii8+PHJlY3QgeD0iMjgiIHk9IjYwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjVmNWY1IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iNiA2IiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxnIGZpbGw9IiMzMzMzMzMiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGNsaXAtcGF0aD0idXJsKCNteC1jbGlwLTMzLTY2LTE2OS0zNy0wKSIgZm9udC1zaXplPSIxMnB4Ij48dGV4dCB4PSIzNC41IiB5PSI3OC41Ij5pbnQgV29yZENvdW50KCk8L3RleHQ+PHRleHQgeD0iMzQuNSIgeT0iOTIuNSI+aW50IFdvcmRDb3VudChwYXJhbXMgY2hhcltdKTwvdGV4dD48L2c+PHJlY3QgeD0iMjg4IiB5PSIxMyIgd2lkdGg9IjM4MCIgaGVpZ2h0PSIxNjciIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMDAwMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48cGF0aCBkPSJNIDI4OCAzMyBMIDUwMyAzMyBMIDUxMyAyMyBMIDUxMyAxMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjg4LjUsMTMuNSkiPjxzd2l0Y2g+PGZvcmVpZ25PYmplY3Qgc3R5bGU9Im92ZXJmbG93OnZpc2libGU7IiBwb2ludGVyLWV2ZW50cz0ibm9uZSIgd2lkdGg9IjM3OCIgaGVpZ2h0PSIxNjUiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyBoZWlnaHQ6IDE2NnB4OyBvdmVyZmxvdzogaGlkZGVuOyB3aWR0aDogMzc5cHg7IHdoaXRlLXNwYWNlOiBub3JtYWw7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PHAgc3R5bGU9Im1hcmdpbjogMHB4IDsgbWFyZ2luLXRvcDogNHB4IDsgbWFyZ2luLWxlZnQ6IDEwcHggOyB0ZXh0LWFsaWduOiBsZWZ0Ij48Yj5uYW1lc3BhY2UgTXlFeHRlbnNpb25NZXRob2RzPC9iPjwvcD48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTg5IiB5PSI4OSIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhIj4mbHQ7cCBzdHlsZT0ibWFyZ2luOiAwcHggOyBtYXJnaW4tdG9wOiA0cHggOyBtYXJnaW4tbGVmdDogMTBweCA7IHRleHQtYWxpZ246IGxlZnQiJmd0OyZsdDtiJmd0O25hbWVzcGFjZSBNeUV4dGVuc2lvbk1ldGhvZHMmbHQ7L2ImZ3Q7Jmx0Oy9wJmd0OzwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyOTggODYgTCAyOTggNjAgTCA2NTggNjAgTCA2NTggODYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMjk4IDg2IEwgMjk4IDE1MiBMIDY1OCAxNTIgTCA2NTggODYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMjk4IDg2IEwgNjU4IDg2IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48ZyBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4Ij48dGV4dCB4PSI0NzcuNSIgeT0iNzguNSI+c3RhdGljIGNsYXNzIFV0aWxpdHk8L3RleHQ+PC9nPjxnIGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiIGNsaXAtcGF0aD0idXJsKCNteC1jbGlwLTMwMi05MS0zNTItMjQtMCkiIGZvbnQtc2l6ZT0iMTJweCI+PHRleHQgeD0iMzAzLjUiIHk9IjEwMy41Ij4uLi48L3RleHQ+PC9nPjxyZWN0IHg9IjI5OCIgeT0iMTEwIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjQyIiBmaWxsPSIjZjVmNWY1IiBzdHJva2U9IiM2NjY2NjYiIHBvaW50ZXItZXZlbnRzPSJub25lIi8+PGcgZmlsbD0iIzMzMzMzMyIgZm9udC1mYW1pbHk9IkhlbHZldGljYSIgY2xpcC1wYXRoPSJ1cmwoI214LWNsaXAtMzAzLTExNi0zNTAtNDAtMCkiIGZvbnQtc2l6ZT0iMTJweCI+PHRleHQgeD0iMzA0LjUiIHk9IjEyOC41Ij5wdWJsaWMgc3RhdGljIGludCBXb3JkQ291bnQodGhpcyBzdHJpbmcgbmFwaXMpwqB7IC4uLiB9PC90ZXh0Pjx0ZXh0IHg9IjMwNC41IiB5PSIxNDIuNSI+cHVibGljIHN0YXRpYyBpbnQgV29yZENvdW50KHRoaXMgc3RyaW5nIG5hcGlzLCBwYXJhbXMgY2hhcltdKSB7IC4uLiB9PC90ZXh0PjwvZz48cmVjdCB4PSI0MyIgeT0iMjAwIiB3aWR0aD0iNTQ1IiBoZWlnaHQ9IjE3MCIgZmlsbD0iI2UxZDVlNyIgc3Ryb2tlPSIjOTY3M2E2IiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ1LjUsMjA3LjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9Im5vbmUiIHdpZHRoPSI1MjgiIGhlaWdodD0iMTUyIiByZXF1aXJlZEZlYXR1cmVzPSJodHRwOi8vd3d3LnczLm9yZy9UUi9TVkcxMS9mZWF0dXJlI0V4dGVuc2liaWxpdHkiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGZvbnQtc2l6ZTogMTJweDsgZm9udC1mYW1pbHk6ICZxdW90O0x1Y2lkYSBDb25zb2xlJnF1b3Q7OyBjb2xvcjogcmdiKDAsIDAsIDApOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aGl0ZS1zcGFjZTogbm93cmFwOyB0ZXh0LWFsaWduOiBsZWZ0OyI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3RleHQtYWxpZ246aW5oZXJpdDt0ZXh0LWRlY29yYXRpb246aW5oZXJpdDsiPjxiPnVzaW5nIDwvYj5NeUV4dGVuc2lvbk1ldGhvZHM7PGJyIC8+PGJyIC8+PGI+Y2xhc3MgPC9iPlByb2dyYW0gPGJyIC8+eyA8YnIgLz7CoCDCoDxiPnN0YXRpYyB2b2lkIDwvYj5NYWluKHN0cmluZ1tdIGFyZ3MpIDxiciAvPsKgIMKge8KgPGJyIC8+wqAgwqAgwqBzdHJpbmcgbmFwaXMgPSAiQWxhIG1hIGtvdGEsIGFzIHRvIEFsaSBwaWVzIjs8YnIgLz7CoCDCoCDCoENvbnNvbGUuV3JpdGVMaW5lKCBuYXBpcy5Xb3JkQ291bnQoKSApOyA8YnIgLz7CoCDCoCDCoENvbnNvbGUuV3JpdGVMaW5lKCBuYXBpcy5Xb3JkQ291bnQoJyAnLCAnXHQnLCAnLCcsICcuJywgJyEnLCAnPycpICk7IDxiciAvPsKgIMKgfSA8YnIgLz59PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjI2NCIgeT0iODIiIGZpbGw9IiMwMDAwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTJweCIgZm9udC1mYW1pbHk9Ikx1Y2lkYSBDb25zb2xlIj5bTm90IHN1cHBvcnRlZCBieSB2aWV3ZXJdPC90ZXh0Pjwvc3dpdGNoPjwvZz48cGF0aCBkPSJNIDMxLjc2IDMxNiBMIDE4IDMxNiBRIDggMzE2IDggMzA2IEwgOCA5MCBRIDggODAgMTggODAgTCAyOCA4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48cGF0aCBkPSJNIDM3Ljc2IDMxNiBMIDI5Ljc2IDMxOC42NyBMIDMxLjc2IDMxNiBMIDI5Ljc2IDMxMy4zMyBaIiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0ibm9uZSIvPjxwYXRoIGQ9Ik0gMjUyIDEwMC4zIEwgMjM2LjggOTEuNSBMIDI5OCA5MS41IEwgMjk4IDEyNyBMIDI4Mi42IDExOCBMIDI0Ny43IDEzNy41IEwgMjE3IDExOS44IiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9Im5vbmUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIsMylyb3RhdGUoLTEyMCwyNTcuNSwxMTQuNSkiIG9wYWNpdHk9IjAuMjUiLz48cGF0aCBkPSJNIDI1MiAxMDAuMyBMIDIzNi44IDkxLjUgTCAyOTggOTEuNSBMIDI5OCAxMjcgTCAyODIuNiAxMTggTCAyNDcuNyAxMzcuNSBMIDIxNyAxMTkuOCIgZmlsbD0iI2Y0YjkzNCIgc3Ryb2tlPSJub25lIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTIwLDI1Ny41LDExNC41KSIgcG9pbnRlci1ldmVudHM9Im5vbmUiLz48L2c+PC9zdmc+" alt="diagram-extension-method"></p>
+<h3 class="mume-header" id="%EF%B8%8F-podsumowanie-%EF%B8%8F">&#x26A0;&#xFE0F; -- Podsumowanie -- &#x26A0;&#xFE0F;</h3>
+
+<ol>
+<li>Metody rozszerzaj&#x105;ce mog&#x105; by&#x107; dodane do klas wbudowanych &#x15B;rodowiska .NET lub klas w&#x142;asnych. Dotyczy to r&#xF3;wnie&#x17C; struktur i interfejs&#xF3;w.</li>
+<li>Metoda rozszerzaj&#x105;ca musi by&#x107; umieszczona w klasie statycznej, niezagnie&#x17C;d&#x17C;onej i niegenerycznej. Nazwa klasy nie ma znaczenia. Klasa musi by&#x107; widoczna dla kodu klienta.</li>
+<li>Klasa, w kt&#xF3;rej umieszczona jest metoda rozszerzaj&#x105;ca, znajduje si&#x119; w pewnej przestrzeni nazw. Jej nazwa nie ma znaczenia.</li>
+<li>Metoda rozszerzaj&#x105;ca mo&#x17C;e by&#x107; u&#x17C;yta w kodzie w dowolnym miejscu, je&#x15B;li tylko wskazano przestrze&#x144; nazw w kt&#xF3;rej zosta&#x142;a zdefiniowana.</li>
+<li>Pierwszy parametr metody rozszerzaj&#x105;cej jest typu rozszerzanego oraz poprzedzony jest s&#x142;owem kluczowym <code>this</code>.</li>
+<li>Sygnatura metody rozszerzaj&#x105;cej musi by&#x107; inna ni&#x17C; te, kt&#xF3;re s&#x105; ju&#x17C; zaimplementowane w typie. Je&#x15B;li jednak tak si&#x119; zdarzy, Twoja metoda nie b&#x119;dzie uruchamiana.</li>
+<li><u>Zalecenie</u>: definiuj metody rozszerzaj&#x105;ce oszcz&#x119;dnie, tylko wtedy, kiedy musisz lub znacz&#x105;co upro&#x15B;ci to Tw&#xF3;j kod. Generalnym sposobem rozszerzania typu jest dziedziczenie.</li>
+<li><u>Zalecenie</u>: grupuj metody rozszerzaj&#x105;ce dla danego typu w jednej klasie. B&#x119;dzie Ci &#x142;atwiej zarz&#x105;dza&#x107; kodem.</li>
+<li><u>Uwaga</u>: koncepcja metod rozszerzaj&#x105;cych nie mo&#x17C;e by&#x107; zastosowana do p&#xF3;l (<em>fields</em>), w&#x142;a&#x15B;ciwo&#x15B;ci (<em>properties</em>) i zdarze&#x144; (<em>events</em>).</li>
+</ol>
+<p><img src="data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSI1NTZweCIgaGVpZ2h0PSIyNzhweCIgdmlld0JveD0iLTAuNSAtMC41IDU1NiAyNzgiIGNvbnRlbnQ9IiZsdDtteGZpbGUgaG9zdD0mcXVvdDt3d3cuZHJhdy5pbyZxdW90OyBtb2RpZmllZD0mcXVvdDsyMDE5LTExLTIwVDIwOjUwOjUyLjA5M1omcXVvdDsgYWdlbnQ9JnF1b3Q7TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzc4LjAuMzkwNC45NyBTYWZhcmkvNTM3LjM2JnF1b3Q7IGV0YWc9JnF1b3Q7RkFzdVA0NTF6bjJocENKVDVybmMmcXVvdDsgdmVyc2lvbj0mcXVvdDsxMi4yLjcmcXVvdDsgdHlwZT0mcXVvdDticm93c2VyJnF1b3Q7IHBhZ2VzPSZxdW90OzEmcXVvdDsmZ3Q7Jmx0O2RpYWdyYW0gbmFtZT0mcXVvdDtQYWdlLTImcXVvdDsgaWQ9JnF1b3Q7TXA3cnNHSWxicExBQXJKeTZYTFEmcXVvdDsmZ3Q7N1ZodGs1czJFUDQxektRZjZzSGdsL1BIK0MzTjVLN04xTW5jeDQ0TWExQXRFSlhFWWZqMVhZSEFFUERFbC9qYUpCUGZlU3l0VnJ2YTFiTXZZTG1yNlBSR2tDUjg0RDR3eTdIOWsrV3VMY2NaVCt3Ny9OR1V2S0xjeldZVklSRFVOMHhud280V1lJaTJvYWJVQjlsaFZKd3pSWk11MGVOeERKN3EwSWdRUE91eUhUanJhazFJQUQzQ3ppT3NUMzJrdmdxTkZjNzhUUDhOYUJEV21zZXpSYlVTa1pyWldDSkQ0dk9zUlhJM2xyc1NuS3RxRkoxV3dMVHphcitjUGk0bnpsL2o3ZHRDSHBmMzIzektpdkd2bGJEdGM3WTBKZ2lJMVcxRk81WG9KOEpTNHkvTG1URlVzdHpqSU5DRG1FUWdFK0pCdllJcW1rWGMrNUJ2VGdwaVNYbjhBQ3Jrdm14RWlJWnRyamtINk5kUlNKVG9nK3hsMHVhb0daSjB6NmluTDBnUlZRNDhScVM4Y055UGlqS3E4a3ZINmFxNjZiSHRMN0JrMklpS2R1Q0lCaDA0akl2eTdtYi9wTHhpY0djejIvYThOcW5hUy9XV1JtUWxvWEhOSXhmK2lxZXhldFU3MlRVNmJmd2NEbjJkS3FUeW90TEJPL29hQzZVU05BNHVHeG1UUkI5blZRVVVpZVJYNnZOQ0lpNXBtK0wvV3VkT1lEU2lDb1Q4NVRyY0RXRGxNaFEvRDdQUEkwK0FTa1Y4NFRxTXkyNmwrcWFrMFM3QmNINTE5bkIxdGJzU0JlWGFING5DMUNSSGYwTEVuMkFUSlNyZnhMZ00raksrVFp2dUlRNTA4Zm55SzUrdnIweHc2NkZrdlRZRlQrVjFGVlZ3MGt1aGloZ1N4aVpXdGlTaVRQY0Y5NmxIZllKYlZ1aHByamN0cjZ4WnByWTlnVUFWcllwdGF0Z2I0QkVvb2RPMVdaMlphbHkzSTZhT1orZmFQcDBhbHJCVjF6RTltWjdDOUJOQkkvbGNNM0ZneXVZelNxamJLNkVQcWFSSTJlZldhbUxwQTlvWmZ2bFJnTFdhV29zbDR6SDhyWjBqQ3NCMFZVQk15eWdyc3A3ZmNaa2ZtOFpGKzczcFFteWMrRVNHNEpzSllUU0ljZXloeDBGMGJ3dDNKVnBrZEFwMG16ZUt1SGRNazVHKzFoSDJTb3luK25vWmpZOGZ5cHRlNjd5Tkk5UFBqZWRtdm1wU0l5WkUvZEVaRVBldnFhYisvbWltTzJNQkNnU0RsVnFTYStadFNmUFh5OFcyWlFHRGd6Nk9CZ1ZGY2E4TldmR2tTdkRva3FHREhDaGpMZnAycXYrUWppYjdGRG9xRCtYbkJXRTY3OEowWXZkZ3VoaEE2ZlNsUURycGdmUWQ5a2c2WXFNZVdIWHprWHRGVEg2aThVZEI0NktMeHJIZHo1cnpBVGhPWGdxTzAzN09CTVg5WVR4V1hYR0pSNXYreE9lUGlNODd0NHZQMmZUL3hlZThoOC8zRkVRbWk3eCtiRUExZzJCVmVaTGlqK0NGTEVBVUpJYUFseTFwdC9FYXlMcTZON2h6ZUliczlwR2xYc0V6YURkeEZ4Nm5XbzM2OXgwTm05dEVnNmpnOForRVF4YmlJOGV1ZkRmaXJqTjBqdllEMlFON3p5WFZUeDF0ajlZSHV2K0VJYUsrWDNiTUlSZTBRT3RJN2ZpWGlqYlgvYVNIN2tkYjB5NjN3MjNzUEQvZWNIcCtRMWF1dGQ0enVwdC9BUT09Jmx0Oy9kaWFncmFtJmd0OyZsdDsvbXhmaWxlJmd0OyI+PGRlZnMvPjxnPjxyZWN0IHg9IjAiIHk9IjQ3IiB3aWR0aD0iNTUwIiBoZWlnaHQ9IjIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJub25lIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMS41LDUzLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjU0NiIgaGVpZ2h0PSIyMjIiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxMnB4OyBmb250LWZhbWlseTogJnF1b3Q7THVjaWRhIENvbnNvbGUmcXVvdDs7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+PGI+bmFtZXNwYWNlPC9iPiBNeUV4dGVuc2lvbk1ldGhvZHM8YnIgLz57IDxiciAvPjxiciAvPjxiciAvPsKgPGI+cHVibGljIHN0YXRpYyBjbGFzczwvYj4gVXRpbGl0eSA8YnIgLz7CoHsgPGJyIC8+PGJyIC8+PGJyIC8+wqAgwqA8Yj5wdWJsaWMgc3RhdGljIDwvYj48Zm9udCBjb2xvcj0iIzY2MDBjYyI+aW50PC9mb250PiBXb3JkQ291bnQoPGI+PGZvbnQgY29sb3I9IiMwMDAwZmYiPnRoaXM8L2ZvbnQ+PC9iPiA8Zm9udCBjb2xvcj0iIzY2MDBjYyI+c3RyaW5nPC9mb250PiBuYXBpcywgcGFyYW1zIDxmb250IGNvbG9yPSIjNjYwMGNjIj5jaGFyPC9mb250PltdIGRlbGltaXRlcnMpIDxiciAvPsKgIMKgeyA8YnIgLz7CoCDCoCDCoDxiPnJldHVybjwvYj4gbmFwaXM8YnIgLz7CoCDCoCDCoCDCoCDCoCDCoCDCoCAuU3BsaXQoZGVsaW1pdGVycywgU3RyaW5nU3BsaXRPcHRpb25zLlJlbW92ZUVtcHR5RW50cmllcyk8YnIgLz7CoCDCoCDCoCDCoCDCoCDCoCDCoCAuTGVuZ3RoOyA8YnIgLz7CoCDCoH0gPGJyIC8+wqB9PGJyIC8+fTwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIyNzMiIHk9IjExNyIgZmlsbD0iIzAwMDAwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMnB4IiBmb250LWZhbWlseT0iTHVjaWRhIENvbnNvbGUiPltOb3Qgc3VwcG9ydGVkIGJ5IHZpZXdlcl08L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMTAgMjUuNSBMIDgwIDI1LjUgTCAxMDAgNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY2NjY2NiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBwb2ludGVyLWV2ZW50cz0iYWxsIi8+PGcgZmlsbD0iIzY2NjY2NiIgZm9udC1mYW1pbHk9IkFyaWFsLEhlbHZldGljYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxN3B4Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIuNSw3LjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjIyOCIgaGVpZ2h0PSIxMyIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEzcHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMTAzLCAxNzEsIDE1OSk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+TXVzaSBiecSHIHcgb2tyZcWbbG9uZWogcHJ6ZXN0cnplbmkgbmF6dzwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSIxMTQiIHk9IjEzIiBmaWxsPSIjNjdBQjlGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEzcHgiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EiPk11c2kgYnnEhyB3IG9rcmXFm2xvbmVqIHByemVzdHJ6ZW5pIG5henc8L3RleHQ+PC9zd2l0Y2g+PC9nPjxwYXRoIGQ9Ik0gMzAgOTIuNSBMIDEwMCA5Mi41IEwgMTAwIDEwNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY2NjY2IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyBmaWxsPSIjNjY2NjY2IiBmb250LWZhbWlseT0iQXJpYWwsSGVsdmV0aWNhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE3cHgiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMi41LDc0LjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjE0NiIgaGVpZ2h0PSIxMyIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEzcHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMTAzLCAxNzEsIDE1OSk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+S2xhc2EgbXVzaSBiecSHIHN0YXR5Y3puYTwvZGl2PjwvZGl2PjwvZm9yZWlnbk9iamVjdD48dGV4dCB4PSI3MyIgeT0iMTMiIGZpbGw9IiM2N0FCOUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTNweCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSI+S2xhc2EgbXVzaSBiecSHIHN0YXR5Y3puYTwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSAyMyAxNTAuNSBMIDkzIDE1MC41IEwgOTMgMTY1IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRlci1ldmVudHM9ImFsbCIvPjxnIGZpbGw9IiM2NjY2NjYiIGZvbnQtZmFtaWx5PSJBcmlhbCxIZWx2ZXRpY2EiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTdweCIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1LjUsMTMyLjUpIj48c3dpdGNoPjxmb3JlaWduT2JqZWN0IHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIgcG9pbnRlci1ldmVudHM9ImFsbCIgd2lkdGg9IjIyMiIgaGVpZ2h0PSIxMyIgcmVxdWlyZWRGZWF0dXJlcz0iaHR0cDovL3d3dy53My5vcmcvVFIvU1ZHMTEvZmVhdHVyZSNFeHRlbnNpYmlsaXR5Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogaW5saW5lLWJsb2NrOyBmb250LXNpemU6IDEzcHg7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2E7IGNvbG9yOiByZ2IoMTAzLCAxNzEsIDE1OSk7IGxpbmUtaGVpZ2h0OiAxLjI7IHZlcnRpY2FsLWFsaWduOiB0b3A7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHRleHQtYWxpZ246IGxlZnQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0OyI+TWV0b2RhIG11c2kgYnnEhyBwdWJsaWN6bmEgaSBzdGF0eWN6bmE8L2Rpdj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PHRleHQgeD0iMTExIiB5PSIxMyIgZmlsbD0iIzY3QUI5RiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxM3B4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhIj5NZXRvZGEgbXVzaSBiecSHIHB1YmxpY3puYSBpIHN0YXR5Y3puYTwvdGV4dD48L3N3aXRjaD48L2c+PHBhdGggZD0iTSA1MDAgNzAuNSBMIDQzMCA3MC41IEwgMjcwIDE2NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY2NjY2IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50ZXItZXZlbnRzPSJhbGwiLz48ZyBmaWxsPSIjNjY2NjY2IiBmb250LWZhbWlseT0iQXJpYWwsSGVsdmV0aWNhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE3cHgiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNzAuNSw1Mi41KSI+PHN3aXRjaD48Zm9yZWlnbk9iamVjdCBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiIHBvaW50ZXItZXZlbnRzPSJhbGwiIHdpZHRoPSIyMjYiIGhlaWdodD0iNDMiIHJlcXVpcmVkRmVhdHVyZXM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1NWRzExL2ZlYXR1cmUjRXh0ZW5zaWJpbGl0eSI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IGlubGluZS1ibG9jazsgZm9udC1zaXplOiAxM3B4OyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBjb2xvcjogcmdiKDEwMywgMTcxLCAxNTkpOyBsaW5lLWhlaWdodDogMS4yOyB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB3aWR0aDogMjI2cHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IG92ZXJmbG93LXdyYXA6IG5vcm1hbDsgdGV4dC1hbGlnbjogcmlnaHQ7Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1hbGlnbjppbmhlcml0O3RleHQtZGVjb3JhdGlvbjppbmhlcml0O3doaXRlLXNwYWNlOm5vcm1hbDsiPlBpZXJ3c3p5IHBhcmFtZXRyIG11c2kgYnnEhyB0eXB1IHJvenN6ZXJ6YW5lZ28swqBtdXNpIGJ5xIcgc8WCb3dvIGtsdWN6b3dlIDxiPnRoaXM8L2I+PC9kaXY+PC9kaXY+PC9mb3JlaWduT2JqZWN0Pjx0ZXh0IHg9IjExMyIgeT0iMjgiIGZpbGw9IiM2N0FCOUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTNweCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSI+W05vdCBzdXBwb3J0ZWQgYnkgdmlld2VyXTwvdGV4dD48L3N3aXRjaD48L2c+PC9nPjwvc3ZnPg==" alt></p>
+<h3 class="mume-header" id="referencje">Referencje</h3>
+
+<ul>
+<li><a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">Extension Methods (C# Programming Guide)</a></li>
+<li><a href="https://www.extensionmethod.net/csharp/">EXTENSIONMETHOD.NET</a></li>
+</ul>
+<hr>
+<h3 class="mume-header" id="zadania">Zadania</h3>
+
+<h4 class="mume-header" id="zadanie-1">Zadanie 1</h4>
+
+<p>Napisz metod&#x119; rozszerzaj&#x105;c&#x105; klas&#x119; <code>string</code> o nazwie <code>BezSamoglosek</code>, zwracaj&#x105;c&#x105; napis przekazany jako parametr, ale pozbawiony samog&#x142;osek.</p>
+<h4 class="mume-header" id="zadanie-2">Zadanie 2</h4>
+
+<p>W j&#x119;zyku VisualBasic jest dost&#x119;pna funkcja <code>IsNumeric(ByVal x As Object) As Boolean</code> zwracaj&#x105;ca prawd&#x119;, je&#x15B;li przekazany argument ma posta&#x107; liczby (mo&#x17C;e by&#x107; przekonwertowany na liczb&#x119;).</p>
+<p>Napisz w C# metod&#x119; rozszerzaj&#x105;c&#x105; typ <code>string</code> o nazwie <code>IsNumeric</code>, zwracaj&#x105;c&#x105; prawd&#x119;, je&#x15B;li argument typu <code>string</code> jest konwertowalny na liczb&#x119; ca&#x142;kowit&#x105;. Zadbaj, aby nie zwraca&#x142;a ona wyj&#x105;tk&#xF3;w.</p>
+<h4 class="mume-header" id="zadanie-3">Zadanie 3</h4>
+
+<p>Listy w C# nie maj&#x105; zdefiniowanego przes&#x142;oni&#x119;cia metody <code>ToString()</code>. W efekcie, wywo&#x142;anie <code>WriteLine</code> dla listy skutkuje wypisaniem informacji o typie:</p>
+<div class="code-chunk" data-id="1-003" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=4, cmd=&quot;dotnet-script&quot; id=&quot;1-003&quot;}" class="language-csharp"><span class="token keyword">var</span> lista <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> lista <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">System.Collections.Generic.List`1[System.Int32]
+</pre></div></div><p>Nie mo&#x17C;esz rozszerzy&#x107; listy o metod&#x119; <code>ToString()</code>, poniewa&#x17C; jest ona zdefiniowana w klasie <code>List&lt;T&gt;</code> (odziedziczona z <code>object</code>). Dok&#x142;adniej -- nawet, jak zdefiniujesz, to i tak si&#x119; ona nie uruchomi, poniewa&#x17C; pierwsze&#x144;stwo w wywo&#x142;aniu ma metoda zaimplementowana w klasie.</p>
+<p>Napisz metod&#x119; rozszerzaj&#x105;c&#x105; interfejs <code>IList&lt;T&gt;</code> o nazwie <code>Dump</code> zwracaj&#x105;c&#x105; napis zawieraj&#x105;cy wszystkie elementy listy, oddzielone od siebie przecinkiem i spacj&#x105;. Elementy te powinny by&#x107; uj&#x119;te w nawiasy klamrowe. Np. dla wcze&#x15B;niejszego kodu wywo&#x142;anie</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp">Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> lista<span class="token punctuation">.</span><span class="token function">Dump</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>powinno wypisa&#x107; na konsoli</p>
+<pre data-role="codeBlock" data-info="console" class="language-console"><code>{0, 1, 2, 3, 4}
+</code></pre><h4 class="mume-header" id="zadanie-4">Zadanie 4</h4>
+
+<p>Napisz generyczn&#x105; metod&#x119; <code>void PrintLn&lt;T&gt;()</code> rozszerzaj&#x105;c&#x105; typ <code>IEnumerable&lt;T&gt;</code>, wypisuj&#x105;c&#x105; na konsol&#x119; kolejne elementy sekwencji w oddzielnych wierszach.</p>
+<h4 class="mume-header" id="zadanie-5">Zadanie 5</h4>
+
+<p>Zaprojektuj metod&#x119; rozszerzaj&#x105;c&#x105; sekwencj&#x119; liczb typu <code>int</code> wyznaczaj&#x105;c&#x105; <a href="https://pl.wikipedia.org/wiki/Mediana">median&#x119;</a> (warto&#x15B;&#x107; &#x15B;rodkow&#x105; w ci&#x105;gu posortowanym).</p>
+<h4 class="mume-header" id="zadanie-6">Zadanie 6</h4>
+
+<p>Zaprojektuj generyczn&#x105; metod&#x119; rozszerzaj&#x105;c&#x105; o nazwie <code>Between&lt;T&gt;</code>, przyjmuj&#x105;c&#x105; parametry <code>T lower</code> oraz <code>T upper</code> i zwracaj&#x105;c&#x105; <code>true</code> je&#x15B;li argument zawarty jest mi&#x119;dzy <code>lower</code> i <code>upper</code> w&#x142;&#x105;cznie.</p>
+<p>Przyk&#x142;ady u&#x17C;ycia:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span> liczba<span class="token punctuation">.</span><span class="token function">Between</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span> napis<span class="token punctuation">.</span><span class="token function">Between</span><span class="token punctuation">(</span><span class="token string">&quot;ala&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;baba&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</pre><p>Uwaga: aby mo&#x17C;na by&#x142;o por&#xF3;wnywa&#x107; elementy typu <code>T</code>, musi on definiowa&#x107; naturalny porz&#x105;dek (by&#x107; <code>IComparable&lt;T&gt;</code>).</p>
+<h4 class="mume-header" id="zadanie-7">Zadanie 7</h4>
+
+<p>Zaprojektuj rozszerzony wariant metody z zadania poprzedniego, uwzgl&#x119;dniaj&#x105;cy parametr typu delegatowego <code>IComparison&lt;T&gt;</code>, wykorzystany jako zewn&#x119;trzny spos&#xF3;b por&#xF3;wnywania. Typ <code>T</code> wtedy nie musi by&#x107; <code>IComparable&lt;T&gt;</code>.</p>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#metody-rozszerzaj%C4%85ce-ang-_extensions-methods_">Metody rozszerzaj&#x105;ce (ang. <em>extensions methods</em>)</a>
+<ul>
+<li><a href="#przyk%C5%82ad">Przyk&#x142;ad</a>
+<ul>
+<li><a href="#podej%C5%9Bcie-1">Podej&#x15B;cie 1</a></li>
+<li><a href="#podej%C5%9Bcie-2">Podej&#x15B;cie 2</a></li>
+<li><a href="#podej%C5%9Bcie-3">Podej&#x15B;cie 3</a></li>
+</ul>
+</li>
+<li><a href="#%EF%B8%8F-podsumowanie-%EF%B8%8F">&#x26A0;&#xFE0F; -- Podsumowanie -- &#x26A0;&#xFE0F;</a></li>
+<li><a href="#referencje">Referencje</a></li>
+<li><a href="#zadania">Zadania</a>
+<ul>
+<li><a href="#zadanie-1">Zadanie 1</a></li>
+<li><a href="#zadanie-2">Zadanie 2</a></li>
+<li><a href="#zadanie-3">Zadanie 3</a></li>
+<li><a href="#zadanie-4">Zadanie 4</a></li>
+<li><a href="#zadanie-5">Zadanie 5</a></li>
+<li><a href="#zadanie-6">Zadanie 6</a></li>
+<li><a href="#zadanie-7">Zadanie 7</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
