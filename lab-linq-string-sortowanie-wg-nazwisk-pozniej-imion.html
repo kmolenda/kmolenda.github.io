@@ -1,0 +1,565 @@
+<!DOCTYPE html><html><head>
+      <title>lab-string-sortowanie-wg-nazwisk-pozniej-imion</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\kmolenda\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.0\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview .code-chunk .output-div {
+  border-left-style: dotted;
+  border-color: gray;
+  border-width: 1px;
+  font-size: 0.8em;
+}
+.markdown-preview.markdown-preview .code-chunk .output-div .language-text {
+  /* background: #f4fcfd */
+  background: black;
+  color: yellow;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="zadanie-linq-to-objects-sortowanie-wg-nazwisk-p%C3%B3%C5%BAniej-wg-imion">Zadanie (LINQ-to-Objects) - Sortowanie wg nazwisk, p&#xF3;&#x17A;niej wg imion</h1>
+
+<ul>
+<li>Krzysztof Molenda, v.01</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="problem">Problem</h2>
+
+<p>Dany jest napis sk&#x142;adaj&#x105;cy si&#x119; z imion i nazwisk oddzielonych przecinkami, np.<br>
+<code>&quot;Krzysztof Molenda, Jan Kowalski, Anna Abacka , J&#xF3;zef Kabacki, Kazimierz Moksa&quot;</code></p>
+<p>Napisz zapytanie, kt&#xF3;re zwr&#xF3;ci ten napis posortowany wed&#x142;ug nazwisk, a nast&#x119;pnie wed&#x142;ug imion.</p>
+<blockquote>
+<p>Zaprojektuj zapytanie LINQ, staraj si&#x119; my&#x15B;le&#x107; deklaratywnie.</p>
+<p>Najpierw skoncentruj si&#x119; na jakimkolwiek rozwi&#x105;zaniu problemu, p&#xF3;&#x17A;niej optymalizuj zapytanie tak, aby by&#x142;o jak najkr&#xF3;tsze i jak najszybsze, najlepiej bez materializowania wynik&#xF3;w cz&#x105;stkowych.</p>
+</blockquote>
+<hr>
+<h2 class="mume-header" id="rozwi%C4%85zanie-_krok-po-kroku_">Rozwi&#x105;zanie <em>Krok-Po-Kroku</em></h2>
+
+<div class="code-chunk" data-id="000" data-cmd="dotnet-script"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Poni&#x17C;ej podano rozwi&#x105;zanie krok-po-kroku, od wariantu naiwnego do ostatecznego - z wykorzystaniem <em>Ling-to-object</em>.</p>
+<h3 class="mume-header" id="krok-11-rozwi%C4%85zanie-naiwne-bez-linq">Krok 1.1 - rozwi&#x105;zanie naiwne (bez LINQ)</h3>
+
+<div class="code-chunk" data-id="001" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=1, cmd=&quot;dotnet-script&quot; continue=&quot;000&quot; id=&quot;001&quot;}" class="language-csharp"><span class="token keyword">string</span> s <span class="token operator">=</span> <span class="token string">&quot;Krzysztof Molenda,  Jan Kowalski, Anna Abacka , J&#xF3;zef Kabacki, Kazimierz Moksa&quot;</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p><strong>Podpowied&#x17A;</strong>: do rozbicia napisu na elementy oddzielone separatorem (tokeny) s&#x142;u&#x17C;y metoda <code>Split</code> klasy <code>string</code>.</p>
+<div class="code-chunk" data-id="002" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=2, cmd=&quot;dotnet-script&quot; continue=&quot;001&quot; id=&quot;002&quot;}" class="language-csharp"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> osoby <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> osoba <span class="token keyword">in</span> osoby<span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> osoba <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Krzysztof Molenda
+  Jan Kowalski
+ Anna Abacka 
+ J&#xF3;zef Kabacki
+ Kazimierz Moksa
+</pre></div></div><p>Pierwszy dostrze&#x17C;ony problem - nale&#x17C;y usun&#x105;&#x107; spacje przed i po tokenie. Zak&#x142;adamy bowiem, &#x17C;e imiona i nazwiska oddzielone s&#x105; przecinkiem (nie wiemy, iloma spacjami).</p>
+<div class="code-chunk" data-id="003" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=3, cmd=&quot;dotnet-script&quot; continue=&quot;001&quot; id=&quot;003&quot;}" class="language-csharp"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> osoby <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> osoby<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> osoba <span class="token keyword">in</span> osoby<span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> osoba <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Krzysztof Molenda
+Jan Kowalski
+Anna Abacka
+J&#xF3;zef Kabacki
+Kazimierz Moksa
+</pre></div></div><p>Teraz wypada&#x142;oby rozbi&#x107; elementy tablicy na oddzielnie imiona i nazwiska. Problem - gdzie zapami&#x119;ta&#x107;?</p>
+<p>Tworzymy robocz&#x105; klas&#x119; <code>Osoba</code> zawieraj&#x105;c&#x105; dwie w&#x142;a&#x15B;ciwo&#x15B;ci: <code>Imie</code> oraz <code>Nazwisko</code> - mo&#x17C;liwie jak najprostsz&#x105;.</p>
+<div class="code-chunk" data-id="004" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=4, cmd=&quot;dotnet-script&quot; continue=&quot;001&quot; id=&quot;004&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Osoba</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Imie <span class="token punctuation">{</span><span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Nazwisko <span class="token punctuation">{</span><span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">string</span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> $<span class="token string">&quot;({Imie}; {Nazwisko})&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Teraz wyniki parsowania zapami&#x119;tamy w li&#x15B;cie os&#xF3;b:</p>
+<div class="code-chunk" data-id="005" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=5, cmd=&quot;dotnet-script&quot; continue=&quot;004&quot; id=&quot;005&quot;}" class="language-csharp"><span class="token keyword">var</span> listaOsob <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Osoba</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> osoby <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> osoby<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> temp <span class="token operator">=</span> osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Osoba</span> o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    o<span class="token punctuation">.</span>Imie <span class="token operator">=</span> temp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    o<span class="token punctuation">.</span>Nazwisko <span class="token operator">=</span> temp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    listaOsob<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span> o <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Sprawd&#x17A;my, co przechowuje lista:</p>
+<div class="code-chunk" data-id="006" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=6, cmd=&quot;dotnet-script&quot; continue=&quot;005&quot; id=&quot;006&quot;}" class="language-csharp"><span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> osoba <span class="token keyword">in</span> listaOsob<span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> osoba <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">(Krzysztof; Molenda)
+(Jan; Kowalski)
+(Anna; Abacka)
+(J&#xF3;zef; Kabacki)
+(Kazimierz; Moksa)
+</pre></div></div><p>Teraz wystarczy j&#x105; przesortowa&#x107; i zwr&#xF3;ci&#x107; wynik odpowiednio formatuj&#x105;c:</p>
+<div class="code-chunk" data-id="007" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=7, cmd=&quot;dotnet-script&quot; continue=&quot;005&quot; id=&quot;007&quot;}" class="language-csharp">listaOsob<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span> <span class="token punctuation">(</span>o1<span class="token punctuation">,</span> o2<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> String<span class="token punctuation">.</span><span class="token function">Compare</span><span class="token punctuation">(</span> o1<span class="token punctuation">.</span>Nazwisko<span class="token operator">+</span>o1<span class="token punctuation">.</span>Imie<span class="token punctuation">,</span> o2<span class="token punctuation">.</span>Nazwisko<span class="token operator">+</span>o2<span class="token punctuation">.</span>Imie <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">string</span> wynik <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token keyword">var</span> x <span class="token keyword">in</span> listaOsob<span class="token punctuation">)</span>
+    wynik <span class="token operator">+=</span> x<span class="token punctuation">.</span>Imie <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> x<span class="token punctuation">.</span>Nazwisko <span class="token operator">+</span> <span class="token string">&quot;, &quot;</span><span class="token punctuation">;</span>
+
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> wynik <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Anna Abacka, J&#xF3;zef Kabacki, Jan Kowalski, Kazimierz Moksa, Krzysztof Molenda, 
+</pre></div></div><p>&#x25A1;</p>
+<h3 class="mume-header" id="krok-12-rozwi%C4%85zanie-naiwne-bez-linq-tuple">Krok 1.2 - rozwi&#x105;zanie naiwne (bez LINQ) - <code>Tuple</code></h3>
+
+<p>Skracamy kod. Wyeliminujmy klas&#x119; <code>Osoba</code>. Zast&#x105;pi&#x107; j&#x105; mo&#x17C;emy klas&#x105; <code>Tuple</code>.</p>
+<div class="code-chunk" data-id="101" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=8, cmd=&quot;dotnet-script&quot; continue=&quot;001&quot; id=&quot;101&quot;}" class="language-csharp"><span class="token keyword">var</span> listaOsob <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span> Tuple<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token operator">&gt;</span> <span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> osoby <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> osoby<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> temp <span class="token operator">=</span> osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">Tuple</span><span class="token punctuation">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>temp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> temp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    listaOsob<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span> o <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+listaOsob<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span> <span class="token punctuation">(</span>o1<span class="token punctuation">,</span> o2<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> String<span class="token punctuation">.</span><span class="token function">Compare</span><span class="token punctuation">(</span> o1<span class="token punctuation">.</span>Item2<span class="token operator">+</span>o1<span class="token punctuation">.</span>Item1<span class="token punctuation">,</span> o2<span class="token punctuation">.</span>Item2<span class="token operator">+</span>o2<span class="token punctuation">.</span>Item1 <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">string</span> wynik <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> listaOsob<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> wynik <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">(Anna, Abacka), (J&#xF3;zef, Kabacki), (Jan, Kowalski), (Kazimierz, Moksa), (Krzysztof, Molenda)
+</pre></div></div><p>Wydruk uwzgl&#x119;dnia domy&#x15B;lne formatowanie obiekt&#xF3;w typu <code>Tuple</code> (zdefiniowane w <code>ToString()</code> tej klasy) - elementy wypisywane s&#x105; w nawiasach i oddzielone przecinkami.<br>
+&#x25A1;</p>
+<h3 class="mume-header" id="krok-12-rozwi%C4%85zanie-naiwne-bez-linq-typy-i-obiekty-anonimowe">Krok 1.2 - rozwi&#x105;zanie naiwne (bez LINQ) - typy i obiekty anonimowe</h3>
+
+<p>W C# 7.x mo&#x17C;emy u&#x17C;y&#x107; obiekt&#xF3;w anonimowych. W tym przyk&#x142;adzie b&#x119;dzie to troch&#x119; sztuczne i trzeba zastosowa&#x107; <em>trick</em> polegaj&#x105;cy na stworzeniu listy na bazie przyk&#x142;adu (technika <em>casting by example</em>). (Poniewa&#x17C; klasy anonimowe pochodz&#x105; bezpo&#x15B;rednio od typu <code>Object</code> i nie mo&#x17C;na ich rzutowa&#x107; na inne typy, nie mo&#x17C;emy wi&#x119;c zbudowa&#x107; listy obiekt&#xF3;w anonimowych).</p>
+<div class="code-chunk" data-id="102" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=9, cmd=&quot;dotnet-script&quot; continue=&quot;001&quot; id=&quot;102&quot;}" class="language-csharp"><span class="token comment">//trick - begin</span>
+<span class="token keyword">var</span> OsobaExample <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token punctuation">{</span>imie<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> nazwisko<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> listaOsob <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">new</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>OsobaExample<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//trick</span>
+listaOsob<span class="token punctuation">.</span><span class="token function">RemoveAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//lista jest pusta</span>
+<span class="token comment">//trick - end</span>
+
+<span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> osoby <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> osoby<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> temp <span class="token operator">=</span> osoby<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token punctuation">{</span> imie <span class="token operator">=</span> temp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nazwisko <span class="token operator">=</span> temp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    listaOsob<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span> o <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+listaOsob<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span> <span class="token punctuation">(</span>o1<span class="token punctuation">,</span> o2<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> String<span class="token punctuation">.</span><span class="token function">Compare</span><span class="token punctuation">(</span> o1<span class="token punctuation">.</span>nazwisko<span class="token operator">+</span>o1<span class="token punctuation">.</span>imie<span class="token punctuation">,</span> o2<span class="token punctuation">.</span>nazwisko<span class="token operator">+</span>o2<span class="token punctuation">.</span>imie <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">string</span> wynik <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> listaOsob<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> wynik <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">{ imie = Anna, nazwisko = Abacka }, { imie = J&#xF3;zef, nazwisko = Kabacki }, { imie = Jan, nazwisko = Kowalski }, { imie = Kazimierz, nazwisko = Moksa }, { imie = Krzysztof, nazwisko = Molenda }
+</pre></div></div><p>Tym razem wydruk uwzgl&#x119;dnia formatowanie obiekt&#xF3;w anonimowych.<br>
+&#x25A1;</p>
+<h3 class="mume-header" id="krok-21-rozwi%C4%85zanie-z-linq">Krok 2.1 - rozwi&#x105;zanie z LINQ</h3>
+
+<p>Wprowadzamy LINQ:</p>
+<div class="code-chunk" data-id="201" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=10, cmd=&quot;dotnet-script&quot; id=&quot;201&quot;}" class="language-csharp"><span class="token keyword">using</span> System<span class="token punctuation">.</span>Linq<span class="token punctuation">;</span>
+
+<span class="token comment">// Main()</span>
+Console<span class="token punctuation">.</span>OutputEncoding <span class="token operator">=</span> System<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">;</span>
+<span class="token keyword">string</span> s <span class="token operator">=</span> <span class="token string">&quot;Krzysztof Molenda,  Jan Kowalski, Anna Abacka , J&#xF3;zef Kabacki, Kazimierz Moksa&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> query1 <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//rozbijamy na osoby</span>
+<span class="token keyword">var</span> query2 <span class="token operator">=</span> query1<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> osoba <span class="token operator">=&gt;</span> osoba<span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//usuwamy spacje</span>
+
+<span class="token comment">// drukujemy</span>
+    query2<span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ForEach</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span> x <span class="token operator">+</span> <span class="token string">&quot;, &quot;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> query3 <span class="token operator">=</span> query2
+                <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> osoba <span class="token operator">=&gt;</span> osoba<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>imie<span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nazwisko<span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// drukujemy</span>
+    query3<span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ForEach</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span> x <span class="token operator">+</span> <span class="token string">&quot;, &quot;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> query4 <span class="token operator">=</span> query3
+                <span class="token punctuation">.</span><span class="token function">OrderBy</span><span class="token punctuation">(</span> o <span class="token operator">=&gt;</span> o<span class="token punctuation">.</span>nazwisko <span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">ThenBy</span><span class="token punctuation">(</span> o <span class="token operator">=&gt;</span> o<span class="token punctuation">.</span>imie <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// drukujemy</span>
+    query4<span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ForEach</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span> x <span class="token operator">+</span> <span class="token string">&quot;, &quot;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> query5 <span class="token operator">=</span> query4<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> o <span class="token operator">=&gt;</span> o<span class="token punctuation">.</span>imie <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> o<span class="token punctuation">.</span>nazwisko <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//drukujemy</span>
+    query5<span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ForEach</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span> x <span class="token operator">+</span> <span class="token string">&quot;, &quot;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ostatecznie</span>
+<span class="token keyword">string</span> wynik <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> query5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> wynik <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Krzysztof Molenda, Jan Kowalski, Anna Abacka, J&#xF3;zef Kabacki, Kazimierz Moksa, 
+(Krzysztof, Molenda), (Jan, Kowalski), (Anna, Abacka), (J&#xF3;zef, Kabacki), (Kazimierz, Moksa), 
+(Anna, Abacka), (J&#xF3;zef, Kabacki), (Jan, Kowalski), (Kazimierz, Moksa), (Krzysztof, Molenda), 
+Anna Abacka, J&#xF3;zef Kabacki, Jan Kowalski, Kazimierz Moksa, Krzysztof Molenda, 
+Anna Abacka, J&#xF3;zef Kabacki, Jan Kowalski, Kazimierz Moksa, Krzysztof Molenda
+</pre></div></div><p>&#x25A1;</p>
+<h3 class="mume-header" id="krok-22-rozwi%C4%85zanie-z-linq-jedna-kwerenda-notacja-_flow_">Krok 2.2 - rozwi&#x105;zanie z LINQ - jedna kwerenda, notacja <em>flow</em></h3>
+
+<div class="code-chunk" data-id="202" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=11, cmd=&quot;dotnet-script&quot; id=&quot;202&quot;}" class="language-csharp"><span class="token keyword">using</span> System<span class="token punctuation">.</span>Linq<span class="token punctuation">;</span>
+
+<span class="token comment">//...</span>
+
+Console<span class="token punctuation">.</span>OutputEncoding <span class="token operator">=</span> System<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">;</span>
+<span class="token keyword">string</span> s <span class="token operator">=</span> <span class="token string">&quot;Krzysztof Molenda,  Jan Kowalski, Anna Abacka , J&#xF3;zef Kabacki, Kazimierz Moksa&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> query <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span>                                    <span class="token comment">//rozbijamy na osoby -&gt; tablica napis&#xF3;w</span>
+              <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> osoba <span class="token operator">=&gt;</span> osoba<span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>              <span class="token comment">//usuwamy spacje</span>
+              <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> osoba <span class="token operator">=&gt;</span> osoba<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>          <span class="token comment">//rozbijamy na wyrazy -&gt; sekwencja tablic 2-elementowych</span>
+              <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>imie<span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nazwisko<span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>  <span class="token comment">//sekwencja obiekt&#xF3;w anonimowych (imie, nazwisko)</span>
+              <span class="token punctuation">.</span><span class="token function">OrderBy</span><span class="token punctuation">(</span> o <span class="token operator">=&gt;</span> o<span class="token punctuation">.</span>nazwisko <span class="token punctuation">)</span>                   <span class="token comment">//sortujemy wg nazwiska,</span>
+              <span class="token punctuation">.</span><span class="token function">ThenBy</span><span class="token punctuation">(</span> o <span class="token operator">=&gt;</span> o<span class="token punctuation">.</span>imie <span class="token punctuation">)</span>                        <span class="token comment">//... a nast&#x119;pnie wg imienia</span>
+              <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> o <span class="token operator">=&gt;</span> o<span class="token punctuation">.</span>imie <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> o<span class="token punctuation">.</span>nazwisko <span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//sekwencja naspis&#xF3;w postaci imie-spacja-nazwisko</span>
+
+<span class="token keyword">string</span> wynik <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> query<span class="token punctuation">)</span><span class="token punctuation">;</span>                    <span class="token comment">//&#x142;&#x105;czymy sekwencj&#x119; z przecinkami</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> wynik <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Anna Abacka, J&#xF3;zef Kabacki, Jan Kowalski, Kazimierz Moksa, Krzysztof Molenda
+</pre></div></div><p>&#x25A1;</p>
+<h3 class="mume-header" id="krok-23-rozwi%C4%85zanie-z-linq-notacja-_query_">Krok 2.3 - rozwi&#x105;zanie z LINQ - notacja <em>query</em></h3>
+
+<div class="code-chunk" data-id="203" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=12, cmd=&quot;dotnet-script&quot; id=&quot;203&quot;}" class="language-csharp"><span class="token keyword">using</span> System<span class="token punctuation">.</span>Linq<span class="token punctuation">;</span>
+
+<span class="token comment">// ...</span>
+
+Console<span class="token punctuation">.</span>OutputEncoding <span class="token operator">=</span> System<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">;</span>
+<span class="token keyword">string</span> s <span class="token operator">=</span> <span class="token string">&quot;Krzysztof Molenda,  Jan Kowalski, Anna Abacka , J&#xF3;zef Kabacki, Kazimierz Moksa&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> query <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span>
+             <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> x<span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+             <span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> x <span class="token operator">=&gt;</span> x<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span><span class="token string">&apos; &apos;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token comment">//.Select( x =&gt; (imie: x[0], nazwisko: x[1]) ) ;</span>
+
+<span class="token keyword">var</span> query1 <span class="token operator">=</span>
+    <span class="token keyword">from</span> osoba <span class="token keyword">in</span> query
+    <span class="token keyword">let</span> imie <span class="token operator">=</span> osoba<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token keyword">let</span> nazwisko <span class="token operator">=</span> osoba<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token keyword">orderby</span> nazwisko<span class="token punctuation">,</span> imie
+    <span class="token keyword">select</span> <span class="token keyword">new</span> <span class="token punctuation">{</span>imie<span class="token punctuation">,</span> nazwisko<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">//string wynik = &quot;&quot;;</span>
+<span class="token comment">//foreach( var osoba in query1 )</span>
+<span class="token comment">//    wynik += osoba.imie + &quot; &quot; + osoba.nazwisko + &quot;, &quot;;</span>
+
+<span class="token keyword">string</span> wynik <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> query1<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span> o <span class="token operator">=&gt;</span> o<span class="token punctuation">.</span>imie <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> o<span class="token punctuation">.</span>nazwisko <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> wynik <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Anna Abacka, J&#xF3;zef Kabacki, Jan Kowalski, Kazimierz Moksa, Krzysztof Molenda
+</pre></div></div><p>&#x25A1;</p>
+<hr>
+<h2 class="mume-header" id="zadania">Zadania</h2>
+
+<p>Wzoruj&#x105;c si&#x119; na powy&#x17C;szym przyk&#x142;adzie rozwi&#x105;&#x17C; zadania w dw&#xF3;ch wariantach: w notacji <em>flow</em> oraz w notacji <em>query</em>.</p>
+<h3 class="mume-header" id="zadanie-1-lista-os%C3%B3b-wg-wieku">Zadanie 1 -- Lista os&#xF3;b wg wieku</h3>
+
+<p>Dany jest napis sk&#x142;adaj&#x105;cy si&#x119; z imion, nazwisk i dat urodzenia, oddzielonych &#x15B;rednikami, np.</p>
+<pre data-role="codeBlock" data-info="console" class="language-console"><code>&quot;Krzysztof Molenda, 1965-11-20; Jan Kowalski, 1987-01-01; Anna Abacka, 1972-05-20; J&#xF3;zef Kabacki, 2000-01-02; Kazimierz Moksa, 2001-01-02&quot;
+</code></pre><p>Napisz uniwersalne zapytanie zwracaj&#x105;ce nazwisko, imi&#x119; oraz dat&#x119; urodzenia w kolejno&#x15B;ci wg wieku, a nast&#x119;pnie wg nazwiska.</p>
+<h3 class="mume-header" id="zadanie-2-inicja%C5%82y">Zadanie 2 -- Inicja&#x142;y</h3>
+
+<p>Dany jest napis sk&#x142;adaj&#x105;cy si&#x119; z imion i nazwisk oddzielonych przecinkami, np.</p>
+<pre data-role="codeBlock" data-info="console" class="language-console"><code>&quot;Krzysztof Molenda, Jan Kowalski,  Anna    Abacka, J&#xF3;zef Kabacki, Kazimierz Moksa,  Alfred Alacki&quot;
+</code></pre><p>Zapisz uniwersalny kod, kt&#xF3;ry dla takiego napisu wypisze wszystkie grupy os&#xF3;b o tych samych inicja&#x142;ach (liczebno&#x15B;&#x107; grupy &gt; 1).</p>
+<p>Zadanie wykonaj bez Linq oraz z Linq (w notacji <em>flow</em> i w notacji <em>query</em>).</p>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#zadanie-linq-to-objects-sortowanie-wg-nazwisk-p%C3%B3%C5%BAniej-wg-imion">Zadanie (LINQ-to-Objects) - Sortowanie wg nazwisk, p&#xF3;&#x17A;niej wg imion</a>
+<ul>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#rozwi%C4%85zanie-_krok-po-kroku_">Rozwi&#x105;zanie <em>Krok-Po-Kroku</em></a>
+<ul>
+<li><a href="#krok-11-rozwi%C4%85zanie-naiwne-bez-linq">Krok 1.1 - rozwi&#x105;zanie naiwne (bez LINQ)</a></li>
+<li><a href="#krok-12-rozwi%C4%85zanie-naiwne-bez-linq-tuple">Krok 1.2 - rozwi&#x105;zanie naiwne (bez LINQ) - <code>Tuple</code></a></li>
+<li><a href="#krok-12-rozwi%C4%85zanie-naiwne-bez-linq-typy-i-obiekty-anonimowe">Krok 1.2 - rozwi&#x105;zanie naiwne (bez LINQ) - typy i obiekty anonimowe</a></li>
+<li><a href="#krok-21-rozwi%C4%85zanie-z-linq">Krok 2.1 - rozwi&#x105;zanie z LINQ</a></li>
+<li><a href="#krok-22-rozwi%C4%85zanie-z-linq-jedna-kwerenda-notacja-_flow_">Krok 2.2 - rozwi&#x105;zanie z LINQ - jedna kwerenda, notacja <em>flow</em></a></li>
+<li><a href="#krok-23-rozwi%C4%85zanie-z-linq-notacja-_query_">Krok 2.3 - rozwi&#x105;zanie z LINQ - notacja <em>query</em></a></li>
+</ul>
+</li>
+<li><a href="#zadania">Zadania</a>
+<ul>
+<li><a href="#zadanie-1-lista-os%C3%B3b-wg-wieku">Zadanie 1 -- Lista os&#xF3;b wg wieku</a></li>
+<li><a href="#zadanie-2-inicja%C5%82y">Zadanie 2 -- Inicja&#x142;y</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
