@@ -1,0 +1,743 @@
+<!DOCTYPE html><html><head>
+      <title>Typy warto&#x15B;ciowe w C#</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview .code-chunk .output-div {
+  border-left-style: dotted;
+  border-color: gray;
+  border-width: 1px;
+  font-size: 0.8em;
+}
+.markdown-preview.markdown-preview .code-chunk .output-div .language-text {
+  /* background: #f4fcfd */
+  background: black;
+  color: yellow;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h2 class="mume-header" id="delegaty-w-c-wprowadzenie">Delegaty w C# - wprowadzenie</h2>
+
+<table>
+<thead>
+<tr>
+<th>Krzysztof Molenda</th>
+<th>2019-11-11</th>
+<th>C#</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<div class="code-chunk" data-id="utf8" data-cmd="dotnet-script"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Rozw&#xF3;j wsp&#xF3;&#x142;czesnych j&#x119;zyk&#xF3;w programowania kierowany jest ide&#x105;: <em>raz zrobi&#x107; &#x2014; sprzeda&#x107; wielokrotnie</em> &#x2014; czyli zasad&#x105; tworzenia kodu uniwersalnego, wielokrotnego u&#x17C;ycia, tak, aby nie by&#x142;o konieczno&#x15B;ci jego rekompilacji.</p>
+<h3 class="mume-header" id="przyk%C5%82ad-rozw%C3%B3j-koncepcji-uog%C3%B3lniania-kodu">Przyk&#x142;ad &#x2014; rozw&#xF3;j koncepcji uog&#xF3;lniania kodu</h3>
+
+<blockquote>
+<p>motyw wiod&#x105;cy &#x2014; wyznaczanie minimum</p>
+</blockquote>
+<p>Historycznie ujmuj&#x105;c, we wczesnych fazach rozwoju informatyki opracowanie aplikacji polega&#x142;o tworzeniu kodu monolitycznego:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span> x <span class="token operator">&lt;</span> y <span class="token punctuation">)</span>
+    min <span class="token operator">=</span> x<span class="token punctuation">;</span>
+<span class="token keyword">else</span>
+    min <span class="token operator">=</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</pre><p>Na kolejnym etapie rozwoju j&#x119;zyk&#xF3;w programowania wprowadzono procedury, funkcje (programowanie proceduralne) zapisane w bibliotekach (modu&#x142;ach). W tworzonych aplikacjach wykorzystywano (wywo&#x142;ywano) te funkcje i procedury.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token comment">// biblioteka procedur i funkcji</span>
+<span class="token keyword">int</span> <span class="token function">Min</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> x <span class="token operator">&lt;</span> y <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">return</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment">// -----------------------</span>
+
+<span class="token comment">// kod aplikacji</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">int</span> min <span class="token operator">=</span> <span class="token function">Min</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</pre><p>Z biegiem czasu wprowadzono paradygmaty programowania obiektowego, koncepcj&#x119; klas, obiektu &#x2014; &#x142;&#x105;cz&#x105;c dane z metodami ich obs&#x142;ugi.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Ulamek</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">readonly</span> <span class="token keyword">int</span> l<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">Ulamek</span><span class="token punctuation">(</span><span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> m<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">DivideByZeroException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">Normalize</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Ulamek</span> <span class="token function">Min</span><span class="token punctuation">(</span> <span class="token class-name">Ulamek</span> u1<span class="token punctuation">,</span> <span class="token class-name">Ulamek</span> u2 <span class="token punctuation">)</span>
+        <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>u1<span class="token punctuation">.</span>l <span class="token operator">*</span> u2<span class="token punctuation">.</span>m <span class="token operator">&lt;</span> u2<span class="token punctuation">.</span>l <span class="token operator">*</span> u1<span class="token punctuation">.</span>m<span class="token punctuation">)</span><span class="token punctuation">?</span> u1 <span class="token punctuation">:</span> u2<span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// aplikacja</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token class-name">Ulamek</span> u <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Ulamek</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Ulamek</span> v <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Ulamek</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Ulamek</span> w <span class="token operator">=</span> Ulamek<span class="token punctuation">.</span><span class="token function">Min</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</pre><p>Jeszcze wi&#x119;kszy poziom uog&#xF3;lnienia uzyskano, wprowadzaj&#x105;c parametryzacj&#x119; typu (programowanie generyczne).</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> T <span class="token generic-method"><span class="token function">Min</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span> <span class="token keyword">where</span> T <span class="token punctuation">:</span> IComparable<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span> x<span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span> y <span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">return</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//w innym miejscu kodu wywo&#x142;ujemy</span>
+<span class="token keyword">decimal</span> x <span class="token operator">=</span> <span class="token number">5.2</span>m<span class="token punctuation">;</span> <span class="token keyword">decimal</span> y <span class="token operator">=</span> <span class="token number">5</span>m<span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;mniejsz&#x105; z {x} oraz {y} jest {Min(x,y)}&quot;</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Kolejnym poziomem uog&#xF3;lnienia kodu jest mo&#x17C;liwo&#x15B;&#x107; przekazania do procedury lub funkcji innej metody.</p>
+<div class="code-chunk" data-id="code-chunk-id-1" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=1, cmd=dotnet-script continue=&quot;utf8&quot;}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> T <span class="token generic-method"><span class="token function">TypObliczenia</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> T <span class="token generic-method"><span class="token function">Oblicz</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">,</span> TypObliczenia<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> f<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Suma</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">double</span> <span class="token function">Iloraz</span><span class="token punctuation">(</span><span class="token keyword">double</span> x<span class="token punctuation">,</span> <span class="token keyword">double</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token operator">/</span> y<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> T <span class="token generic-method"><span class="token function">Mniejszy</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span> <span class="token keyword">where</span> T <span class="token punctuation">:</span> IComparable<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> 
+    <span class="token operator">=&gt;</span> <span class="token punctuation">(</span> x<span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span> y <span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">?</span> x <span class="token punctuation">:</span> y<span class="token punctuation">;</span>
+
+<span class="token comment">//w innym miejscu kodu wywo&#x142;ujemy Oblicz w r&#xF3;&#x17C;nych wariantach i dla r&#xF3;&#x17C;nych typ&#xF3;w</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 suma = {Oblicz(1, 5, new TypObliczenia&lt;int&gt;(Suma))}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 suma = {Oblicz(1, 5, Suma)}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 iloraz = {Oblicz(1.0, 5.0, Iloraz)}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 minimum = {Oblicz(1, 5, Mniejszy)}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 maksimum = {Oblicz(1, 5, Math.Max)}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = `1` oraz y = `5` sklejenie = `{Oblicz(&quot;</span><span class="token number">1</span><span class="token string">&quot;, &quot;</span><span class="token number">5</span><span class="token string">&quot;, String.Concat)}`&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 r&#xF3;&#x17C;nica = {Oblicz(1, 5, delegate(long x, long y){ return x - y; } )}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 iloczyn = {Oblicz(1, 5, (x,y) =&gt; x*y ) }&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Dla x = 1 oraz y = 5 suma = 6
+Dla x = 1 oraz y = 5 suma = 6
+Dla x = 1 oraz y = 5 iloraz = 0,2
+Dla x = 1 oraz y = 5 minimum = 1
+Dla x = 1 oraz y = 5 maksimum = 5
+Dla x = `1` oraz y = `5` sklejenie = `15`
+Dla x = 1 oraz y = 5 r&#xF3;&#x17C;nica = -4
+Dla x = 1 oraz y = 5 iloczyn = 5
+</pre></div></div><p>&#x25A1;</p>
+<hr>
+<h3 class="mume-header" id="czym-jest-delegat">Czym jest delegat</h3>
+
+<p>Formalna definicja delegata w <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/">Delegates (C# Programming Guide)</a>:</p>
+<blockquote>
+<p>A delegate is a type that represents references to methods with a particular parameter list and return type. When you instantiate a delegate, you can associate its instance with any method with a compatible signature and return type. You can invoke (or call) the method through the delegate instance. Delegates are used to pass methods as arguments to other methods.</p>
+</blockquote>
+<p>W oparciu o rozwa&#x17C;ania poprzedniego rozdzia&#x142;u (ostatni przedstawiony poziom uog&#xF3;lniania kodu) mo&#x17C;emy wywnioskowa&#x107;, &#x17C;e delegat jest:</p>
+<ul>
+<li>
+<p>typem opisuj&#x105;cym posta&#x107; metody (funkcji, procedury) &#x2014; u nas:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> T <span class="token generic-method"><span class="token function">TypObliczenia</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre></li>
+<li>
+<p>sam&#x105; metod&#x105; (a raczej referencj&#x105; do niej) przekazan&#x105; jako parametr do innej metody, kt&#xF3;ra w swoim ciele j&#x105; wywo&#x142;a &#x2014; na wiele sposob&#xF3;w, np. poprzez:</p>
+<ul>
+<li>
+<p>utworzenie instancji delegata (C# 1.0) &#x2014; u nas: <code>new TypObliczenia&lt;int&gt;(Suma))</code></p>
+</li>
+<li>
+<p>jawn&#x105; nazw&#x119; (C# 2.0) &#x2014; u nas:  <code>Oblicz(1, 5, Suma)</code></p>
+</li>
+<li>
+<p>definiowanie funkcji anonimowej (C# 2.0) &#x2014; u nas: <code>Oblicz(1, 5, delegate(long x, long y){ return x - y; } )</code></p>
+</li>
+<li>
+<p>lambda-wyra&#x17C;enie (C# 3.0) &#x2014; u nas: <code>Oblicz(1, 5, (x,y) =&gt; x*y )</code></p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; Funkcje anonimowe i lambda-wyra&#x17C;enia om&#xF3;wione b&#x119;d&#x105; p&#xF3;&#x17A;niej w ramach tego tematu (jako istotne notacyjne uproszczenie koncepcji delegata).</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>Zwr&#xF3;&#x107;my uwag&#x119; na t&#x119; dualno&#x15B;&#x107; nazewnicz&#x105;. S&#x142;owo kluczowe <code>delegate</code> u&#x17C;ywane jest do okre&#x15B;lenia typu</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> T <span class="token generic-method"><span class="token function">TypObliczenia</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>jak i do zdefiniowania metody &#x2014; instancji tego typu</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">delegate</span><span class="token punctuation">(</span><span class="token keyword">long</span> x<span class="token punctuation">,</span> <span class="token keyword">long</span> y<span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token operator">-</span> y<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</pre><p>Dla programuj&#x105;cych w j&#x119;zyku C++ koncepcja ta jest znana jako <em>wska&#x17A;nik do funkcji</em>.</p>
+<p>Poni&#x17C;sze fragmenty kodu oznaczaj&#x105; to samo dla j&#x119;zyk&#xF3;w C++ oraz C#:</p>
+<pre data-role="codeBlock" data-info="c++" class="language-cpp"><span class="token keyword">typedef</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>TypObliczenia<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// wska&#x17A;nik na funkcje w C++</span>
+</pre><pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">delegate</span> <span class="token keyword">int</span> <span class="token function">TypObliczenia</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// deklaracja typu delegatowego w C#</span>
+</pre><h4 class="mume-header" id="przyk%C5%82ad-prosty-kalkulator">Przyk&#x142;ad &#x2014; prosty kalkulator</h4>
+
+<p>Przyjmijmy, &#x17C;e dawno temu, kiedy rozpoczyna&#x142;e&#x15B; przygod&#x119; z programowaniem, utworzy&#x142;e&#x15B; kod prostego kalkulatora pracuj&#x105;cego na liczbach ca&#x142;kowitych.</p>
+<div class="code-chunk" data-id="code-chunk-id-2" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=2, cmd=dotnet-script continue=utf8}" class="language-csharp"><span class="token comment">// w pliku MathHelper.cs</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">MathHelper</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Suma</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">DzielenieCalkowite</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> x <span class="token operator">/</span> y<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Roznica</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> x <span class="token operator">-</span> y<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// w pliku Program.cs, w klasie Program</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> Dzialanie <span class="token punctuation">{</span> plus<span class="token punctuation">,</span> minus<span class="token punctuation">,</span> razy<span class="token punctuation">,</span> podziel <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> <span class="token class-name">Dzialanie</span> d<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> wynik <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span> d <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> Dzialanie<span class="token punctuation">.</span>plus<span class="token punctuation">:</span>
+            wynik <span class="token operator">=</span> MathHelper<span class="token punctuation">.</span><span class="token function">Suma</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> Dzialanie<span class="token punctuation">.</span>minus<span class="token punctuation">:</span>
+            wynik <span class="token operator">=</span> MathHelper<span class="token punctuation">.</span><span class="token function">Roznica</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> Dzialanie<span class="token punctuation">.</span>podziel<span class="token punctuation">:</span>
+            wynik <span class="token operator">=</span> MathHelper<span class="token punctuation">.</span><span class="token function">DzielenieCalkowite</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> wynik<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// w klasie Program, w funkcji Main()</span>
+<span class="token comment">// ... docelowo planujesz wczytywa&#x107; z konsoli</span>
+<span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span> <span class="token comment">//int.Parse(Console.ReadlIne());</span>
+<span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">//int.Parse(Console.ReadlIne());</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> Dzialanie<span class="token punctuation">.</span>podziel<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">2
+</pre></div></div><p>Postanawiasz doda&#x107; do niego now&#x105; funkcjonalno&#x15B;&#x107;, wyznaczanie <em>modulo</em>.</p>
+<p>Kod nie jest elastyczny. O ile funkcja <code>Oblicz</code>, dzi&#x119;ki trzeciemu parametrowi typu <code>enum</code>, mo&#x17C;e wykona&#x107; r&#xF3;&#x17C;ne dzia&#x142;ania, o tyle ograniczona jest do tylko tych w niej zaprogramowanych oraz wymienionych w <code>enum Dzialanie</code>.</p>
+<p>Je&#x15B;li chcia&#x142;by&#x15B; rozszerzy&#x107; dzia&#x142;anie funkcji <code>Oblicz</code> o operacj&#x119; <em>modulo</em>, musisz:</p>
+<ol>
+<li>
+<p>doda&#x107; metod&#x119; <code>Modulo</code>, np. do klasy <code>MathHelper</code>:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Modulo</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> x <span class="token operator">%</span> y<span class="token punctuation">;</span><span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>dopisa&#x107; do <code>enum Dzialanie</code> jeszcze jeden wariant:</p>
+<pre data-role="codeBlock" data-info="cshapr" class="language-cshapr"><code>public enum Dzialanie { plus, minus, razy, podziel, modulo };
+</code></pre></li>
+<li>
+<p>dopisa&#x107; w funkcji <code>Oblicz</code> jeszcze jeden przypadek:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">case</span> Dzialanie<span class="token punctuation">.</span>modulo<span class="token punctuation">:</span> wynik <span class="token operator">=</span> MathHelper<span class="token punctuation">.</span><span class="token function">Modulo</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+</pre></li>
+<li>
+<p>Wszystko ponownie skompilowa&#x107;.</p>
+</li>
+</ol>
+<p>Teraz dopiero w funkcji <code>Main()</code> mo&#x17C;esz skorzysta&#x107; z oblicze&#x144; <em>modulo</em></p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp">Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> Dzialanie<span class="token punctuation">.</span>Modulo<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>. . . . . . .</p>
+<p>Refaktoryzujesz kod. Je&#x15B;li wykorzystamy delegaty, stanie si&#x119; on og&#xF3;lniejszy i znacznie kr&#xF3;tszy.</p>
+<div class="code-chunk" data-id="code-chunk-id-3" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=3, cmd=dotnet-script continue=utf8}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> T <span class="token generic-method"><span class="token function">TypObliczenia</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// deklaracja typu delegatowego w C#</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> TypObliczenia<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> d<span class="token punctuation">)</span>
+    <span class="token operator">=&gt;</span> <span class="token function">d</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// w klasie Program, w funkcji Main()</span>
+<span class="token comment">// ... docelowo planujesz wczytywa&#x107; z konsoli</span>
+<span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment">//int.Parse(Console.ReadlIne());</span>
+<span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">//int.Parse(Console.ReadlIne());</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> x<span class="token operator">/</span>y <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// div</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> x<span class="token operator">%</span>y <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// mod</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">3
+1
+</pre></div></div><p>&#x25A1;</p>
+<h4 class="mume-header" id="przyk%C5%82ad-delegat-comparisont">Przyk&#x142;ad &#x2014; delegat <code>Comparison&lt;T&gt;</code></h4>
+
+<p>W bibliotekach j&#x119;zyka C# zaimplementowany jest algorytm sortuj&#x105;cy zbi&#xF3;r danych (tablic&#x119;, list&#x119;, ...). Ale, aby m&#xF3;c go wykorzysta&#x107;, nale&#x17C;y dostarczy&#x107; mu informacji o metodzie por&#xF3;wnywania obiekt&#xF3;w.</p>
+<div class="code-chunk" data-id="Osoba" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=4, cmd=dotnet-script id=Osoba}" class="language-csharp"><span class="token keyword">class</span> <span class="token class-name">Osoba</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Imie <span class="token punctuation">{</span><span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Nazwisko <span class="token punctuation">{</span><span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">string</span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Imie <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> Nazwisko<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><div class="code-chunk" data-id="code-chunk-id-5" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=5, cmd=dotnet-script continue=utf8 continue=Osoba}" class="language-csharp"><span class="token comment">// w Main()</span>
+<span class="token keyword">var</span> osoby <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Osoba</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Krzysztof&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Molenda&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Anonim&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Nieznany&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Zenobiusz&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Abacki&quot;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> o <span class="token keyword">in</span> osoby<span class="token punctuation">)</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> o <span class="token punctuation">)</span><span class="token punctuation">;</span>
+osoby<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// nie zadzia&#x142;a - brak informacji o porzadku sortowania</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Krzysztof Molenda
+Anonim Nieznany
+Zenobiusz Abacki
+System.InvalidOperationException: Failed to compare two elements in the array.
+ ---&gt; System.ArgumentException: At least one object must implement IComparable.
+   at System.Collections.Comparer.Compare(Object a, Object b)
+   at System.Collections.Generic.ObjectComparer`1.Compare(T x, T y)
+   at System.Collections.Generic.ArraySortHelper`1.SwapIfGreater(T[] keys, Comparison`1 comparer, Int32 a, Int32 b)
+   at System.Collections.Generic.ArraySortHelper`1.IntroSort(T[] keys, Int32 lo, Int32 hi, Int32 depthLimit, Comparison`1 comparer)
+   at System.Collections.Generic.ArraySortHelper`1.IntrospectiveSort(T[] keys, Int32 left, Int32 length, Comparison`1 comparer)
+   at System.Collections.Generic.ArraySortHelper`1.Sort(T[] keys, Int32 index, Int32 length, IComparer`1 comparer)
+   --- End of inner exception stack trace ---
+   at System.Collections.Generic.ArraySortHelper`1.Sort(T[] keys, Int32 index, Int32 length, IComparer`1 comparer)
+   at System.Array.Sort[T](T[] array, Int32 index, Int32 length, IComparer`1 comparer)
+   at System.Collections.Generic.List`1.Sort(Int32 index, Int32 count, IComparer`1 comparer)
+   at System.Collections.Generic.List`1.Sort()
+   at Submission#0.&lt;<initialize>&gt;d__0.MoveNext() in C:\Przedmioty\CSharp-2020-github\Delegates, events\am5kcigt5_code_chunk:line 16
+--- End of stack trace from previous location where exception was thrown ---
+   at Dotnet.Script.Core.ScriptRunner.Execute[TReturn](String dllPath, IEnumerable`1 commandLineArgs) in D:\a\1\s\src\Dotnet.Script.Core\ScriptRunner.cs:line 60
+</initialize></pre></div></div><p>Wywo&#x142;anie metody sortuj&#x105;cej bez argument&#xF3;w spowoduje pojawienie si&#x119; wyj&#x105;tku z powodu braku informacji o sposobie por&#xF3;wnywania obiekt&#xF3;w typu <code>Osoba</code>. Przeci&#x105;&#x17C;ony wariant metody <code>Sort</code> wymaga dostarczenia jako argument delegata typu <a href="https://docs.microsoft.com/en-us/dotnet/api/system.comparison-1?view=netstandard-2.0"><code>Comparison&lt;T&gt;</code></a>.</p>
+<div class="code-chunk" data-id="code-chunk-id-6" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=6, cmd=dotnet-script continue=Osoba}" class="language-csharp"><span class="token comment">// w klasie Program</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">WgImieniaPotemNazwiskaComparison</span><span class="token punctuation">(</span><span class="token class-name">Osoba</span> o1<span class="token punctuation">,</span> <span class="token class-name">Osoba</span> o2<span class="token punctuation">)</span>
+    <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>o1<span class="token punctuation">.</span>Imie<span class="token operator">+</span>o1<span class="token punctuation">.</span>Nazwisko<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span>o2<span class="token punctuation">.</span>Imie<span class="token operator">+</span>o2<span class="token punctuation">.</span>Nazwisko<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">WgNazwiskaPotemImieniaComparison</span><span class="token punctuation">(</span><span class="token class-name">Osoba</span> o1<span class="token punctuation">,</span> <span class="token class-name">Osoba</span> o2<span class="token punctuation">)</span>
+    <span class="token operator">=&gt;</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Compare</span><span class="token punctuation">(</span> o1<span class="token punctuation">.</span>Nazwisko<span class="token operator">+</span>o1<span class="token punctuation">.</span>Imie<span class="token punctuation">,</span> o2<span class="token punctuation">.</span>Nazwisko<span class="token operator">+</span>o2<span class="token punctuation">.</span>Imie<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// w Main</span>
+<span class="token keyword">var</span> osoby <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Osoba</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Krzysztof&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Molenda&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Anonim&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Nieznany&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Zenobiusz&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Abacki&quot;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+osoby<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span> WgImieniaPotemNazwiskaComparison <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> o <span class="token keyword">in</span> osoby<span class="token punctuation">)</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> o <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+osoby<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span> WgNazwiskaPotemImieniaComparison <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> o <span class="token keyword">in</span> osoby<span class="token punctuation">)</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> o <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Anonim Nieznany
+Krzysztof Molenda
+Zenobiusz Abacki
+
+Zenobiusz Abacki
+Krzysztof Molenda
+Anonim Nieznany
+</pre></div></div><p>&#x25A1;</p>
+<hr>
+<h3 class="mume-header" id="co-by-by%C5%82o-gdyby-delegat%C3%B3w-nie-by%C5%82o">Co by by&#x142;o gdyby ... delegat&#xF3;w nie by&#x142;o</h3>
+
+<p>Wyobra&#x17A;my sobie, hipotetycznie, &#x17C;e w C# nie zaimplementowano typu delegatowego (funkcyjnego), jak np. w Java a&#x17C; do wersji 8. Jak w takim razie pisa&#x107; kod o podobnym stopniu uniwersalno&#x15B;ci? Jak sobie radzono z tego typu otwarto&#x15B;ci&#x105; i elastyczno&#x15B;ci&#x105; kodu w Java &lt; 8?</p>
+<p>J&#x119;zyk C# (podobnie jak Java) jest j&#x119;zykiem obiektowym. Wszystko jest obiektem (dziedziczy z klasy <code>Object</code>). Do metody zawsze mo&#x17C;emy przekaza&#x107; &#x2014; jako argument &#x2014; obiekt. Tylko jak zapewni&#x107; elastyczno&#x15B;&#x107; i uniwersalno&#x15B;&#x107; rozwi&#x105;zania?</p>
+<p>Kontynuujemy przyk&#x142;ad z kalkulatorem.</p>
+<p>W kroku pierwszym tworzymy interfejs zawieraj&#x105;cy deklaracj&#x119; tylko jednej metody o nazwie <code>Oblicz</code>.</p>
+<div class="code-chunk" data-id="IObliczenie" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=7, cmd=dotnet-script id=IObliczenie}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IObliczenie</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">T</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>W kolejnym kroku napiszemy metod&#x119; <code>Oblicz2</code> przyjmuj&#x105;c&#x105; jako swoje argumenty dane do obliczenia oraz obiekt typu <code>IObliczenie</code>:</p>
+<div class="code-chunk" data-id="Oblicz2" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=8, cmd=dotnet-script continue=IObliczenie id=Oblicz2}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> T <span class="token generic-method"><span class="token function">Oblicz2</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">,</span> IObliczenie<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> obiekt<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> obiekt<span class="token punctuation">.</span><span class="token function">Oblicz</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Teraz wystarczy opracowa&#x107; klasy implementuj&#x105;ce interfejs <code>IObliczenie</code>, dla ka&#x17C;dej z planowanych funkcji obliczaj&#x105;cych i wywo&#x142;a&#x107; je w <code>Main()</code>:</p>
+<div class="code-chunk" data-id="Oblicz2Metody" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=9, cmd=dotnet-script continue=IOblicz2 continue=IObliczenie id=Oblicz2Metody}" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Suma</span> <span class="token punctuation">:</span> <span class="token class-name">IObliczenie</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Iloczyn</span> <span class="token punctuation">:</span> <span class="token class-name">IObliczenie</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">Oblicz</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token operator">*</span> y<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> T <span class="token generic-method"><span class="token function">Oblicz2</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">,</span> IObliczenie<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> obiekt<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> obiekt<span class="token punctuation">.</span><span class="token function">Oblicz</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Main()</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 suma = {Oblicz2(1, 5, new Suma() )}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> $<span class="token string">&quot;Dla x = 1 oraz y = 5 iloczyn = {Oblicz2(1, 5, new Iloczyn() )}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Dla x = 1 oraz y = 5 suma = 6
+Dla x = 1 oraz y = 5 iloczyn = 5
+</pre></div></div><p>Zatem delegaty mo&#x17C;na by&#x142;o by -- w pewnym sensie -- zast&#x105;pi&#x107; implementacjami interfejsu.</p>
+<p>Wi&#x119;cej na temat podobie&#x144;stw i r&#xF3;&#x17C;nic mi&#x119;dzy delegatami i interfejsami: <a href="https://www.geeksforgeeks.org/delegates-vs-interfaces-in-c-sharp/">Delegates vs Interfaces in C#</a></p>
+<p>W Java 8 wprowadzono koncepcj&#x119; interfejsu funkcyjnego, czyli takiego interfejsu, kt&#xF3;ry zawiera tylko jedn&#x105; metod&#x119;. Dopiero ta konstrukcja umo&#x17C;liwi&#x142;a w Java wprowadzenie <em>notacji lambda</em>. W C# nie by&#x142;o to konieczne, poniewa&#x17C; notacja funkcyjna lambda jest t&#x142;umaczona na delegaty. Dopiero w C# 8 skopiowano funkcjonalno&#x15B;&#x107; Java&apos;owych interfejs&#xF3;w funkcyjnych, wprowadzaj&#x105;c <em>domy&#x15B;ln&#x105; implementacj&#x119; interfejsu</em> (g&#x142;&#xF3;wnie z powod&#xF3;w utrzymania kompatybilno&#x15B;ci z j&#x119;zykiem Java, w kontek&#x15B;cie &#x142;&#x105;czenia kodu dla aplikacji na system Android).</p>
+<p>Mechanizm opisany w przyk&#x142;adzie wykorzystany jest r&#xF3;wnie&#x17C; w C# &#x2014; do sortowania. Istnieje inne przeci&#x105;&#x17C;enie metody <code>Sort()</code>, wymagaj&#x105;ce dostarczenia jako argumentu obiektu typu <a href="https://docs.microsoft.com/en-Us/dotnet/api/system.collections.generic.icomparer-1?view=netframework-4.7.2"><code>IComparer&lt;T&gt;</code></a>. Obiekt tego typu zawiera tylko jedn&#x105; metod&#x119; <code>int Compare(T x, T y)</code> zwracaj&#x105;c&#x105; liczb&#x119; ca&#x142;kowit&#x105; interpretowan&#x105; jako wynik por&#xF3;wnania (je&#x15B;li <code>x &lt; y</code> wynik jest ujemny, dla <code>x == y</code> wynik zerowy, dla <code>x &gt; y</code> wynik dodatni).</p>
+<div class="code-chunk" data-id="code-chunk-id-10" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=10, cmd=dotnet-script continue=Osoba}" class="language-csharp"><span class="token keyword">class</span> <span class="token class-name">WgImieniaPotemNazwiskaComparer</span> <span class="token punctuation">:</span> <span class="token class-name">IComparer</span><span class="token operator">&lt;</span>Osoba<span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">Compare</span><span class="token punctuation">(</span><span class="token class-name">Osoba</span> o1<span class="token punctuation">,</span> <span class="token class-name">Osoba</span> o2<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>o1<span class="token punctuation">.</span>Imie<span class="token operator">+</span>o1<span class="token punctuation">.</span>Nazwisko<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span>o2<span class="token punctuation">.</span>Imie<span class="token operator">+</span>o2<span class="token punctuation">.</span>Nazwisko<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// w Main()</span>
+<span class="token keyword">var</span> osoby <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token generic-method"><span class="token function">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Osoba</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Krzysztof&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Molenda&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Anonim&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Nieznany&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token class-name">Osoba</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>Imie <span class="token operator">=</span> <span class="token string">&quot;Zenobiusz&quot;</span><span class="token punctuation">,</span> Nazwisko <span class="token operator">=</span> <span class="token string">&quot;Abacki&quot;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+osoby<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">WgImieniaPotemNazwiskaComparer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token keyword">var</span> o <span class="token keyword">in</span> osoby<span class="token punctuation">)</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> o <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">Anonim Nieznany
+Krzysztof Molenda
+Zenobiusz Abacki
+</pre></div></div><hr>
+<h3 class="mume-header" id="typy-delegatowe-wbudowane">Typy delegatowe wbudowane</h3>
+
+<p>Wcze&#x15B;niej wspomniano o delegacie <a href="https://docs.microsoft.com/en-us/dotnet/api/system.comparison-1?view=netstandard-2.1"><code>Comparison&lt;T&gt;</code></a> wykorzystywanym do przekazywania informacji o sposobie uporz&#x105;dkowania obiekt&#xF3;w:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">int</span> <span class="token generic-method"><span class="token function">Comparison</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> x<span class="token punctuation">,</span> <span class="token class-name">T</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Przyk&#x142;ad wykorzystania:</p>
+<div class="code-chunk" data-id="code-chunk-id-11" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=11, cmd=dotnet-script}" class="language-csharp"><span class="token comment">// por&#xF3;wnanie napis&#xF3;w najpierw wg d&#x142;ugo&#x15B;ci napisu, potem leksykograficznie</span>
+Comparison<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token operator">&gt;</span> wgDlugosciPotemLeksykograficznie <span class="token operator">=</span>
+    <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>x<span class="token punctuation">.</span>Length <span class="token operator">==</span> y<span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">?</span>
+                x<span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span> <span class="token punctuation">:</span>
+                <span class="token punctuation">(</span>x<span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> zwierzaki <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot;mucha&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;kot&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;pies&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ryba&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ptak&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;zebra&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Array<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>zwierzaki<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// leksykograficznie</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> zwierzaki <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Array<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>zwierzaki<span class="token punctuation">,</span> wgDlugosciPotemLeksykograficznie<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> zwierzaki <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">kot, mucha, pies, ptak, ryba, zebra
+kot, pies, ptak, ryba, mucha, zebra
+</pre></div></div><p>Innym przyk&#x142;adem wykorzystywanego delegata jest <a href="https://docs.microsoft.com/pl-pl/dotnet/api/system.predicate-1?view=netstandard-2.1"><code>Predicate&lt;T&gt;</code></a> -- przy definiowaniu warunk&#xF3;w logicznych, kt&#xF3;re powinny by&#x107; spe&#x142;nione (g&#x142;&#xF3;wnie dla potrzeb filtrowania):</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">bool</span> <span class="token generic-method"><span class="token function">Predicate</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T</span> obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Wykorzystywany jest np. do filtrowania zawarto&#x15B;ci listy za pomoc&#x105; metod typu <code>Find</code>:</p>
+<div class="code-chunk" data-id="code-chunk-id-12" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=12, cmd=dotnet-script}" class="language-csharp">Predicate<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token operator">&gt;</span> krotszyNiz5 <span class="token operator">=</span> <span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> s<span class="token punctuation">.</span>Length <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span>
+
+<span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> zwierzaki <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot;mucha&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;kot&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;pies&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ryba&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ptak&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;zebra&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Join</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">,</span> Array<span class="token punctuation">.</span><span class="token function">FindAll</span><span class="token punctuation">(</span> zwierzaki<span class="token punctuation">,</span> krotszyNiz5 <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">kot, pies, ryba, ptak
+</pre></div></div><p>Wprowadzono go w C# 2, g&#x142;&#xF3;wnie dla uog&#xF3;lnienia dzia&#x142;ania metod <em>Find*</em> oraz <em>Remove*</em>. Wtedy nie by&#x142;o jeszcze notacji lambda, delegat&#xF3;w generycznych <code>Func</code> i <code>Action</code> oraz technologii <em>Linq</em>.</p>
+<p>Obecnie nie zaleca si&#x119; jego u&#x17C;ywania. Zamiast niego stosujemy delegat <code>Func&lt;T, bool&gt;</code>, kt&#xF3;ry jest mu r&#xF3;wnowa&#x17C;ny.</p>
+<p>W C# 3 wprowadzono dwa uniwersalne generyczne delegatowe typy (w przestrzeni nazw <code>System</code>):</p>
+<ul>
+<li><code>Func</code></li>
+<li><code>Action</code></li>
+</ul>
+<p>U&#x17C;ywanie ich w kodzie eliminuje konieczno&#x15B;&#x107; definiowania w&#x142;asnych, nazwanych delegat&#xF3;w (zatem istotnie skraca kod).</p>
+<h4 class="mume-header" id="delegaty-func">Delegaty <code>Func</code></h4>
+
+<p><code>Func</code> jest delegatem wbudowanym, generycznym. Opisuje on posta&#x107; funkcji maj&#x105;cej od 0 do 16 argument&#xF3;w (i zwracaj&#x105;cej warto&#x15B;&#x107;):</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> TResult <span class="token generic-method"><span class="token function">Func</span><span class="token punctuation">&lt;</span><span class="token keyword">out</span> <span class="token class-name">TResult</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">delegate</span> TResult <span class="token generic-method"><span class="token function">Func</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T1</span><span class="token punctuation">,</span> <span class="token keyword">out</span> <span class="token class-name">TResult</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T1</span> arg1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">delegate</span> TResult <span class="token generic-method"><span class="token function">Func</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T1</span><span class="token punctuation">,</span> <span class="token keyword">in</span> <span class="token class-name">T2</span><span class="token punctuation">,</span> <span class="token keyword">out</span> <span class="token class-name">TResult</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T1</span> arg1<span class="token punctuation">,</span> <span class="token class-name">T2</span> arg2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">public</span> <span class="token keyword">delegate</span> TResult <span class="token generic-method"><span class="token function">Func</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T1</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token keyword">in</span> <span class="token class-name">T16</span><span class="token punctuation">,</span> <span class="token keyword">out</span> <span class="token class-name">TResult</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T1</span> arg1<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token class-name">T16</span> arg16<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Zrealizowano go w postaci 17 przeci&#x105;&#x17C;e&#x144; -- od 0 do 16 argument&#xF3;w.</p>
+<p>Przyk&#x142;adowo, funkcja obliczaj&#x105;ca sum&#x119; dw&#xF3;ch argument&#xF3;w ca&#x142;kowitych jest typu <code>Func&lt;int, int, int&gt;</code>:</p>
+<div class="code-chunk" data-id="code-chunk-id-13" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=13, cmd=dotnet-script}" class="language-csharp">                        <span class="token comment">// notacja lambda</span>
+Func<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">&gt;</span> f <span class="token operator">=</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">5
+</pre></div></div><p>Przyk&#x142;adowo, funkcja zwracaj&#x105;ca losow&#x105; warto&#x15B;&#x107; ca&#x142;kowit&#x105; z przedzia&#x142;u od <code>0</code> do <code>10</code> w&#x142;&#x105;cznie:</p>
+<div class="code-chunk" data-id="code-chunk-id-14" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=14, cmd=dotnet-script}" class="language-csharp">                <span class="token comment">// funkcja anonimowa</span>
+Func<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> los <span class="token operator">=</span> <span class="token keyword">delegate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token class-name">Random</span> rnd <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">return</span> rnd<span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+                 <span class="token comment">// notacja lambda</span>
+Func<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> los1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">los</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">los1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">7
+3
+</pre></div></div><h4 class="mume-header" id="delegaty-action">Delegaty <code>Action</code></h4>
+
+<p><code>Action</code> jest delegatem wbudowanym, generycznym. Opisuje on posta&#x107; procedury maj&#x105;cej od 0 do 16 argument&#xF3;w (i nie zwracaj&#x105;cej warto&#x15B;ci, czyli zwracaj&#x105;cej <code>void</code>):</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">void</span> <span class="token function">Action</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">void</span> <span class="token generic-method"><span class="token function">Action</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T1</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T1</span> arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">void</span> <span class="token generic-method"><span class="token function">Action</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T1</span><span class="token punctuation">,</span> <span class="token keyword">in</span> <span class="token class-name">T2</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T1</span> arg1<span class="token punctuation">,</span> <span class="token class-name">T2</span> arg2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">void</span> <span class="token generic-method"><span class="token function">Action</span><span class="token punctuation">&lt;</span><span class="token keyword">in</span> <span class="token class-name">T1</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token keyword">in</span> <span class="token class-name">T16</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token class-name">T1</span> arg1<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token class-name">T16</span> arg16<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Zrealizowano go w postaci 17 przeci&#x105;&#x17C;e&#x144; -- od 0 do 16 argument&#xF3;w.</p>
+<p>Przyk&#x142;ad u&#x17C;ycia:</p>
+<div class="code-chunk" data-id="code-chunk-id-15" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=15, cmd=dotnet-script}" class="language-csharp">List<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token operator">&gt;</span> zwierzaki <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token string">&quot;mucha&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;kot&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;pies&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ryba&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ptak&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;zebra&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+Action<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token operator">&gt;</span> Wypisz <span class="token operator">=</span> <span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>s <span class="token operator">+</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Action<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token operator">&gt;</span> Wykrzycz <span class="token operator">=</span> <span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span> s<span class="token punctuation">.</span><span class="token function">ToUpper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+zwierzaki<span class="token punctuation">.</span><span class="token function">ForEach</span><span class="token punctuation">(</span> Wypisz <span class="token punctuation">)</span><span class="token punctuation">;</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+zwierzaki<span class="token punctuation">.</span><span class="token function">ForEach</span><span class="token punctuation">(</span> Wykrzycz <span class="token punctuation">)</span><span class="token punctuation">;</span> Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">mucha kot pies ryba ptak zebra 
+MUCHA KOT PIES RYBA PTAK ZEBRA 
+</pre></div></div>
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#delegaty-w-c-wprowadzenie">Delegaty w C# - wprowadzenie</a>
+<ul>
+<li><a href="#przyk%C5%82ad-rozw%C3%B3j-koncepcji-uog%C3%B3lniania-kodu">Przyk&#x142;ad &#x2014; rozw&#xF3;j koncepcji uog&#xF3;lniania kodu</a></li>
+<li><a href="#czym-jest-delegat">Czym jest delegat</a>
+<ul>
+<li><a href="#przyk%C5%82ad-prosty-kalkulator">Przyk&#x142;ad &#x2014; prosty kalkulator</a></li>
+<li><a href="#przyk%C5%82ad-delegat-comparisont">Przyk&#x142;ad &#x2014; delegat <code>Comparison&lt;T&gt;</code></a></li>
+</ul>
+</li>
+<li><a href="#co-by-by%C5%82o-gdyby-delegat%C3%B3w-nie-by%C5%82o">Co by by&#x142;o gdyby ... delegat&#xF3;w nie by&#x142;o</a></li>
+<li><a href="#typy-delegatowe-wbudowane">Typy delegatowe wbudowane</a>
+<ul>
+<li><a href="#delegaty-func">Delegaty <code>Func</code></a></li>
+<li><a href="#delegaty-action">Delegaty <code>Action</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
