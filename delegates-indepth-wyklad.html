@@ -428,7 +428,21 @@ Console<span class="token punctuation">.</span><span class="token function">Writ
 
 print<span class="token punctuation">?.</span><span class="token function">Invoke</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// alternatywne wywo&#x142;anie z operatorem `null conditional`,</span>
                   <span class="token comment">// r&#xF3;wnowa&#x17C;ne poprzedniemu</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Wywo&#x142;anie <em>multicast</em>-delegata proceduralnego spowoduje uruchomienie wszystkich metod zapisanych na li&#x15B;cie inwokacyjnej.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">System.Delegate[]
+1
+3
+-- Lista metod:
+Void PrintX(Int32)
+Void PrintY(Int32)
+Void &lt;<initialize>&gt;b__0_0(Int32)
+-- Wywolanie MulticatsDelegate dla wartosci 5:
+....2
+(5)
+[5]
+....2
+(5)
+[5]
+</initialize></pre></div></div><p>Wywo&#x142;anie <em>multicast</em>-delegata proceduralnego spowoduje uruchomienie wszystkich metod zapisanych na li&#x15B;cie inwokacyjnej.</p>
 <p><strong>Przyk&#x142;ad 2:</strong></p>
 <p>Wprowadzamy drobn&#x105; zmian&#x119; w kodzie przyk&#x142;adu 1, definiuj&#x105;c typ delegata jako funkcyjny</p>
 <div class="code-chunk" data-id="func&lt;ulticastdelegate&gt;" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=3, cmd=dotnet-script continue=utf8 highlight=1 id=func&lt;ulticastdelegate&gt;}" class="language-csharp" data-line="1"><span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">string</span> <span class="token function">PrintVal</span><span class="token punctuation">(</span> <span class="token keyword">int</span> val <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -468,7 +482,17 @@ Console<span class="token punctuation">.</span><span class="token function">Writ
   Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> print<span class="token punctuation">?.</span><span class="token function">Invoke</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>Wywo&#x142;anie <em>multicast</em>-delegata funkcyjnego spowoduje uruchomienie tylko ostatnio dodanego do listy. Oczywi&#x15B;cie nic nie stoi na przeszkodzie, aby wywo&#x142;a&#x107; wszystkie z listy, ale trzeba to wykona&#x107; przegl&#x105;daj&#x105;c list&#x119; inwokacyjn&#x105;.</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">System.Delegate[]
+1
+3
+-- Lista metod:
+System.String PrintX(Int32)
+System.String PrintY(Int32)
+System.String &lt;<initialize>&gt;b__0_0(Int32)
+-- Wywo&#x142;anie MulticatsDelegate dla warto&#x15B;ci 5:
+[5]
+[5]
+</initialize></pre></div></div><p>Wywo&#x142;anie <em>multicast</em>-delegata funkcyjnego spowoduje uruchomienie tylko ostatnio dodanego do listy. Oczywi&#x15B;cie nic nie stoi na przeszkodzie, aby wywo&#x142;a&#x107; wszystkie z listy, ale trzeba to wykona&#x107; przegl&#x105;daj&#x105;c list&#x119; inwokacyjn&#x105;.</p>
 <div class="code-chunk" data-id="code-chunk-id-5" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=5, cmd=dotnet-script continue=func&lt;ulticastdelegate&gt;}" class="language-csharp"><span class="token comment">// Main</span>
 <span class="token class-name">PrintVal</span> print <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// deklaracja zmiennej delegatowej</span>
 <span class="token class-name">X</span> x <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">X</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -487,7 +511,18 @@ Console<span class="token punctuation">.</span><span class="token function">Writ
 Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;-- Wywo&#x142;anie wszystkich funkcji w MulticatsDelegate dla warto&#x15B;ci 5:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">foreach</span><span class="token punctuation">(</span> <span class="token class-name">PrintVal</span> delegat <span class="token keyword">in</span> print<span class="token punctuation">.</span><span class="token function">GetInvocationList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
   Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span> <span class="token function">delegat</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p><strong>Przyk&#x142;ad 3:</strong></p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">System.Delegate[]
+1
+3
+-- Lista metod:
+System.String PrintX(Int32)
+System.String PrintY(Int32)
+System.String &lt;<initialize>&gt;b__0_0(Int32)
+-- Wywo&#x142;anie wszystkich funkcji w MulticatsDelegate dla warto&#x15B;ci 5:
+....2
+(5)
+[5]
+</initialize></pre></div></div><p><strong>Przyk&#x142;ad 3:</strong></p>
 <p>Definicja typu delegatowego mo&#x17C;e uwzgl&#x119;dnia&#x107; parametry przekazywane przez referencj&#x119; (<code>ref</code>, <code>out</code>).</p>
 <p>Je&#x15B;li delegat ma parametry przekazywane przez referencj&#x119;, warto&#x15B;&#x107; parametru mo&#x17C;e zmienia&#x107; si&#x119; pomi&#x119;dzy wywo&#x142;aniami kolejnych metod z listy inwokacyjnej.</p>
 <div class="code-chunk" data-id="code-chunk-id-6" data-cmd="dotnet-script"><div class="input-div"><pre data-role="codeBlock" data-info="csharp {code_chunk_offset=6, cmd=dotnet-script }" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">delegate</span> <span class="token keyword">void</span> <span class="token function">ObliczenieDelegate</span><span class="token punctuation">(</span><span class="token keyword">ref</span> <span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -511,7 +546,9 @@ f <span class="token operator">+=</span> licz<span class="token punctuation">.</
 Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;x przed wywolaniem = {x}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">ref</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>$<span class="token string">&quot;x po wywolaniu = {x}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><p>&#x25A1;</p>
+</pre><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"><pre class="language-text">x przed wywolaniem = 2
+x po wywolaniu = 10
+</pre></div></div><p>&#x25A1;</p>
 <p>Wynikiem kompilacji delegata jest klasa zapiecz&#x119;towana z trzema metodami, kt&#xF3;rych parametry i zwracane warto&#x15B;ci bazuj&#x105; na deklaracji delegata.</p>
 <pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token comment">// This is only pseudo-code!</span>
 <span class="token keyword">public</span> <span class="token keyword">sealed</span> <span class="token keyword">class</span> <span class="token class-name">DelegateName</span> <span class="token punctuation">:</span> <span class="token class-name">MulticastDelegate</span>
