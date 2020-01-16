@@ -1,0 +1,562 @@
+<!DOCTYPE html><html><head>
+      <title>Dyrektywy preprocesora C#</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview .code-chunk .output-div {
+  border-left-style: dotted;
+  border-color: gray;
+  border-width: 1px;
+  font-size: 0.8em;
+}
+.markdown-preview.markdown-preview .code-chunk .output-div .language-text {
+  /* background: #f4fcfd */
+  background: black;
+  color: yellow;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="dyrektywy-preprocesora-kompilacja-warunkowa">Dyrektywy preprocesora, kompilacja warunkowa</h1>
+
+<h2 class="mume-header" id="preprocesor-c">Preprocesor C#</h2>
+
+<dl>
+<dt>Preprocesor</dt>
+<dd>program komputerowy, kt&#xF3;rego zadaniem jest przetworzenie kodu &#x17A;r&#xF3;d&#x142;owego, w spos&#xF3;b okre&#x15B;lony przez programist&#x119; za pomoc&#x105; <em>dyrektyw preprocesora</em>, na kod wyj&#x15B;ciowy. Tak przetworzony kod &#x17A;r&#xF3;d&#x142;owy poddawany jest nast&#x119;pnie analizie sk&#x142;adniowej, kompilacji, a w ko&#x144;cu konsolidacji.</dd>
+</dl>
+<p>Kompilator j&#x119;zyka C# nie ma oddzielonego preprocesora - jest on z nim zintegrowany. Sterowanie <em>preprocessingiem</em> odbywa si&#x119; za pomoc&#x105; dyrektyw.</p>
+<p>G&#x142;&#xF3;wnym zastosowaniem preprocesora C# jest warunkowa kompilacja kodu. Nie dostarcza on (jak w C/C++) mo&#x17C;liwo&#x15B;ci budowania makr.</p>
+<h2 class="mume-header" id="dyrektywy-preprocesora-c">Dyrektywy preprocesora C#</h2>
+
+<dl>
+<dt>Dyrektywa</dt>
+<dd>linia w kodzie, kt&#xF3;ra <strong>nie jest</strong> cz&#x119;&#x15B;ci&#x105; logiki programu. Dyrektywa dostarcza informacji o tym, jak kompilator ma zadzia&#x142;a&#x107;, a nie jak wykonywa&#x107; si&#x119; maj&#x105; instrukcje, czy jak ma si&#x119; zachowywa&#x107; pami&#x119;&#x107;.</dd>
+</dl>
+<p>Dyrektywy preprocesora s&#x105; wierszami w kodzie C# rozpoczynaj&#x105;cymi si&#x119; od znaku <code>#</code> po kt&#xF3;rym nast&#x119;puje nazwa dyrektywy. W danym wierszu mo&#x17C;e wyst&#x105;pi&#x107; tylko jedna dyrektywa preprocesora. Mog&#x105; wyst&#x105;pi&#x107; spacje przed oraz po znaku <code>#</code>.</p>
+<p><a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/language-reference/preprocessor-directives/">Dyrektywy preprocesora C#</a>, w podziale ze wzgl&#x119;du na przeznaczenie:</p>
+<ul>
+<li>
+<p>Warunkowa kompilacja - w&#x142;&#x105;czanie lub wy&#x142;&#x105;czanie fragment&#xF3;w kodu z kompilacji:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token preprocessor property">#<span class="token directive keyword">if</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">else</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">elif</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">define</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">undef</span></span>
+</pre></li>
+<li>
+<p>Generowanie b&#x142;&#x119;d&#xF3;w i ostrze&#x17C;e&#x144; kompilacji lub pomijanie wybranych ostrze&#x17C;e&#x144; kompilatora</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token preprocessor property">#<span class="token directive keyword">warning</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">error</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">line</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">pragma</span> [warning | checksum]</span>
+</pre></li>
+<li>
+<p>Nazywanie blok&#xF3;w kodu</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token preprocessor property">#<span class="token directive keyword">region</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">endregion</span></span>
+</pre></li>
+</ul>
+<blockquote>
+<p>UWAGA: W j&#x119;zyku C# <code>using System</code> jest dyrektyw&#x105;, ale nie dyrektyw&#x105; preprocesora.</p>
+</blockquote>
+<h3 class="mume-header" id="dyrektywy-define-undef">Dyrektywy <code>#define</code>, <code>#undef</code></h3>
+
+<p>Dyrektywa preprocesora <a href="https://docs.microsoft.com/en-US/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-define"><code>#define</code></a> tworzy sta&#x142;&#x105; symboliczn&#x105;.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token preprocessor property">#<span class="token directive keyword">define</span> MYSYMBOL</span>
+</pre><p>Tak zdefiniowanej sta&#x142;ej symbolicznej nie przypisujemy warto&#x15B;ci. Jedynie deklarujemy istnienie symbolu.</p>
+<p>Fakt istnienia symbolu b&#x119;dzie wykorzystany w dyrektywach warunkowych <code>#if</code>, <code>#elif</code> czy atrybucie <code>ConditionalAttribute</code>.</p>
+<p>Definiowane sta&#x142;e symboliczne nie koliduj&#x105; z nazwami zmiennych programu - nale&#x17C;&#x105; &quot;do innego &#x15B;wiata&quot;.</p>
+<p>Definiowane symbole umieszczamy zwyczajowo na pocz&#x105;tku pliku. Wymogiem formalnym jest, aby deklaracja symbolu by&#x142;a przed jego pierwszym u&#x17C;yciem.</p>
+<p>Zasi&#x119;g deklaracji symbolu obowi&#x105;zuje do ko&#x144;ca pliku w kt&#xF3;rym si&#x119; on pojawi&#x142; chyba, &#x17C;e zosta&#x142; on &quot;oddefiniowany&quot; dyrektyw&#x105; <code>#undef</code>.</p>
+<p>W &#x15B;rodowiskach .NET (.NET Framework, .NET Standard, .NET Core) wyst&#x119;puj&#x105; predefiniowane symbole o ustalonym znaczeniu:</p>
+<ul>
+<li>
+<p>wykorzystywane w trybie kompilacji</p>
+<ul>
+<li><code>DEBUG</code> - pozwala aplikacji na wykorzystanie klasy <a href="https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debug?view=netstandard-2.0"><code>Debug</code></a></li>
+<li><code>TRACE</code> - pozwala aplikacji na wykorzystanie klasy <a href="https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.trace?view=netstandard-2.0"><code>Trace</code></a></li>
+</ul>
+</li>
+</ul>
+<p>oraz</p>
+<ul>
+<li>informuj&#x105;ce o wersji &#x15B;rodowiska .NET</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Target Frameworks</th>
+<th>Symbols</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.NET Framework</td>
+<td>NETFRAMEWORK, NET20, NET35, NET40, NET45, NET451, NET452, NET46, NET461, NET462, NET47, NET471, NET472, NET48</td>
+</tr>
+<tr>
+<td>.NET Standard</td>
+<td>NETSTANDARD, NETSTANDARD1_0, NETSTANDARD1_1, NETSTANDARD1_2, NETSTANDARD1_3, NETSTANDARD1_4, NETSTANDARD1_5, NETSTANDARD1_6, NETSTANDARD2_0, NETSTANDARD2_1</td>
+</tr>
+<tr>
+<td>.NET Core</td>
+<td>NETCOREAPP, NETCOREAPP1_0, NETCOREAPP1_1, NETCOREAPP2_0, NETCOREAPP2_1, NETCOREAPP2_2, NETCOREAPP3_0</td>
+</tr>
+</tbody>
+</table>
+<p>&#x179;r&#xF3;d&#x142;o: <a href="https://docs.microsoft.com/pl-pl/dotnet/csharp/language-reference/preprocessor-directives/">https://docs.microsoft.com/pl-pl/dotnet/csharp/language-reference/preprocessor-directives/</a></p>
+<p>Symbole mo&#x17C;emy deklarowa&#x107; bezpo&#x15B;rednio w kodzie za pomoc&#x105; dyrektywy <code>#define</code> lub dostarcza&#x107; ich deklaracji spoza kodu, wywo&#x142;uj&#x105;c kompilator z odpowiedni&#x105; opcj&#x105;:</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd"><code>csc -define:MYSYMBOL -optimize -out:File2.exe *.cs
+</code></pre><pre data-role="codeBlock" data-info="cmd" class="language-cmd"><code>dotnet msbuild /p:DefineConstants=TRACE;DEBUG;MYSYMBOL /p:Configuration=Debug
+</code></pre><blockquote>
+<p>ZALECENIE: symbole powinny by&#x107; definiowane poza kodem, w &#x15B;rodowisku zewn&#x119;trznym. Wtedy mo&#x17C;na efektywnie sterowa&#x107; procesem kompilacji.</p>
+</blockquote>
+<p>W &#x15B;rodowisku VisualStudio, wywo&#x142;uj&#x105;c formularz w&#x142;a&#x15B;ciwo&#x15B;ci projektu, mo&#x17C;emy poda&#x107; list&#x119; definiowanych symboli (obowi&#x105;zuj&#x105;c&#x105; dla ca&#x142;ego projektu)</p>
+<p><img src="data:image/png;charset=utf-8;base64,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" alt="Symbole preprocesora"></p>
+<p>ustalaj&#x105;c, w jakiej konfiguracji kompilacji definiowane symbole b&#x119;d&#x105; obowi&#x105;zywa&#x107;.</p>
+<p>Domy&#x15B;lnie kompilacja w trybie <em>Debug</em> definiuje symbole <code>DEBUG</code> oraz <code>TRACE</code>. Kompilacja w trybie <em>Release</em> <strong>nie definiuje</strong> symbolu <code>DEBUG</code>, ale definiuje <code>TRACE</code>. Domy&#x15B;lnie nie definiowany jest w &#x17C;adnym przypadku symbol <code>RELEASE</code> (podchwytliwe pytania na egzaminie 70-483).</p>
+<p>W momencie pojawienia si&#x119; dyrektywy <code>#undef MYSYMBOL</code> nast&#x119;puje odwo&#x142;anie definicji tego symbolu.</p>
+<h3 class="mume-header" id="kompilacja-warunkowa">Kompilacja warunkowa</h3>
+
+<p>Dyrektywy warunkowe (<code>#if</code>, <code>#else</code>, <code>#elif</code>, <code>#endif</code>) &quot;konsumuj&#x105;&quot; dyrektywy <code>#define</code> i <code>#undef</code>.</p>
+<p>W poni&#x17C;szym przyk&#x142;adzie, je&#x15B;li kompilacja odbywa si&#x119; w trybie <em>Debug</em> (symbol <code>DEBUG</code> jest ustawiony), programista ma dost&#x119;p do zmiennej <code>wylosowana</code> za po&#x15B;rednictwem w&#x142;a&#x15B;ciwo&#x15B;ci <code>GetWylosowana</code>. W kompilacji w trybie <em>Release</em> nie ma do niej dost&#x119;pu.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp">    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Gra</span>
+    <span class="token punctuation">{</span>  
+        <span class="token keyword">private</span> <span class="token keyword">readonly</span> <span class="token keyword">int</span> wylosowana<span class="token punctuation">;</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">if</span> DEBUG</span>
+        <span class="token keyword">public</span> <span class="token keyword">int</span> GetWylosowana <span class="token operator">=&gt;</span> wylosowana<span class="token punctuation">;</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+</pre><p>Poniewa&#x17C; r&#xF3;&#x17C;ne wersje &#x15B;rodowisk .NET dostarczaj&#x105; r&#xF3;&#x17C;nych interfejs&#xF3;w API, konieczne jest rozdzielanie kompilacji na r&#xF3;&#x17C;ne ga&#x142;&#x119;zie.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyClass</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+<span class="token preprocessor property">#<span class="token directive keyword">if</span> NET20 || NET35</span>
+        <span class="token class-name">HttpClient</span> _client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">else</span></span>
+        <span class="token class-name">WebClient</span> _client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+    <span class="token comment">//...</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//...</span>
+<span class="token punctuation">}</span>
+</pre><p>W instrukcjach kompilacji warunkowej mo&#x17C;na u&#x17C;ywa&#x107; operator&#xF3;w <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code> oraz <code>||</code>. Mo&#x17C;na r&#xF3;wnie&#x17C; u&#x17C;ywa&#x107; nawias&#xF3;w <code>(</code> oraz <code>)</code>.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token preprocessor property">#<span class="token directive keyword">define</span> MYTEST</span>
+<span class="token keyword">using</span> System<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyClass</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+<span class="token preprocessor property">#<span class="token directive keyword">if</span> (DEBUG &amp;&amp; !MYTEST)</span>
+        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;DEBUG is defined&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">elif</span> (!DEBUG &amp;&amp; MYTEST)</span>
+        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;MYTEST is defined&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">elif</span> (DEBUG &amp;&amp; MYTEST)</span>
+        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;DEBUG and MYTEST are defined&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token preprocessor property">#<span class="token directive keyword">else</span></span>
+        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;DEBUG and MYTEST are not defined&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>W przestrzeni nazw <a href="https://docs.microsoft.com/pl-pl/dotnet/api/system.diagnostics?view=netstandard-2.1">System.Diagnostics</a> zdefiniowano <a href="https://docs.microsoft.com/pl-pl/dotnet/api/system.diagnostics.conditionalattribute?view=netstandard-2.1"><code>ConditionalAttribute</code></a>.</p>
+<p>Adnotowanie tym atrybutem klas i metod informuje kompilator, &#x17C;e te fragmenty nale&#x17C;y omin&#x105;&#x107; podczas kompilacji.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token comment">//#define OLD</span>
+<span class="token preprocessor property">#<span class="token directive keyword">define</span> NEW</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Gra</span>
+<span class="token punctuation">{</span>  
+    <span class="token keyword">private</span> <span class="token keyword">readonly</span> <span class="token keyword">int</span> wylosowana<span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">if</span> DEBUG</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> GetWylosowana <span class="token operator">=&gt;</span> wylosowana<span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+
+    <span class="token punctuation">[</span><span class="token class-name">Conditional</span><span class="token punctuation">(</span><span class="token string">&quot;NEW&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Conditional</span><span class="token punctuation">(</span><span class="token string">&quot;DEBUG&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> <span class="token function">Weryfikuj</span><span class="token punctuation">(</span><span class="token keyword">int</span> propozycja<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">[</span><span class="token class-name">Conditional</span><span class="token punctuation">(</span><span class="token string">&quot;OLD&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> <span class="token function">Weryfikuj</span><span class="token punctuation">(</span><span class="token keyword">int</span> propozycja<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// nowy kod ...</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token class-name">Conditional</span><span class="token punctuation">(</span><span class="token string">&quot;DEBUG&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</pre><p>Ref: <a href="https://stackoverflow.com/questions/3788605/if-debug-vs-conditionaldebug">#if DEBUG vs. Conditional(&quot;DEBUG&quot;) @StackOverflow</a></p>
+<p>W klasie <code>System.Diagnostics.Debugger</code> zdefiniowana jest w&#x142;a&#x15B;ciwo&#x15B;&#x107; <code>IsAttached</code> pozwalaj&#x105;ca na stwierdzenie, czy debugger jest do&#x142;&#x105;czony do uruchomionego procesu (mo&#x17C;e by&#x107; do&#x142;&#x105;czony zar&#xF3;wno w trybie <em>Debug</em> jak i <em>Release</em>). Cz&#x119;sto wykorzystuje si&#x119; testowanie tego faktu w powi&#x105;zaniu z dyrektyw&#x105; <code>#if DEBUG</code>, aby ograniczy&#x107; obs&#x142;ug&#x119; wyj&#x105;tk&#xF3;w podczas kompilacji test&#xF3;w wewn&#x119;trznych.</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token preprocessor property">#<span class="token directive keyword">if</span> DEBUG</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>System<span class="token punctuation">.</span>Diagnostics<span class="token punctuation">.</span>Debugger<span class="token punctuation">.</span>IsAttached<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+<span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+</pre><h3 class="mume-header" id="nadawanie-nazw-blokom-kodu-dyrektywy-region-i-endregion">Nadawanie nazw blokom kodu - dyrektywy <code>#region</code> i <code>#endregion</code></h3>
+
+<p>Dyrektywa <code>#region</code> pozwala nazwa&#x107; i okre&#x15B;li&#x107; blok kodu, kt&#xF3;ry mo&#x17C;na rozwin&#x105;&#x107; lub zwin&#x105;&#x107; przy u&#x17C;yciu funkcjonalno&#x15B;ci tworzenia konspektu (rozwijanie/zwijanie kodu) w edytorze kodu programu (Visual Studio, VS Code). W przypadku d&#x142;ugich plik&#xF3;w z kodem wygodniejsze jest zwini&#x119;cie lub ukrycie jednego lub kilku region&#xF3;w, aby m&#xF3;c skupi&#x107; si&#x119; na tej cz&#x119;&#x15B;ci pliku, nad kt&#xF3;r&#x105; si&#x119; obecnie pracuje.</p>
+<p>Blok <code>#region</code> musi ko&#x144;czy&#x107; si&#x119; dyrektyw&#x105; <code>#endregion</code>.</p>
+<p>Blok <code>#region</code> nie mo&#x17C;e nak&#x142;ada&#x107; si&#x119; na blok <code>#if</code>, mo&#x17C;e natomiast by&#x107; zagnie&#x17C;d&#x17C;ony w bloku <code>#if</code>, a blok <code>#if</code> mo&#x17C;e by&#x107; zagnie&#x17C;d&#x17C;ony w bloku <code>#region</code>.</p>
+<p>Nazwane bloki kodu stosowane s&#x105; cz&#x119;sto w kodzie automatycznie generowanym (np. w WinForm).</p>
+<h2 class="mume-header" id="klasy-debug-i-trace">Klasy <code>Debug</code> i <code>Trace</code></h2>
+
+<p>Klasa <code>Debug</code> dostarcza metod, kt&#xF3;re wspieraj&#x105; debugowanie kodu. Metody do&#x142;&#x105;czane s&#x105; do skompilowanego kodu tylko w trybie <em>Debug</em> (ustawiony symbol <code>DEBUG</code>) - w budowaniu kodu <em>Release</em> nie s&#x105; kompilowane.</p>
+<p>Klasa <code>Trace</code> dostarcza metod, kt&#xF3;re umo&#x17C;liwiaj&#x105; &#x15B;ledzenie wykonania kodu nie tylko w trybie <em>Debug</em>, ale r&#xF3;wnie&#x17C; w <em>Release</em> (ustawiony symbol <code>TRACE</code>).</p>
+<p>Obie klasy dostarczaj&#x105; zestaw tych samych metod - r&#xF3;&#x17C;nice polegaj&#x105; tylko na do&#x142;&#x105;czaniu do kompilacji w odpowiednim trybie.</p>
+<p>Z technicznego punktu widzenia metody tych klas opatrzone s&#x105; adnotacjami kompilacji warunkowej:</p>
+<ul>
+<li>
+<p>w klasie <code>Debug</code>:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token punctuation">[</span><span class="token class-name">System<span class="token punctuation">.</span>Diagnostics<span class="token punctuation">.</span>Conditional</span><span class="token punctuation">(</span><span class="token string">&quot;DEBUG&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token keyword">string</span> message<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    TraceInternal<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>w klasie <code>Trace</code>:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token punctuation">[</span><span class="token class-name">System<span class="token punctuation">.</span>Diagnostics<span class="token punctuation">.</span>Conditional</span><span class="token punctuation">(</span><span class="token string">&quot;TRACE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token keyword">string</span> message<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    TraceInternal<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ul>
+<p>Obie metody korzystaj&#x105; z tej samej klasy <code>TraceInternal</code> <a href="https://referencesource.microsoft.com/#system/compmod/system/diagnostics/TraceInternal.cs">https://referencesource.microsoft.com/#system/compmod/system/diagnostics/TraceInternal.cs</a>.</p>
+<p>Do najcz&#x119;&#x15B;ciej u&#x17C;ywanych metod nale&#x17C;&#x105;:</p>
+<ul>
+<li><code>Assert</code> - sprawdza, czy spe&#x142;niony jest warunek podany jako parametr. Je&#x15B;li nie, zostanie wys&#x142;any komunikat o b&#x142;&#x119;dzie (nie spe&#x142;nienie za&#x142;o&#x17C;enia).</li>
+<li><code>Write</code>, <code>WriteLine</code> - wypisuje przekazany parametr (wiele przeci&#x105;&#x17C;e&#x144;)</li>
+<li><code>WriteIf</code>, <code>WriteLineIf</code> - wypisuje przekazany parametr, je&#x15B;li warunek (r&#xF3;wnie&#x17C; przekazany jako parametr) jest spe&#x142;niony (wiele przeci&#x105;&#x17C;e&#x144;).</li>
+<li><code>Debug.Print</code> - w zasadzie to samo, co <code>Debug.WriteLine</code>, z tym, &#x17C;e parametrem jest komunikat (typu <code>string</code>), a nie obiekt. Nie wyst&#x119;puje w klasie <code>Trace</code>.</li>
+</ul>
+<p>Ref: <a href="https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/how-to-add-trace-statements-to-application-code?view=netframework-4.8">How to: Add Trace Statements to Application Code</a></p>
+<p>Ref: <a href="https://docs.microsoft.com/en-us/visualstudio/debugger/assertions-in-managed-code?view=vs-2019">Assertions in Managed Code</a></p>
+<p>Za pomoc&#x105; obu klas wyniki dzia&#x142;ania metod domy&#x15B;lnie kierowane s&#x105; na konsol&#x119; debugowania. Miejsce docelowe odbierania wynik&#xF3;w dzia&#x142;ania mo&#x17C;esz zmieni&#x107;, konfiguruj&#x105;c <code>Listeners</code>. Miejscem mo&#x17C;e by&#x107; konsola, plik, baza danych, ...</p>
+<p>Ref: <a href="https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/trace-listeners">Trace Listeners</a></p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token comment">// przekierowanie wynik&#xF3;w dzia&#x142;ania metdod klasy `Trace`</span>
+<span class="token comment">// na standardowe wyj&#x15B;cie</span>
+<span class="token class-name">ConsoleTraceListener</span> myWriter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConsoleTraceListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Trace<span class="token punctuation">.</span>Listeners<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>myWriter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Utworzenie pliku TestFile.txt.</span>
+<span class="token class-name">Stream</span> myFile <span class="token operator">=</span> File<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span><span class="token string">&quot;TestFile.txt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// przekierowanie wynik&#xF3;w dzia&#x142;ania metdod klasy `Trace`</span>
+<span class="token comment">// do pliku</span>
+<span class="token class-name">TextWriterTraceListener</span> myTextListener <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TextWriterTraceListener</span><span class="token punctuation">(</span>myFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Trace<span class="token punctuation">.</span>Listeners<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>myTextListener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Kolekcja <code>Listeners</code> jest wsp&#xF3;&#x142;u&#x17C;ytkowana przez <code>Debug</code> i <code>Trace</code>.</p>
+<p>Istnieje mo&#x17C;liwo&#x15B;&#x107; definiowania w&#x142;asnych <em>listener&#xF3;w</em>, tworz&#x105;c klasy dziedzicz&#x105;ce z <code>TraceListener</code>.</p>
+<h2 class="mume-header" id="materia%C5%82y-uzupe%C5%82niaj%C4%85ce">Materia&#x142;y uzupe&#x142;niaj&#x105;ce</h2>
+
+<p><a href="https://docs.microsoft.com/en-us/visualstudio/debugger/?view=vs-2019">Visual Studio debugger documentation</a></p>
+<p><a href="https://docs.microsoft.com/en-us/visualstudio/debugger/managed-debugging-recommended-property-settings?view=vs-2017">Managed Debugging: Recommended Property Settings</a></p>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#dyrektywy-preprocesora-kompilacja-warunkowa">Dyrektywy preprocesora, kompilacja warunkowa</a>
+<ul>
+<li><a href="#preprocesor-c">Preprocesor C#</a></li>
+<li><a href="#dyrektywy-preprocesora-c">Dyrektywy preprocesora C#</a>
+<ul>
+<li><a href="#dyrektywy-define-undef">Dyrektywy <code>#define</code>, <code>#undef</code></a></li>
+<li><a href="#kompilacja-warunkowa">Kompilacja warunkowa</a></li>
+<li><a href="#nadawanie-nazw-blokom-kodu-dyrektywy-region-i-endregion">Nadawanie nazw blokom kodu - dyrektywy <code>#region</code> i <code>#endregion</code></a></li>
+</ul>
+</li>
+<li><a href="#klasy-debug-i-trace">Klasy <code>Debug</code> i <code>Trace</code></a></li>
+<li><a href="#materia%C5%82y-uzupe%C5%82niaj%C4%85ce">Materia&#x142;y uzupe&#x142;niaj&#x105;ce</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
